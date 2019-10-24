@@ -1,18 +1,18 @@
 const router = require('express').Router() 
 const vegetables = require('../controllers/vegetables') 
 const users = require('../controllers/auth') 
-//const secureRoute = require('../lib/secureRoute') 
+const secureRoute = require('../lib/secureRoute') 
 
 router.route('/vegetables') 
   .get(vegetables.index) 
-  .post(vegetables.create) 
+  .post(secureRoute, vegetables.create) 
 
 // Note the contollers are named the same as the exports at the bottom of the /controllers/animals.js file
 
 router.route('/vegetables/:id') 
   .get(vegetables.show) 
-  .put(vegetables.update) 
-  .delete(vegetables.delete)
+  .put(secureRoute, vegetables.update) 
+  .delete(secureRoute, vegetables.delete)
 
 // router.route('/vegetables/:id/comments') 
 //   .post(vegetables.commentCreate)
