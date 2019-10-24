@@ -1,0 +1,13 @@
+{
+  "name": "sei-project-03",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:clairesmi/sei-project-03.git",
+  "author": "Claire <smith.clairelouise@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.5.1",
+    "eslint-plugin-react": "^7.16.0"
+  }
+}
