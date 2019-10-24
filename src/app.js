@@ -3,12 +3,18 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 import './styles/style.scss'
 
-//import Navbar from './components/common/Navbar'
+import Navbar from './components/common/Navbar'
+import Home from './components/common/Home'
 
 const App = () => (
-  
-  <h1>render app</h1>
-  
+  <BrowserRouter>
+    <main>
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+      </Switch>
+    </main>
+  </BrowserRouter>
 )
 
 ReactDOM.render(
