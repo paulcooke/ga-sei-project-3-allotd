@@ -1,6 +1,7 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 // might need axios in here to post images to be saved somewhere?
-// will need to import link from react router dom to be able to link to edit form. quite like the editing in state idea though (facebook profile style)
+
 
 class VegetablesShow extends React.Component {
   constructor() {
@@ -9,7 +10,10 @@ class VegetablesShow extends React.Component {
 
   render() {
     return (
-      <h1>showing off a veggie on the SHOW PAGE!!!</h1>
+      <>
+        <h1>showing off a veggie on the SHOW PAGE!!!</h1>
+        <Link to="/vegetables/:id/edit">This link is for the edit button to the edit page</Link>
+      </>
     )
   }
 }

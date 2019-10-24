@@ -1,7 +1,7 @@
 import React from 'react'
 import VegetablesForm from './VegetablesForm'
 
-class VegetablesNew extends React.Component {
+class VegetablesEdit extends React.Component {
   constructor() {
     super()
   }
@@ -9,11 +9,11 @@ class VegetablesNew extends React.Component {
   render() {
     return (
       <>
-        <h1>Make your veggies here! on the CREATE PAGE!!!</h1>
+        <h1>I am the edit page. i deal with changes to the vegetable posts</h1>
         <VegetablesForm />
       </>
     )
   }
 }
 
-export default VegetablesNew
+export default VegetablesEdit

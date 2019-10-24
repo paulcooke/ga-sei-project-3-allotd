@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import VegetablesShow from './VegetablesShow'
+import VegetableCard from './VegetableCard'
 
 
 
@@ -13,7 +13,7 @@ class VegetablesIndex extends React.Component {
     return (
       <>
         <h1>this is the index page</h1>
-        <Link to="/vegetables/:id">This link is for wrapping veggies in, it'll go to the show page</Link>
+        <VegetableCard />
       </>
     )
   }
