@@ -12,11 +12,11 @@ class Navbar extends React.Component {
     return (
       <nav>
         <Link to="/">Go home</Link>
-        
+        <Link to="/vegetables">Veg on offer</Link>
       </nav>
     )
   }
 
 }
 
-export default Navbar
+export default withRouter(Navbar)

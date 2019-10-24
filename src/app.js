@@ -5,6 +5,7 @@ import './styles/style.scss'
 
 import Navbar from './components/common/Navbar'
 import Home from './components/common/Home'
+import VegetablesIndex from './components/vegetables/VegetablesIndex'
 
 const App = () => (
   <BrowserRouter>
@@ -12,6 +13,7 @@ const App = () => (
       <Navbar />
       <Switch>
         <Route exact path="/" component={Home} />
+        <Route path="/vegetables" component={VegetablesIndex}/>
       </Switch>
     </main>
   </BrowserRouter>
