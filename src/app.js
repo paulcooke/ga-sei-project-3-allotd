@@ -8,6 +8,7 @@ import Home from './components/common/Home'
 
 import VegetablesIndex from './components/vegetables/VegetablesIndex'
 
+import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 
 const App = () => (
@@ -17,6 +18,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/vegetables" component={VegetablesIndex}/>
+        <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
       </Switch>
     </main>
