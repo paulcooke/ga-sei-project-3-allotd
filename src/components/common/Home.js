@@ -1,7 +1,9 @@
 import React from 'react'
 
 const Home = () => (
-  <h1>this is the home page</h1>
+  <main className='hero'>
+    <h1>Growers & Showers</h1>
+  </main>
 )
 
 export default Home
