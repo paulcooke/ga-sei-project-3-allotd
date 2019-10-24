@@ -67,7 +67,7 @@ mongoose.connect(
             varietyOfVeg: 'English',
             pickedDate: 5,
             description: 'Full of flavour and quite large. ',
-            image: 'https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/tomatoes-1296x728-feature.jpg?w=1155&h=1528',
+            image: 'https://www.nhm.ac.uk/content/dam/nhmwww/discover/aubergine-evolution/aubergine-shutterstock-full-width.jpg.thumb.1920.1920.png',
             isClaimed: false,
             vegLocation: 'SW13 9PF',
             user: users[2]
