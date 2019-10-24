@@ -9,6 +9,7 @@ import Footer from './components/common/Footer'
 
 import VegetablesIndex from './components/vegetables/VegetablesIndex'
 import VegetablesShow from './components/vegetables/VegetablesShow'
+import VegetablesNew from './components/vegetables/VegetablesNew'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -20,6 +21,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/vegetables/:id" component={VegetablesShow} />
+        <Route path="/vegetables/new" component={VegetablesNew} />
         <Route path="/vegetables" component={VegetablesIndex}/>
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
