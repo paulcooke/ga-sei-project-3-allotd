@@ -26,7 +26,7 @@ router.route('/register')
 router.route('/login') 
   .post(users.login) 
 
-/* router.route('/profile')
-  .get(users.profile) */
+router.route('/profile')
+  .get(secureRoute, users.profile)
 
 module.exports = router  // exporting our router module for use in index.js
