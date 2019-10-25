@@ -8,10 +8,8 @@ class Login extends React.Component {
     super()
     
     this.state = {
-      data: {
-        email: '',
-        password: ''
-      }
+      data: {},
+      errors: {}
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,7 +17,8 @@ class Login extends React.Component {
 
   handleChange({ target: { name, value } }) {
     const data = { ...this.state.data, [name]: value }
-    this.setState({ data })
+    const errors = { ...this.state.errors, [name]: '' }
+    this.setState({ data, errors })
   }
 
   handleSubmit(e) {
@@ -29,10 +28,11 @@ class Login extends React.Component {
         Auth.setToken(res.data.token)
         this.props.history.push('/index')
       })
-      .catch(err => console.log(err.message))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
   render() {
+    const { errors } = this.state
     return (
       <div className='formWrapper'>
         <form className='panelWrapper' onSubmit={this.handleSubmit}>
@@ -47,9 +47,11 @@ class Login extends React.Component {
           <input
             name='password'
             type='password'
-            placeholder='Password'
+            placeholder='password'
             onChange={this.handleChange}
           />
+
+          {!errors && <small>oops, something went wrong. please try again</small>}
           <button type='submit'>Login</button>
         </form>
       </div>
