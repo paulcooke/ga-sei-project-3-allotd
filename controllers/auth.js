@@ -28,15 +28,15 @@ function login(req, res) {
 }
 
 // profile route -/profile
-/* function profile(req, res) { 
+function profile(req, res) { 
   User
     .findById(req.currentUser._id) 
     .then(user => res.status(200).json(user)) 
     .catch(err => res.json(err)) 
-} */
+}
 
 module.exports = {
-  // profile,
+  profile,
   register,
   login
 }
