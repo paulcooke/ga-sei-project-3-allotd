@@ -2,6 +2,7 @@ const router = require('express').Router()
 const vegetables = require('../controllers/vegetables') 
 const users = require('../controllers/auth') 
 const secureRoute = require('../lib/secureRoute') 
+const appointments = require('../controllers/appointments')
 
 router.route('/vegetables') 
   .get(vegetables.index) 
@@ -28,5 +29,8 @@ router.route('/login')
 
 /* router.route('/profile')
   .get(users.profile) */
+
+router.route('/appointments')
+  .post(appointments.create)
 
 module.exports = router  // exporting our router module for use in index.js
