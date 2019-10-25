@@ -1,6 +1,7 @@
 $navgreen: #2E933C;
 $bordergrey: #64403E;
 $boxcolor: #81C14B;
+$buttonbrown: #ECBA82;
 
 * {
   margin: 0;
@@ -39,5 +40,67 @@ nav {
   a{
     font-size: 24px;
     margin: 20px;
+  }
+}
+
+button {
+  width: 120px;
+  height: 50px;
+  background: $buttonbrown;
+  border: solid 1px $bordergrey;
+  outline: none;
+  margin: 5px;
+  font-size: 18px;
+}
+
+textarea {
+  border: none;
+  border-radius: 10px;
+  margin: 8px;
+  width: 96%;
+  font-size: 18px;
+}
+
+input {
+  border: none;
+  border-radius: 10px;
+  width: 96%;
+  height: 40px;
+  border-radius: 5px;
+  font-size: 18px;
+  margin: 5px;
+}
+
+label {
+  margin-top: 10px;
+}
+
+.panelWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: $boxcolor;
+  margin: 20px;
+  padding: 20px;
+  width: 100%;
+  border-radius: 10px;
+  border: solid 1px grey;
+  box-shadow: 3px 4px 10px -1px $bordergrey;
+}
+
+.formWrapper {
+  margin: 80px;
+  height: 100vh;
+  padding: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .panelWrapper {
+    width: 30%;
+    min-width: 500px;
+    max-width: 500px;
+  }
+  button {
+    margin-left: auto;
   }
 }
