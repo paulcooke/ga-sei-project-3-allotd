@@ -34,8 +34,22 @@ function profile(req, res) {
     .catch(err => res.json(err)) 
 }
 
+//profile route -/profile/:id
+function update(req, res, next) {
+  User
+    .findById(req.params.id)
+    .then(user => {
+      if (req.params.id === (req.currentUser._id)) return res.status(401).json({ message: 'Unauthorized' }) 
+      user.set(req.body)
+      return user.save()
+    }) 
+    .then(user => res.status(202).json(user)) 
+    .catch(next)
+}
+
 module.exports = {
   profile,
   register,
-  login
+  login, 
+  update
 }

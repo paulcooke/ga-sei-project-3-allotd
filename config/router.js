@@ -30,7 +30,16 @@ router.route('/login')
 router.route('/profile')
   .get(secureRoute, users.profile)
 
+router.route('/profile/:id')  
+  .put(secureRoute, users.update)
+
 router.route('/appointments')
   .post(appointments.create)
+  .get(appointments.index)
+
+router.route('/appointments/:id')
+  .patch(appointments.update) // THIS IS A PATCH NOT A PUT (JJ)
+  .delete(appointments.deleteAppointment)
+  .get(appointments.show)
 
 module.exports = router  // exporting our router module for use in index.js
