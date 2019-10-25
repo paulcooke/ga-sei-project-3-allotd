@@ -1,0 +1,43 @@
+$navgreen: #2E933C;
+$bordergrey: #64403E;
+$boxcolor: #81C14B;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-image: url('https://images.unsplash.com/photo-1516211697506-8360dbcfe9a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  font-family: 'Indie Flower', cursive;
+  color: rgb(27, 14, 14);
+}
+
+h1 {
+  font-size: 120px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(27, 14, 14);
+  margin-left: 20px;
+  cursor: pointer;//url('./cigarpointer.png');
+}
+
+nav {
+  display: flex;
+  justify-content: flex-start;
+  background: $navgreen;
+  height: 70px;
+  border: solid 1px $bordergrey;
+  a{
+    font-size: 24px;
+    margin: 20px;
+  }
+}
