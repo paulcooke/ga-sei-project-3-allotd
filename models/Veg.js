@@ -12,7 +12,7 @@ const vegSchema = new mongoose.Schema({
   availablePickUpDays: { type: [String] },
   availablePickUpTimes: { type: [String] },
   pickerId: { type: String },
-  // appointment: { type: mongoose.Schema.Object, ref: 'Appointment' },
+  appointmentId: { type: mongoose.Schema.ObjectId, ref: 'Appointment' },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true

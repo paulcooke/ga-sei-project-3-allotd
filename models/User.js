@@ -14,7 +14,8 @@ const userSchema = new mongoose.Schema({
   vegGrown: { type: [String] },
   vegLookingFor: { type: [String] },
   rating: { type: Number },
-  appointment: [ { type: mongoose.Schema.ObjectId, ref: 'Appointment' } ]
+  listingHistory: { type: mongoose.Schema.ObjectId, ref: 'Veg' },
+  appointmentHistory: [ { type: mongoose.Schema.ObjectId, ref: 'Appointment' } ]
 }, {
   timestamps: true
 })
