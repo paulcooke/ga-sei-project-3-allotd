@@ -13,7 +13,8 @@ const userSchema = new mongoose.Schema({
   userLocation: { type: String }, 
   vegGrown: { type: [String] },
   vegLookingFor: { type: [String] },
-  rating: { type: Number }
+  rating: { type: Number },
+  appointment: [ { type: mongoose.Schema.ObjectId, ref: 'Appointment' } ]
 }, {
   timestamps: true
 })
