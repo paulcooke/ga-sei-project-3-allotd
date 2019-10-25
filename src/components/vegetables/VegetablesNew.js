@@ -3,7 +3,6 @@ import VegetablesForm from './VegetablesForm'
 import axios from 'axios'
 
 import Auth from '../../lib/auth'
-import { type } from 'os'
 
 class VegetablesNew extends React.Component {
   constructor() {
