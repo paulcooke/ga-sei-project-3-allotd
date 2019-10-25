@@ -1,11 +1,12 @@
+//25/20/2019 - JJ - It worked Tal was a witness. It was randomly breaking and then randomly working. 
 /* global describe, afterEach, it, expect, api */
 const User = require('../../models/User')
 
 const testDataIncorrect = {
   username: 'test',
-  email: 'incorect@.emailcom',
+  email: 'incorectemailcom',
   password: 'test',
-  passwordConfirmation: 'test'
+  passwordConfirmation: 'incorrect'
 }
 
 // const testDataCorrect = {
@@ -32,6 +33,15 @@ describe('POST /register', () => {
       .send(testDataIncorrect)
       .end((err, res) => {
         expect(res.status).to.eq(422)
+        done()
+      })
+  })
+
+  it('should return a 201 if user is created', done => {
+    api.post('/api/register')
+      .send(testDataIncorrect)
+      .end((err, res) => {
+        expect(res.status).to.eq(201)
         done()
       })
   })
