@@ -11,7 +11,6 @@ function register(req, res, next) {
     .then(user => res.status(201).json({ message: `Thanks for Registering ${user.username}` })) 
     .catch(next)
 }
-
 // login route -/login
 // user suplies in body of request, email and password only
 function login(req, res) {

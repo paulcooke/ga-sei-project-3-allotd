@@ -27,7 +27,7 @@ class VegetablesIndex extends React.Component {
     return (
       <div className='indexWrapper'>
         {this.state.vegetables.map(vegetable => (
-          <VegetableCard key={vegetable.title} {...vegetable} />
+          <VegetableCard key={vegetable._id} {...vegetable} />
         ))}
       </div>
     )
