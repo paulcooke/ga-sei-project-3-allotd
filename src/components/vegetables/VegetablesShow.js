@@ -59,7 +59,7 @@ class VegetablesShow extends React.Component {
             <div>
               {this.isOwner() &&
                 <>
-                  <Link to={`/cigars/${this.state.vegetable._id}/edit`}>
+                  <Link to={`/vegetables/${this.state.vegetable._id}/edit`}>
                     <button>Edit vegetable</button>
                   </Link>
                   <button onClick={this.handleDelete}>Delete vegetable</button>

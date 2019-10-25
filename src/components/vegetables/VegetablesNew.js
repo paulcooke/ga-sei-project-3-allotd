@@ -13,9 +13,10 @@ class VegetablesNew extends React.Component {
         title: '', // { type: String, required: true },
         typeOfVeg: '', // { type: String, required: true },
         varietyOfVeg: '', //{ type: String },
-        pickedDate: '', //{ type: Date, required: true },
+        pickedDate: 0, //{ type: Date, required: true },
         description: '', // { type: String, maxlength: 200 },
         image: '', //{ type: String },
+        isClaimed: false,
         vegLocation: '' //{ type: String, required: true },
       }
     }
@@ -31,6 +32,7 @@ class VegetablesNew extends React.Component {
   }
 
   handleSubmit(e) {
+    console.log(this.state.data)
     e.preventDefault()
     axios.post('/api/vegetables', this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -40,73 +42,8 @@ class VegetablesNew extends React.Component {
   }
 
   render() {
-    // return (
-    //   <>
-    //     <h1>Make your veggies here! on the CREATE PAGE!!!</h1>
-    //     <VegetablesForm />
-    const { data: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation } } = this.state
     return (
-      <VegetablesForm vegetable={this.state.data} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-      // <div className='formWrapper'>
-      //   <form className='panelWrapper' onSubmit={this.handleSubmit}>
-      //     <h2>New Vegetable</h2>
-      //     <label>Name</label>
-      //     <input
-      //       placeholder="Name"
-      //       name="title"
-      //       onChange={this.handleChange}
-      //       value={title}
-      //     />
-      //     <label>Type</label>
-      //     <input
-      //       placeholder="Type"
-      //       name="typeOfVeg"
-      //       onChange={this.handleChange}
-      //       value={typeOfVeg}
-      //     />
-      //     <label>Variety</label>
-      //     <input
-      //       placeholder="Variety"
-      //       name="varietyOfVeg"
-      //       onChange={this.handleChange}
-      //       value={varietyOfVeg}
-      //     />
-      //     <label>Date Picked</label>
-      //     <input
-      //       placeholder="Date Picked"
-      //       name="pickedDate"
-      //       onChange={this.handleChange}
-      //       value={pickedDate}
-      //     />
-      //     <label>Image URL</label>
-      //     <input
-      //       placeholder='Image URL'
-      //       name='image'
-      //       onChange={this.handleChange}
-      //       value={image}
-      //     />
-      //     <label>Location</label>
-      //     <input
-      //       placeholder='Postcode'
-      //       name='vegLocation'
-      //       onChange={this.handleChange}
-      //       value={vegLocation}
-      //     />
-      //     <label>Description</label>
-      //     <textarea
-      //       rows='4'
-      //       cols='5'
-      //       type='textarea'
-      //       placeholder="Description"
-      //       name="description"
-      //       onChange={this.handleChange}
-      //       value={description}
-      //     />
-      //     <button type="submit">
-      //       submit
-      //     </button>
-      //   </form>
-      // </div>
+      <VegetablesForm vegetable={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
     )
   }
 }
