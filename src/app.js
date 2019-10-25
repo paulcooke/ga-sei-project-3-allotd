@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
-import './styles/style.scss'
+import './styles/main.scss'
 
 import Navbar from './components/common/Navbar'
 import Home from './components/common/Home'
@@ -14,6 +14,7 @@ import VegetablesEdit from './components/vegetables/VegetablesEdit'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
+import Dashboard from './components/common/Dashboard'
 
 const App = () => (
   <BrowserRouter>
@@ -28,6 +29,7 @@ const App = () => (
 
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
+        <Route path ="/dashboard" component={Dashboard} />
       </Switch>
       <Footer />
     </main>
