@@ -1,9 +1,11 @@
+//24/10/19 - JJ added regex to email 
+
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
 const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
-  email: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true, match: [/\S+@\S+\.\S+/, 'is invalid'] }, //regex test added to email - jj
   password: { type: String, required: true }, 
   userImage: { type: String }, 
   availablePickUpDays: { type: [String] }, 
