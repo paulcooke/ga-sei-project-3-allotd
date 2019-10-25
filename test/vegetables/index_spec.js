@@ -7,7 +7,7 @@ describe('GET /vegetables', () => {
   beforeEach(done => {
     User.create({ 
       username: 'Claire',
-      email: 'claire@email',
+      email: 'claire@email.com',
       password: 'pass',
       passwordConfirmation: 'pass'
     })
