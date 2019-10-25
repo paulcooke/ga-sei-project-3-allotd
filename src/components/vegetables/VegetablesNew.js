@@ -47,66 +47,67 @@ class VegetablesNew extends React.Component {
     //     <VegetablesForm />
     const { data: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation } } = this.state
     return (
-      <div className='formWrapper'>
-        <form className='panelWrapper' onSubmit={this.handleSubmit}>
-          <h2>New Vegetable</h2>
-          <label>Name</label>
-          <input
-            placeholder="Name"
-            name="title"
-            onChange={this.handleChange}
-            value={title}
-          />
-          <label>Type</label>
-          <input
-            placeholder="Type"
-            name="typeOfVeg"
-            onChange={this.handleChange}
-            value={typeOfVeg}
-          />
-          <label>Variety</label>
-          <input
-            placeholder="Variety"
-            name="varietyOfVeg"
-            onChange={this.handleChange}
-            value={varietyOfVeg}
-          />
-          <label>Date Picked</label>
-          <input
-            placeholder="Date Picked"
-            name="pickedDate"
-            onChange={this.handleChange}
-            value={pickedDate}
-          />
-          <label>Image URL</label>
-          <input
-            placeholder='Image URL'
-            name='image'
-            onChange={this.handleChange}
-            value={image}
-          />
-          <label>Location</label>
-          <input
-            placeholder='Postcode'
-            name='vegLocation'
-            onChange={this.handleChange}
-            value={vegLocation}
-          />
-          <label>Description</label>
-          <textarea
-            rows='4'
-            cols='5'
-            type='textarea'
-            placeholder="Description"
-            name="description"
-            onChange={this.handleChange}
-            value={description}
-          />
-          <button type="submit">
-            submit
-          </button>
-        </form>
-      </div>
+      <VegetablesForm vegetable={this.state.data} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      // <div className='formWrapper'>
+      //   <form className='panelWrapper' onSubmit={this.handleSubmit}>
+      //     <h2>New Vegetable</h2>
+      //     <label>Name</label>
+      //     <input
+      //       placeholder="Name"
+      //       name="title"
+      //       onChange={this.handleChange}
+      //       value={title}
+      //     />
+      //     <label>Type</label>
+      //     <input
+      //       placeholder="Type"
+      //       name="typeOfVeg"
+      //       onChange={this.handleChange}
+      //       value={typeOfVeg}
+      //     />
+      //     <label>Variety</label>
+      //     <input
+      //       placeholder="Variety"
+      //       name="varietyOfVeg"
+      //       onChange={this.handleChange}
+      //       value={varietyOfVeg}
+      //     />
+      //     <label>Date Picked</label>
+      //     <input
+      //       placeholder="Date Picked"
+      //       name="pickedDate"
+      //       onChange={this.handleChange}
+      //       value={pickedDate}
+      //     />
+      //     <label>Image URL</label>
+      //     <input
+      //       placeholder='Image URL'
+      //       name='image'
+      //       onChange={this.handleChange}
+      //       value={image}
+      //     />
+      //     <label>Location</label>
+      //     <input
+      //       placeholder='Postcode'
+      //       name='vegLocation'
+      //       onChange={this.handleChange}
+      //       value={vegLocation}
+      //     />
+      //     <label>Description</label>
+      //     <textarea
+      //       rows='4'
+      //       cols='5'
+      //       type='textarea'
+      //       placeholder="Description"
+      //       name="description"
+      //       onChange={this.handleChange}
+      //       value={description}
+      //     />
+      //     <button type="submit">
+      //       submit
+      //     </button>
+      //   </form>
+      // </div>
     )
   }
 }
