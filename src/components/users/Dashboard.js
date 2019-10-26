@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 
 // import axios from 'axios'
 
@@ -21,15 +22,30 @@ class Dashboard extends React.Component {
         availablePickUpTimes: []
       }
     }
+
+    // this.options = [
+    //   { value: 'eggs', label: 'Eggs' },
+    //   { value: 'bacon', label: 'Bacon' },
+    //   { value: 'coffee', label: 'Coffee' },
+    //   { value: 'tea', label: 'Tea' },
+    //   { value: 'beans', label: 'Beans' },
+    //   { value: 'toast', label: 'Toast' },
+    //   { value: 'cereal', label: 'Cereal' }
+    // ]
     // bind here
   }
 
   componentDidMount() {
-    axios.get('/api/profile', {
+    const userId = this.props.match.params.id
+    axios.get(`/api/profile/${userId}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
       .catch(err => console.log(err.message))
+  }
+
+  isOwner() {
+    return Auth.getPayload().sub === this.state.data._id
   }
 
   render() {
@@ -59,14 +75,18 @@ class Dashboard extends React.Component {
           </div>
           <div>
             <h2>My availability</h2>
-            {this.state.data.availablePickUpDays.map(veg => 
-              <p key={veg}>{veg}</p>
-            )}
+            <p>
+              {this.state.data.availablePickUpDays.map(day => {
+                return day
+              }).join(', ')}
+            </p>
           </div>
           <div>
-            {this.state.data.availablePickUpTimes.map(veg => 
-              <p key={veg}>{veg}</p>
-            )}
+            <p>
+              {this.state.data.availablePickUpTimes.map(time => {
+                return time
+              }).join(', ')}
+            </p>
           </div>
         </section>
         <section>
@@ -75,6 +95,15 @@ class Dashboard extends React.Component {
           </div>
           <div className='panelWrapper'>
        My claimed veggies
+          </div>
+          <div className='panelWrapper'>
+            {this.isOwner() &&
+                <>
+                  <Link to={`/dashboard/${this.state.data.id}/edit`}>
+                    <button>Edit profile</button>
+                  </Link>
+                </>
+            }
           </div>
         </section>
       </main>

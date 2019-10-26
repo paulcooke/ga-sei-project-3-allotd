@@ -15,6 +15,7 @@ class Navbar extends React.Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <nav>
         <Link to="/">Go home</Link>

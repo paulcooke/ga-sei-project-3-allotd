@@ -11,6 +11,7 @@ class VegetablesShow extends React.Component {
     this.state = {
       vegetable: null
     }
+    
     this.handleDelete = this.handleDelete.bind(this)
   }
 
@@ -68,7 +69,7 @@ class VegetablesShow extends React.Component {
             </div>
             <div className="panelWrapper">
               <h3>Claim this vegetable</h3>
-
+              
             </div>
           </div>
         </div>

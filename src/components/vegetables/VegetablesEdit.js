@@ -20,6 +20,7 @@ class VegetablesEdit extends React.Component {
       },
       errors: null
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -51,7 +52,11 @@ class VegetablesEdit extends React.Component {
 
   render() {
     return (
-      <VegetablesForm vegetable={this.state.data} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      <VegetablesForm 
+        vegetable={this.state.data} 
+        handleChange={this.handleChange} 
+        handleSubmit={this.handleSubmit}
+      />
     )
   }
 }
