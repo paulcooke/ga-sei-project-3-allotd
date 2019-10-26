@@ -4,6 +4,7 @@ import axios from 'axios'
 //import moment from 'moment'
 
 import Auth from '../../lib/auth'
+import SearchForm from '../common/SearchForm'
 
 class VegetablesEdit extends React.Component {
   constructor() {
@@ -97,15 +98,17 @@ class VegetablesEdit extends React.Component {
 
   render() {
     return (
-      <VegetablesForm 
-        vegetable={this.state.data} 
-        handleChange={this.handleChange} 
-        handleSubmit={this.handleSubmit}
-        handleDaySelect={this.handleDaySelect}
-        handleTimeSelect={this.handleTimeSelect}
-        dayOptions={this.dayOptions}
-        timeOptions={this.timeOptions}
-      />
+      <>
+        <VegetablesForm
+          vegetable={this.state.data}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleDaySelect={this.handleDaySelect}
+          handleTimeSelect={this.handleTimeSelect}
+          dayOptions={this.dayOptions}
+          timeOptions={this.timeOptions}
+        />
+      </>
     )
   }
 }
