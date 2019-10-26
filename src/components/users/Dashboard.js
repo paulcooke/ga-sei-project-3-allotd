@@ -19,19 +19,12 @@ class Dashboard extends React.Component {
         vegLookingFor: [],
         rating: '',
         availablePickUpDays: [],
-        availablePickUpTimes: []
+        availablePickUpTimes: [], 
+        listingHistory: [],
+        pickedVegHistory: []
       }
     }
 
-    // this.options = [
-    //   { value: 'eggs', label: 'Eggs' },
-    //   { value: 'bacon', label: 'Bacon' },
-    //   { value: 'coffee', label: 'Coffee' },
-    //   { value: 'tea', label: 'Tea' },
-    //   { value: 'beans', label: 'Beans' },
-    //   { value: 'toast', label: 'Toast' },
-    //   { value: 'cereal', label: 'Cereal' }
-    // ]
     // bind here
   }
 
@@ -50,7 +43,6 @@ class Dashboard extends React.Component {
 
   render() {
     console.log(this.state)
-    
     return (
       <main>
         <section className='panelWrapper'>
@@ -91,10 +83,24 @@ class Dashboard extends React.Component {
         </section>
         <section>
           <div className='panelWrapper'>
-       My Listings
+            <h2>My listings</h2>
+            {
+              this.state.data.listingHistory.map(listing => (
+                <div key={listing.id}>
+                  {listing.title} on {listing.createdAt}
+                </div>
+              ))
+            }
           </div>
           <div className='panelWrapper'>
-       My claimed veggies
+            <h2>My pickups</h2>
+            {
+              this.state.data.pickedVegHistory.map(picked => (
+                <div key={picked.id}>
+                  {picked.vegId} (veg id)
+                </div>
+              ))
+            }
           </div>
           <div className='panelWrapper'>
             {this.isOwner() &&

@@ -1,6 +1,16 @@
 import React from 'react'
+import Select from 'react-select'
+import makeAnimated from 'react-select/animated'
 
+<<<<<<< HEAD
 const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation }, handleSubmit, handleChange } ) => {
+=======
+const animatedComponents = makeAnimated()
+
+const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions } ) => {
+  console.log('title is: ', title)
+  console.log('pickedDate is: ', pickedDate)
+>>>>>>> development
   return (
     <div className='formWrapper'>
       <form className='panelWrapper' onSubmit={(e) => handleSubmit(e)}>
@@ -57,6 +67,23 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           onChange={(e) => handleChange(e)}
           value={description}
         />
+
+        <label>Set your preferences for when you would like people to collect from you</label>
+        <Select 
+          name="availablePickUpDays"
+          options={dayOptions}
+          isMulti
+          onChange={handleDaySelect}
+          components={animatedComponents}
+        />
+        <br/>
+        <Select 
+          options={timeOptions}
+          isMulti
+          onChange={handleTimeSelect}
+          components={animatedComponents}
+        />
+
         <button type="submit">
           submit
         </button>

@@ -6,6 +6,7 @@ function index(req, res) {
     .find()
     .populate('pickerId')
     .populate('vegId')
+    .populate('growerId')
     .then(appointment => res.status(200).json(appointment)) 
     .catch(() => res.status(404).json({ message: 'Not Found' })) 
 }
@@ -14,6 +15,7 @@ function index(req, res) {
 function create(req, res, next) {
   req.body.vegId = req.params.id 
   req.body.pickerId = req.currentUser 
+  req.body.expiryDate = new Date(Date.now() + 172800 * 1000).toISOString()
   Appointment
     .create(req.body) 
     .then(appointment => res.status(201).json(appointment)) 
@@ -26,12 +28,17 @@ function show(req, res) {
     .findById(req.params.id) 
     .populate('pickerId')
     .populate('vegId')
+    .populate('growerId')
     .then(appointment => {
       if (!appointment) return res.status(404).json({ message: 'Not Found ' })
       res.status(200).json(appointment)
     })
     .catch(() => res.status(404).json({ message: 'Not Found ' }))
 }
+
+//.populate({ growerId: appointment.vegId.user })
+//appointment.set(appointment.vegId.user)
+//appointment.save()
 
 // update route - /appointments/id
 function update(req, res, next) {

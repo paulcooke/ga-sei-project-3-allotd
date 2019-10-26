@@ -11,12 +11,12 @@ const vegSchema = new mongoose.Schema({
   vegLocation: { type: String, required: true },
   availablePickUpDays: { type: [String] },
   availablePickUpTimes: { type: [String] },
-  //pickerId: { type: String },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true
 })
 
+//Gets pickUpAppointment from Appointment based on Veg _id in the Appointment vegId
 vegSchema.virtual('pickUpAppointment', {
   ref: 'Appointment',
   localField: '_id',
