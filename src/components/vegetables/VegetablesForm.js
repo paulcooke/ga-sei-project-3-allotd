@@ -2,15 +2,11 @@ import React from 'react'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 
-<<<<<<< HEAD
-const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation }, handleSubmit, handleChange } ) => {
-=======
 const animatedComponents = makeAnimated()
 
 const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions } ) => {
   console.log('title is: ', title)
   console.log('pickedDate is: ', pickedDate)
->>>>>>> development
   return (
     <div className='formWrapper'>
       <form className='panelWrapper' onSubmit={(e) => handleSubmit(e)}>

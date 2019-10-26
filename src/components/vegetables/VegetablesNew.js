@@ -18,12 +18,8 @@ class VegetablesNew extends React.Component {
         image: '', //{ type: String },
         isClaimed: false,
         vegLocation: '', //{ type: String, required: true },
-<<<<<<< HEAD
-        momentTest: null
-=======
         availablePickUpDays: [],
         availablePickUpTimes: []
->>>>>>> development
       }
     }
 
@@ -95,16 +91,12 @@ class VegetablesNew extends React.Component {
       <VegetablesForm 
         vegetable={this.state} 
         handleChange={this.handleChange} 
-<<<<<<< HEAD
-        handleSubmit={this.handleSubmit}/>
-=======
         handleSubmit={this.handleSubmit}
         handleDaySelect={this.handleDaySelect}
         handleTimeSelect={this.handleTimeSelect}
         dayOptions={this.dayOptions}
         timeOptions={this.timeOptions}
       />
->>>>>>> development
     )
   }
 }
