@@ -1,9 +1,13 @@
 import React from 'react'
+import SearchForm from './SearchForm'
 
 const Home = () => (
-  <main className='hero'>
-    <h1>Growers & Showers</h1>
-  </main>
+  <>
+    <SearchForm />
+    <main className='hero'>
+      <h1>Growers & Showers</h1>
+    </main>
+  </>
 )
 
 export default Home

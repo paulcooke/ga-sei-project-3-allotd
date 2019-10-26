@@ -99,6 +99,7 @@ class VegetablesEdit extends React.Component {
   render() {
     return (
       <>
+        <SearchForm />
         <VegetablesForm
           vegetable={this.state.data}
           handleChange={this.handleChange}

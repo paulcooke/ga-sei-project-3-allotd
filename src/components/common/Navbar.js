@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import Auth from '../../lib/auth'
-import SearchForm from './SearchForm'
 
 class Navbar extends React.Component {
   constructor() {

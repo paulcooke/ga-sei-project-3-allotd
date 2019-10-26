@@ -3,6 +3,7 @@ import VegetablesForm from './VegetablesForm'
 import axios from 'axios'
 
 import Auth from '../../lib/auth'
+import SearchForm from '../common/SearchForm'
 
 class VegetablesNew extends React.Component {
   constructor() {
@@ -88,15 +89,18 @@ class VegetablesNew extends React.Component {
 
   render() {
     return (
-      <VegetablesForm 
-        vegetable={this.state} 
-        handleChange={this.handleChange} 
-        handleSubmit={this.handleSubmit}
-        handleDaySelect={this.handleDaySelect}
-        handleTimeSelect={this.handleTimeSelect}
-        dayOptions={this.dayOptions}
-        timeOptions={this.timeOptions}
-      />
+      <>
+        <SearchForm />
+        <VegetablesForm
+          vegetable={this.state}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          handleDaySelect={this.handleDaySelect}
+          handleTimeSelect={this.handleTimeSelect}
+          dayOptions={this.dayOptions}
+          timeOptions={this.timeOptions}
+        />
+      </>
     )
   }
 }

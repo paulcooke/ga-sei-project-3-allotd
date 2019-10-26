@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import Auth from '../../lib/auth'
+import SearchForm from '../common/SearchForm'
 
 class Login extends React.Component {
   constructor() {
@@ -34,27 +35,30 @@ class Login extends React.Component {
   render() {
     const { errors } = this.state
     return (
-      <div className='formWrapper'>
-        <form className='panelWrapper' onSubmit={this.handleSubmit}>
-          <h2>Login</h2>
-          <label>Email</label>
-          <input
-            name='email'
-            placeholder='name@email.com'
-            onChange={this.handleChange}
-          />
-          <label>Password</label>
-          <input
-            name='password'
-            type='password'
-            placeholder='password'
-            onChange={this.handleChange}
-          />
+      <>
+        <SearchForm />
+        <div className='formWrapper'>
+          <form className='panelWrapper' onSubmit={this.handleSubmit}>
+            <h2>Login</h2>
+            <label>Email</label>
+            <input
+              name='email'
+              placeholder='name@email.com'
+              onChange={this.handleChange}
+            />
+            <label>Password</label>
+            <input
+              name='password'
+              type='password'
+              placeholder='password'
+              onChange={this.handleChange}
+            />
 
-          {!errors && <small>oops, something went wrong. please try again</small>}
-          <button type='submit'>Login</button>
-        </form>
-      </div>
+            {!errors && <small>oops, something went wrong. please try again</small>}
+            <button type='submit'>Login</button>
+          </form>
+        </div>
+      </>
     )
   }
 }
