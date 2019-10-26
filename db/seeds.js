@@ -24,7 +24,7 @@ mongoose.connect(
             passwordConfirmation: 'pass'
           },
           {
-            username: 'Jenny',
+            username: 'jenny',
             email: 'jenny@email.com',
             password: 'pass',
             passwordConfirmation: 'pass'

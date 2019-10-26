@@ -25,7 +25,6 @@ function show(req, res) {
   Veg
     .findById(req.params.id) 
     .populate('user')
-    .populate('comments.user')
     .then(vegetable => {
       if (!vegetable) return res.status(404).json({ message: 'Not Found ' }) 
       res.status(200).json(vegetable) 

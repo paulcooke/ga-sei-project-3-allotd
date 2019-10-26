@@ -1,4 +1,5 @@
 //24/10/19 - JJ added regex to email 
+//26/10/19 - JJ added virtual field for listed Veg history
 
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
@@ -14,13 +15,21 @@ const userSchema = new mongoose.Schema({
   vegGrown: { type: [String] },
   vegLookingFor: { type: [String] },
   rating: { type: Number },
-  listingHistory: { type: mongoose.Schema.ObjectId, ref: 'Veg' },
+  //listingHistory: { type: mongoose.Schema.ObjectId, ref: 'Veg' },
   appointmentHistory: [ { type: mongoose.Schema.ObjectId, ref: 'Appointment' } ]
 }, {
   timestamps: true
 })
 
+// a virtual getter to show the vegetables created by this user
+userSchema.virtual('listingHistory', {
+  ref: 'Veg',
+  localField: '_id',
+  foreignField: 'user'
+})
+
 userSchema.set('toJSON', {
+  virtuals: true,
   transform(doc, json) {
     delete json.password
     delete json.email
