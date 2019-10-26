@@ -10,6 +10,9 @@ router.route('/vegetables')
 
 // Note the contollers are named the same as the exports at the bottom of the /controllers/animals.js file
 
+router.route('/vegetables/map') // added by CS 2.45pm Saturday 
+
+
 router.route('/vegetables/:id') 
   .get(vegetables.show) 
   .put(secureRoute, vegetables.update) 
