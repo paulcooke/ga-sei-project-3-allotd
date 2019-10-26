@@ -14,7 +14,7 @@ import VegetablesEdit from './components/vegetables/VegetablesEdit'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
-import Dashboard from './components/common/Dashboard'
+import Dashboard from './components/users/Dashboard'
 
 const App = () => (
   <BrowserRouter>

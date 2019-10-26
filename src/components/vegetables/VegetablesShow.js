@@ -66,6 +66,10 @@ class VegetablesShow extends React.Component {
                 </>
               }
             </div>
+            <div className="panelWrapper">
+              <h3>Claim this vegetable</h3>
+
+            </div>
           </div>
         </div>
       </div>
