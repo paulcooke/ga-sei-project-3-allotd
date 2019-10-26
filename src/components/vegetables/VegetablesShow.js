@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
 import axios from 'axios'
+import moment from 'moment'
+//import 'moment/locale/en-gb'
 
 
 class VegetablesShow extends React.Component {
@@ -13,6 +15,7 @@ class VegetablesShow extends React.Component {
     }
     
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleDate = this.handleDate.bind(this)
   }
 
   componentDidMount() {
@@ -35,13 +38,18 @@ class VegetablesShow extends React.Component {
     return Auth.getPayload().sub === this.state.vegetable.user._id
   }
 
+  handleDate(pickedDate) {
+    moment.locale('en')
+    const inputDate = moment(pickedDate, 'DD/MM/YYYY')
+    return inputDate.add(1, 'days').from(moment.now())
+  }
+
   render() {
     if (!this.state.vegetable) return null
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user
     } = this.state.vegetable
     return (
-      //<Link to="/vegetables/:id/edit">This link is for the edit button to the edit page</Link>
       <div className='showWrapper'>
         <div className='imgAndInfo'>
           <img src={image} alt={title} />
@@ -50,7 +58,7 @@ class VegetablesShow extends React.Component {
               <h1>{title}</h1>
               <p>Type: {typeOfVeg}</p>
               <p>Variety: {varietyOfVeg}</p>
-              <p>Date Picked: {pickedDate}</p>
+              <p>Picked: {this.handleDate(pickedDate)}</p>
               <p>Description: {description}</p>
               <p>Claimed: {isClaimed}</p>
               <p>vegLocation: {vegLocation}</p>

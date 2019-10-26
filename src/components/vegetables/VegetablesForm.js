@@ -1,8 +1,6 @@
 import React from 'react'
 
 const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation }, handleSubmit, handleChange } ) => {
-  console.log('title is: ', title)
-  console.log('pickedDate is: ', pickedDate)
   return (
     <div className='formWrapper'>
       <form className='panelWrapper' onSubmit={(e) => handleSubmit(e)}>
@@ -30,11 +28,10 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
         />
         <label>Date Picked</label>
         <input
-          placeholder="Date Picked"
+          placeholder="DD/MM/YYYY"
           name="pickedDate"
           onChange={(e) => handleChange(e)}
           value={pickedDate}
-          type="number"
         />
         <label>Image URL</label>
         <input

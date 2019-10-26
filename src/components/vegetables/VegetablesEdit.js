@@ -1,6 +1,7 @@
 import React from 'react'
 import VegetablesForm from './VegetablesForm'
 import axios from 'axios'
+//import moment from 'moment'
 
 import Auth from '../../lib/auth'
 
@@ -40,7 +41,6 @@ class VegetablesEdit extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log('submitted data is: ', this.state.data)
     e.preventDefault()
     const vegetableId = this.props.match.params.id
     axios.put(`/api/vegetables/${vegetableId}`, this.state.data, {

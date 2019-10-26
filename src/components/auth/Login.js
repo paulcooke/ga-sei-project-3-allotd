@@ -30,7 +30,7 @@ class Login extends React.Component {
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
-
+  
   render() {
     const { errors } = this.state
     return (

@@ -13,11 +13,12 @@ class VegetablesNew extends React.Component {
         title: '', // { type: String, required: true },
         typeOfVeg: '', // { type: String, required: true },
         varietyOfVeg: '', //{ type: String },
-        pickedDate: 0, //{ type: Date, required: true },
+        pickedDate: '', //{ type: Date, required: true },
         description: '', // { type: String, maxlength: 200 },
         image: '', //{ type: String },
         isClaimed: false,
-        vegLocation: '' //{ type: String, required: true },
+        vegLocation: '', //{ type: String, required: true },
+        momentTest: null
       }
     }
     this.handleChange = this.handleChange.bind(this)
@@ -32,18 +33,20 @@ class VegetablesNew extends React.Component {
   }
 
   handleSubmit(e) {
-    console.log(this.state.data)
     e.preventDefault()
     axios.post('/api/vegetables', this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.props.history.push(`/vegetables/${res.data._id}`))
       .catch(err => this.setState({ errors: err.message }))
-  }
+  }  
 
   render() {
     return (
-      <VegetablesForm vegetable={this.state} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      <VegetablesForm 
+        vegetable={this.state} 
+        handleChange={this.handleChange} 
+        handleSubmit={this.handleSubmit}/>
     )
   }
 }
