@@ -5,8 +5,26 @@ const appointmentSchema = new mongoose.Schema({
   selectedPickUpTime: { type: String },
   appointmentStatus: { type: Boolean },
   vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg', required: true },
-  //growerId: { type: mongoose.Schema.ObjectId, ref: 'User' },
-  pickerId: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+  pickerId: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
+  expiryDate: { type: String }
+}, {
+  timestamps: true
+})
+
+//Gets GrowerID from User based on Apointment _id in the User listingHistory
+appointmentSchema.virtual('growerId', {
+  ref: 'User',
+  localField: '_id',
+  foreignField: 'listingHistory'
+})
+
+appointmentSchema.set('toJSON', {
+  virtuals: true,
+  transform(doc, json) {
+    delete json.password
+    delete json.email
+    return json
+  }
 })
 
 appointmentSchema.plugin(require('mongoose-unique-validator'))
