@@ -4,7 +4,7 @@ const appointmentSchema = new mongoose.Schema({
   selectedPickUpDay: { type: String },
   selectedPickUpTime: { type: String },
   appointmentStatus: { type: Boolean },
-  //vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg' },
+  vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg', required: true },
   //growerId: { type: mongoose.Schema.ObjectId, ref: 'User' },
   pickerId: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 })

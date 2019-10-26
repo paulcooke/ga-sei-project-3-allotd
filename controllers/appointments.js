@@ -5,12 +5,14 @@ function index(req, res) {
   Appointment
     .find()
     .populate('pickerId')
+    .populate('vegId')
     .then(appointment => res.status(200).json(appointment)) 
     .catch(() => res.status(404).json({ message: 'Not Found' })) 
 }
 
-// create route - /appointments
+// create route - /vegetables/:id/appointment
 function create(req, res, next) {
+  req.body.vegId = req.params.id 
   req.body.pickerId = req.currentUser 
   Appointment
     .create(req.body) 
@@ -23,6 +25,7 @@ function show(req, res) {
   Appointment
     .findById(req.params.id) 
     .populate('pickerId')
+    .populate('vegId')
     .then(appointment => {
       if (!appointment) return res.status(404).json({ message: 'Not Found ' })
       res.status(200).json(appointment)

@@ -12,10 +12,24 @@ const vegSchema = new mongoose.Schema({
   availablePickUpDays: { type: [String] },
   availablePickUpTimes: { type: [String] },
   //pickerId: { type: String },
-  //appointmentId: { type: mongoose.Schema.ObjectId, ref: 'Appointment' },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {
   timestamps: true
+})
+
+vegSchema.virtual('pickUpAppointment', {
+  ref: 'Appointment',
+  localField: '_id',
+  foreignField: 'vegId'
+})
+
+vegSchema.set('toJSON', {
+  virtuals: true,
+  transform(doc, json) {
+    delete json.password
+    delete json.email
+    return json
+  }
 })
 
 vegSchema.plugin(require('mongoose-unique-validator'))

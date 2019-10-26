@@ -34,8 +34,10 @@ router.route('/profile/:id/edit')
   .put(secureRoute, users.update)
 
 router.route('/appointments')
-  .post(secureRoute, appointments.create)
   .get(appointments.index)
+
+router.route('/vegetables/:id/appointment')
+  .post(secureRoute, appointments.create)
 
 router.route('/appointments/:id')
   .patch(appointments.update) // THIS IS A PATCH NOT A PUT (JJ)
