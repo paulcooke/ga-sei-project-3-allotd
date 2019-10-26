@@ -16,6 +16,7 @@ import VegetablesMap from './components/vegetables/VegetablesMap'
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import Dashboard from './components/users/Dashboard'
+import DashboardEdit from './components/users/DashboardEdit'
 
 const App = () => (
   <BrowserRouter>
@@ -31,7 +32,8 @@ const App = () => (
 
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <Route path ="/dashboard" component={Dashboard} />
+        <Route path="/dashboard/:id/edit" component={DashboardEdit} />
+        <Route path="/dashboard" component={Dashboard} />
       </Switch>
       <Footer />
     </main>

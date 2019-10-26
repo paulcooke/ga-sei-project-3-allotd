@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 
 // import axios from 'axios'
 
@@ -18,25 +19,32 @@ class Dashboard extends React.Component {
         vegLookingFor: [],
         rating: '',
         availablePickUpDays: [],
-        availablePickUpTimes: []
+        availablePickUpTimes: [], 
+        listingHistory: [],
+        pickedVegHistory: []
       }
     }
+
     // bind here
   }
 
   componentDidMount() {
-    axios.get('/api/profile', {
+    const userId = this.props.match.params.id
+    axios.get(`/api/profile/${userId}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
       .catch(err => console.log(err.message))
   }
 
+  isOwner() {
+    return Auth.getPayload().sub === this.state.data._id
+  }
+
   render() {
     console.log(this.state)
-    
     return (
-      <main>
+      <div className='dashWrapper'>
         <section className='panelWrapper'>
           <div>
             <h1>Dashboard</h1>
@@ -59,25 +67,52 @@ class Dashboard extends React.Component {
           </div>
           <div>
             <h2>My availability</h2>
-            {this.state.data.availablePickUpDays.map(veg => 
-              <p key={veg}>{veg}</p>
-            )}
+            <p>
+              {this.state.data.availablePickUpDays.map(day => {
+                return day
+              }).join(', ')}
+            </p>
           </div>
           <div>
-            {this.state.data.availablePickUpTimes.map(veg => 
-              <p key={veg}>{veg}</p>
-            )}
+            <p>
+              {this.state.data.availablePickUpTimes.map(time => {
+                return time
+              }).join(', ')}
+            </p>
           </div>
         </section>
         <section>
           <div className='panelWrapper'>
-       My Listings
+            <h2>My listings</h2>
+            {
+              this.state.data.listingHistory.map(listing => (
+                <div key={listing.id}>
+                  {listing.title} on {listing.createdAt}
+                </div>
+              ))
+            }
           </div>
           <div className='panelWrapper'>
-       My claimed veggies
+            <h2>My pickups</h2>
+            {
+              this.state.data.pickedVegHistory.map(picked => (
+                <div key={picked.id}>
+                  {picked.vegId} (veg id)
+                </div>
+              ))
+            }
+          </div>
+          <div className='panelWrapper'>
+            {this.isOwner() &&
+                <>
+                  <Link to={`/dashboard/${this.state.data.id}/edit`}>
+                    <button>Edit profile</button>
+                  </Link>
+                </>
+            }
           </div>
         </section>
-      </main>
+      </div>
     )
   }
 

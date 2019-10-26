@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Auth from '../../lib/auth'
 import axios from 'axios'
+import moment from 'moment'
+//import 'moment/locale/en-gb'
 
 
 class VegetablesShow extends React.Component {
@@ -9,9 +11,15 @@ class VegetablesShow extends React.Component {
     super()
 
     this.state = {
-      vegetable: null
+      vegetable: null,
+      newAppointment: {},
+      errors: {}
     }
+    
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleDate = this.handleDate.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
@@ -34,14 +42,37 @@ class VegetablesShow extends React.Component {
     return Auth.getPayload().sub === this.state.vegetable.user._id
   }
 
+  handleDate(pickedDate) {
+    moment.locale('en')
+    const inputDate = moment(pickedDate, 'DD/MM/YYYY')
+    return inputDate.add(1, 'days').from(moment.now())
+  }
+  
+  handleChange({ target: { name, value, type, checked } }) {
+    const newValue = type === 'checkbox' ? checked : value
+    const newAppointment = { ...this.state.newAppointment, [name]: newValue }
+    const errors = { ...this.state.errors, [name]: '' }
+    this.setState({ newAppointment, errors })
+  }
+
+  handleSubmit(e) {
+    e.preventDefault()
+    const vegetableId = this.props.match.params.id
+    axios.post(`/api/vegetables/${vegetableId}/appointment`, this.state.newAppointment, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.props.history.push('/vegetables'))
+      .catch(err => this.setState({ errors: err.message }))
+  }
+
   render() {
+    console.log(this.state)
     if (!this.state.vegetable) return null
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
-      vegLocation, availablePickUpDays, availablePickUpTimes, user
+      vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
     return (
-      //<Link to="/vegetables/:id/edit">This link is for the edit button to the edit page</Link>
-      <div className='showWrapper'>
+      <div className='formWrapper'>
         <div className='imgAndInfo'>
           <img src={image} alt={title} />
           <div className='panelWrapper'>
@@ -49,15 +80,13 @@ class VegetablesShow extends React.Component {
               <h1>{title}</h1>
               <p>Type: {typeOfVeg}</p>
               <p>Variety: {varietyOfVeg}</p>
-              <p>Date Picked: {pickedDate}</p>
+              <p>Picked: {this.handleDate(pickedDate)}</p>
               <p>Description: {description}</p>
               <p>Claimed: {isClaimed}</p>
-              <p>vegLocation: {vegLocation}</p>
-              <p>Available on {availablePickUpDays} at {availablePickUpTimes}</p>
               <p>Posted by: {user.username}</p>
             </div>
             <div>
-              {this.isOwner() &&
+              {this.isOwner() && 
                 <>
                   <Link to={`/vegetables/${this.state.vegetable._id}/edit`}>
                     <button>Edit vegetable</button>
@@ -66,10 +95,52 @@ class VegetablesShow extends React.Component {
                 </>
               }
             </div>
+            {!this.isOwner() && pickUpAppointment.length < 1 && 
             <div className="panelWrapper">
-              <h3>Claim this vegetable</h3>
-
+              <form>
+                <h2>Claim this veg from {user.username}</h2>
+                <p>Veg location: {vegLocation}</p>
+                
+                <h3>Pick an upcoming day from the grower`&apos;`s preferences</h3>
+                <div>
+                  {
+                    availablePickUpDays.map(day => (
+                      <label key={day}>
+                        <input 
+                          type="radio" 
+                          name="selectedPickUpDay"
+                          value={day} 
+                          checked={this.state.newAppointment.selectedPickUpDay === day}
+                          onChange={this.handleChange}
+                        />
+                        {day}
+                      </label>
+                    ))
+                  }
+                </div>
+                <br/>
+                <h3>and a time...</h3>
+                <div>
+                  {
+                    availablePickUpTimes.map(time => (
+                      <label key={time}>
+                        <input 
+                          type="radio" 
+                          name="selectedPickUpTime"
+                          value={time} 
+                          checked={this.state.newAppointment.selectedPickUpTime === time}
+                          onChange={this.handleChange}
+                        />
+                        {`${time}:00`}
+                      </label>
+                    ))
+                  }
+                </div>
+                {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
+                <button onClick={this.handleSubmit}>Request pickup</button>
+              </form>              
             </div>
+            }
           </div>
         </div>
       </div>

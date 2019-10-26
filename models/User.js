@@ -19,13 +19,14 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
-// a virtual getter to show the vegetables created by this user
+//Gets listingHistory from Veg based on User _id in the Veg user
 userSchema.virtual('listingHistory', {
   ref: 'Veg',
   localField: '_id',
   foreignField: 'user'
 })
 
+//Gets pickedVegHistory from Appointment based on User _id in the Appointment pickerId
 userSchema.virtual('pickedVegHistory', {
   ref: 'Appointment',
   localField: '_id',
