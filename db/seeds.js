@@ -28,7 +28,7 @@ mongoose.connect(
             availablePickUpTimes: [ '18', '19', '20' ]
           },
           {
-            username: 'Jenny',
+            username: 'jenny',
             email: 'jenny@email.com',
             password: 'pass',
             passwordConfirmation: 'pass',
