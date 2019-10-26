@@ -17,6 +17,7 @@ const userSchema = new mongoose.Schema({
   rating: { type: Number },
   //listingHistory: { type: mongoose.Schema.ObjectId, ref: 'Veg' },
   appointmentHistory: [ { type: mongoose.Schema.ObjectId, ref: 'Appointment' } ]
+
 }, {
   timestamps: true
 })

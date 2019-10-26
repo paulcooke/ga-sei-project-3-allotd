@@ -15,25 +15,33 @@ mongoose.connect(
             username: 'Lloyd',
             email: 'lloyd@email.com',
             password: 'pass',
-            passwordConfirmation: 'pass'
+            passwordConfirmation: 'pass',
+            availablePickUpDays: [ 'mon', 'tues', 'weds', 'thurs', 'fri', 'sat', 'sun' ], 
+            availablePickUpTimes: [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23' ]
           },
           {
             username: 'Claire',
             email: 'claire@email.com',
             password: 'pass',
-            passwordConfirmation: 'pass'
+            passwordConfirmation: 'pass',
+            availablePickUpDays: [ 'mon', 'tues', 'weds', 'thurs', 'fri' ], 
+            availablePickUpTimes: [ '18', '19', '20' ]
           },
           {
             username: 'jenny',
             email: 'jenny@email.com',
             password: 'pass',
-            passwordConfirmation: 'pass'
+            passwordConfirmation: 'pass',
+            availablePickUpDays: [ 'sat', 'sun' ], 
+            availablePickUpTimes: [ '9', '10' ]
           },
           {
             username: 'Paul',
             email: 'paul@email.com',
             password: 'pass',
-            passwordConfirmation: 'pass'
+            passwordConfirmation: 'pass',
+            availablePickUpDays: [ 'tues', 'weds' ], 
+            availablePickUpTimes: [ '18', '19', '20' ]
           }
         ])
       })
