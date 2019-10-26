@@ -1,12 +1,18 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
-// auth will go here
+import Auth from '../../lib/auth'
 
 class Navbar extends React.Component {
   constructor() {
     super()
+
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
+  handleLogout() {
+    Auth.logout()
+    this.props.history.push('/vegetables')
+  }
 
   render() {
     return (
@@ -18,10 +24,10 @@ class Navbar extends React.Component {
         <Link to="/register">Register</Link>        
         <Link to="/login">Sign in</Link>
         <Link to="/dashboard">Dashboard</Link>
+        <a onClick={this.handleLogout}>Logout</a>
       </nav>
     )
   }
-
 }
 
 export default withRouter(Navbar)
