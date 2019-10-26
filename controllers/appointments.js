@@ -15,7 +15,7 @@ function index(req, res) {
 function create(req, res, next) {
   req.body.vegId = req.params.id 
   req.body.pickerId = req.currentUser 
-  //req.body.expiryDate = 
+  req.body.expiryDate = new Date(Date.now() + 172800 * 1000).toISOString()
   Appointment
     .create(req.body) 
     .then(appointment => res.status(201).json(appointment)) 

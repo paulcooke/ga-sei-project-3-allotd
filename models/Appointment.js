@@ -6,7 +6,7 @@ const appointmentSchema = new mongoose.Schema({
   appointmentStatus: { type: Boolean },
   vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg', required: true },
   pickerId: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  expiryDate: { type: String }
+  expiryDate: { type: String, required: true }
 }, {
   timestamps: true
 })
