@@ -44,7 +44,7 @@ class Dashboard extends React.Component {
   render() {
     console.log(this.state)
     return (
-      <main>
+      <div className='dashWrapper'>
         <section className='panelWrapper'>
           <div>
             <h1>Dashboard</h1>
@@ -112,7 +112,7 @@ class Dashboard extends React.Component {
             }
           </div>
         </section>
-      </main>
+      </div>
     )
   }
 

@@ -104,7 +104,7 @@ class DashboardEdit extends React.Component {
     console.log(this.state)
     const { data } = this.state
     return (
-      <main>
+      <div className='dashWrapper'>
         <section className='panelWrapper'>
           <div>
             <h1>Edit your profile</h1>
@@ -173,7 +173,7 @@ class DashboardEdit extends React.Component {
             <button onClick={this.handleSubmit}>Submit</button>
           </div>
         </section>
-      </main>
+      </div>
     )
   }
 
