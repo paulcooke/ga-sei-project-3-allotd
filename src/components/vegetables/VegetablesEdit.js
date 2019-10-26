@@ -24,13 +24,13 @@ class VegetablesEdit extends React.Component {
     }
 
     this.dayOptions = [
-      { value: 'mon', label: 'mon' },
-      { value: 'tues', label: 'tues' },
-      { value: 'weds', label: 'weds' },
-      { value: 'thurs', label: 'thurs' },
-      { value: 'fri', label: 'fri' },
-      { value: 'sat', label: 'sat' },
-      { value: 'sun', label: 'sun' }
+      { value: 'Monday', label: 'Monday' },
+      { value: 'Tuesday', label: 'Tuesday' },
+      { value: 'Wedsday', label: 'Wedsday' },
+      { value: 'Thursday', label: 'Thursday' },
+      { value: 'Friday', label: 'Friday' },
+      { value: 'Saturday', label: 'Saturday' },
+      { value: 'Sunday', label: 'Sunday' }
     ]
 
     this.timeOptions = [

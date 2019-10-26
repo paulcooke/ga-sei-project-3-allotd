@@ -23,15 +23,6 @@ class Dashboard extends React.Component {
       }
     }
 
-    // this.options = [
-    //   { value: 'eggs', label: 'Eggs' },
-    //   { value: 'bacon', label: 'Bacon' },
-    //   { value: 'coffee', label: 'Coffee' },
-    //   { value: 'tea', label: 'Tea' },
-    //   { value: 'beans', label: 'Beans' },
-    //   { value: 'toast', label: 'Toast' },
-    //   { value: 'cereal', label: 'Cereal' }
-    // ]
     // bind here
   }
 
@@ -91,10 +82,10 @@ class Dashboard extends React.Component {
         </section>
         <section>
           <div className='panelWrapper'>
-       My Listings
+            My Listings
           </div>
           <div className='panelWrapper'>
-       My claimed veggies
+            My pickups
           </div>
           <div className='panelWrapper'>
             {this.isOwner() &&
