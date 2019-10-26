@@ -14,10 +14,7 @@ const userSchema = new mongoose.Schema({
   userLocation: { type: String }, 
   vegGrown: { type: [String] },
   vegLookingFor: { type: [String] },
-  rating: { type: Number },
-  //listingHistory: { type: mongoose.Schema.ObjectId, ref: 'Veg' },
-  appointmentHistory: [ { type: mongoose.Schema.ObjectId, ref: 'Appointment' } ]
-
+  rating: { type: Number }
 }, {
   timestamps: true
 })
@@ -27,6 +24,12 @@ userSchema.virtual('listingHistory', {
   ref: 'Veg',
   localField: '_id',
   foreignField: 'user'
+})
+
+userSchema.virtual('pickedVegHistory', {
+  ref: 'Appointment',
+  localField: '_id',
+  foreignField: 'pickerId'
 })
 
 userSchema.set('toJSON', {

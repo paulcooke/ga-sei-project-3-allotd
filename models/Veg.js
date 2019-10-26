@@ -11,7 +11,7 @@ const vegSchema = new mongoose.Schema({
   vegLocation: { type: String, required: true },
   availablePickUpDays: { type: [String] },
   availablePickUpTimes: { type: [String] },
-  pickerId: { type: String },
+  //pickerId: { type: String },
   //appointmentId: { type: mongoose.Schema.ObjectId, ref: 'Appointment' },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
 }, {

@@ -27,14 +27,14 @@ router.route('/register')
 router.route('/login') 
   .post(users.login) 
 
-router.route('/profile')
+router.route('/profile/:id')
   .get(secureRoute, users.profile)
 
-router.route('/profile/:id')  
+router.route('/profile/:id/edit')  
   .put(secureRoute, users.update)
 
 router.route('/appointments')
-  .post(appointments.create)
+  .post(secureRoute, appointments.create)
   .get(appointments.index)
 
 router.route('/appointments/:id')

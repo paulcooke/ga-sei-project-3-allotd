@@ -4,14 +4,14 @@ const Appointment = require('../models/Appointment')
 function index(req, res) {
   Appointment
     .find()
-    //.populate('user')
+    .populate('pickerId')
     .then(appointment => res.status(200).json(appointment)) 
     .catch(() => res.status(404).json({ message: 'Not Found' })) 
 }
 
 // create route - /appointments
 function create(req, res, next) {
-  //req.body.user = req.currentUser 
+  req.body.pickerId = req.currentUser 
   Appointment
     .create(req.body) 
     .then(appointment => res.status(201).json(appointment)) 
@@ -22,7 +22,7 @@ function create(req, res, next) {
 function show(req, res) {
   Appointment
     .findById(req.params.id) 
-    //.populate('user')
+    .populate('pickerId')
     .then(appointment => {
       if (!appointment) return res.status(404).json({ message: 'Not Found ' })
       res.status(200).json(appointment)
