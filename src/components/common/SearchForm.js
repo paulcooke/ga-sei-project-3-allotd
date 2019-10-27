@@ -1,5 +1,6 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom' 
+import Dropdown from './Dropdown'
 
 class SearchForm extends React.Component {
   constructor() {
@@ -12,6 +13,7 @@ class SearchForm extends React.Component {
   }
 
   handleRedirect() {
+    console.log('handle redirect was called. ')
     if (this.props.location.pathname !== '/vegetables') this.props.history.push({
       pathname: '/vegetables',
       search: '?query=abc',
@@ -20,6 +22,7 @@ class SearchForm extends React.Component {
   }
   
   storeValForRedirect(e) {
+    console.log('svfr was called. ')
     const valBeforeRedirect = [e.target.name] = e.target.value
     this.setState({ valBeforeRedirect })
   }
@@ -28,14 +31,22 @@ class SearchForm extends React.Component {
     const { onChange, onSubmit, name } = this.props
     if (this.props.location.state) console.log('value: ', this.props.location.state)
     return (
-      <form 
-        className='searchForm'
-        onChange={onChange ? onChange : this.storeValForRedirect} //no func from idx, store val until redirect 
-        onSubmit={onSubmit ? onSubmit : this.handleRedirect} //no function passed from index then redirect to there
-      >
-        <input name={name} placeholder='search => typeOfVeg' />
-        <button type='submit'>Search</button>
-      </form>
+      <>
+        <form
+          className='searchForm'
+          onChange={onChange ? onChange : this.storeValForRedirect} //no func from idx, store val until redirect 
+          onSubmit={onSubmit ? onSubmit : this.handleRedirect} //no function passed from index then redirect to there
+        >
+          <Dropdown
+            vegetable={this.state.region}
+            onClick={onChange ? onChange : (e) => {
+              this.storeValForRedirect(e)
+              this.handleRedirect()
+            }} />
+          <input name={name} placeholder='Search by title' />
+          <button type='submit'>Search</button>
+        </form>
+      </>
     )
   }
 }
