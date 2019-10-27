@@ -3,7 +3,6 @@ import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 
-// import axios from 'axios'
 
 class Dashboard extends React.Component {
   constructor() {

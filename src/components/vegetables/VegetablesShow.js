@@ -98,7 +98,7 @@ class VegetablesShow extends React.Component {
                   </>
                 }
               </div>
-              {!this.isOwner() && pickUpAppointment.length < 1 &&
+              {!this.isOwner() && Auth.isAuthenticated() && pickUpAppointment.length < 1 &&
                 <div className="panelWrapper">
                   <form>
                     <h2>Claim this veg from {user.username}</h2>
