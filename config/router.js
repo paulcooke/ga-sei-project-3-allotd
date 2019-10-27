@@ -4,6 +4,7 @@ const users = require('../controllers/auth')
 const secureRoute = require('../lib/secureRoute') 
 const appointments = require('../controllers/appointments')
 
+
 router.route('/vegetables') 
   .get(vegetables.index) 
   .post(secureRoute, vegetables.create) 

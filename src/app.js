@@ -19,6 +19,8 @@ import Login from './components/auth/Login'
 import Dashboard from './components/users/Dashboard'
 import DashboardEdit from './components/users/DashboardEdit'
 
+import imageUpload from './components/images/imageUpload'
+
 const App = () => (
   <BrowserRouter>
     <main>
@@ -30,6 +32,7 @@ const App = () => (
         <SecureRoute path="/vegetables/:id/edit" component={VegetablesEdit} />
         <Route path="/vegetables/:id" component={VegetablesShow} />
         <Route path="/vegetables" component={VegetablesIndex}/>
+        <Route path="/uploadbase" component={imageUpload}/>
 
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
