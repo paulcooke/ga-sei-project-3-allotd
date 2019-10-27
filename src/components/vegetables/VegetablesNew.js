@@ -27,7 +27,7 @@ class VegetablesNew extends React.Component {
     this.dayOptions = [
       { value: 'Monday', label: 'Monday' },
       { value: 'Tuesday', label: 'Tuesday' },
-      { value: 'Wedsday', label: 'Wedsday' },
+      { value: 'Wednesday', label: 'Wednesday' },
       { value: 'Thursday', label: 'Thursday' },
       { value: 'Friday', label: 'Friday' },
       { value: 'Saturday', label: 'Saturday' },
