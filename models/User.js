@@ -19,14 +19,21 @@ const userSchema = new mongoose.Schema({
   timestamps: true
 })
 
-//Gets listingHistory from Veg based on User _id in the Veg user
+//Creates listingHistory virtual field in userSchema
+//The function goes to 'Veg' model with the User.js _id.
+//if User.js '_id' is equal to the Veg.js 'user' 
+//then 'listingHistory' in 'User' is populated with that 'Veg' object. 
+//So the whole vegetable with all its referenced and virtual fields is attached. 
 userSchema.virtual('listingHistory', {
   ref: 'Veg',
   localField: '_id',
   foreignField: 'user'
 })
 
-//Gets pickedVegHistory from Appointment based on User _id in the Appointment pickerId
+//Creates pickedVegHistory virtual field in userSchema
+//the function goes to 'Appointment' object finds pickerId 
+//and checks if the pickerId is the same as the User _id if yes
+//It adds the 'Appointment' to the 'pickedVegHistory
 userSchema.virtual('pickedVegHistory', {
   ref: 'Appointment',
   localField: '_id',

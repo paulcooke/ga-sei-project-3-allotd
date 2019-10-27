@@ -29,8 +29,8 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    const userId = this.props.match.params.id
-    axios.get(`/api/profile/${userId}`, {
+    const userId = this.props.match.params.id//why is this null when i log it?
+    axios.get(`/api/profile/${userId}`, { // how is this working? LN
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
@@ -38,11 +38,11 @@ class Dashboard extends React.Component {
   }
 
   isOwner() {
+    console.log(this.state.data._id)
     return Auth.getPayload().sub === this.state.data._id
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className='dashWrapper'>
         <section className='panelWrapper'>
