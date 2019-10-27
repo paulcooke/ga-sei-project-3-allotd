@@ -162,7 +162,7 @@ class DashboardEdit extends React.Component {
               isMulti
               onChange={this.handleDaySelect}
               components={animatedComponents}
-              value={
+              value={data.availablePickUpDays && 
                 data.availablePickUpDays.map(day => (
                   { value: day, label: day }
                 ))
@@ -174,7 +174,7 @@ class DashboardEdit extends React.Component {
               isMulti
               onChange={this.handleTimeSelect}
               components={animatedComponents}
-              value={
+              value={data.availablePickUpTimes && 
                 data.availablePickUpTimes.map(time => (
                   { value: time, label: time + ':00' }
                 ))
