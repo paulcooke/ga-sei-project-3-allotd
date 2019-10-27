@@ -6,6 +6,7 @@ import './styles/main.scss'
 import Navbar from './components/common/Navbar'
 import Home from './components/common/Home'
 import Footer from './components/common/Footer'
+import SecureRoute from './components/common/SecureRoute'
 
 import VegetablesIndex from './components/vegetables/VegetablesIndex'
 import VegetablesShow from './components/vegetables/VegetablesShow'
@@ -25,15 +26,15 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path ="/vegetables/map" component={VegetablesMap} />
-        <Route path="/vegetables/new" component={VegetablesNew} />
-        <Route path="/vegetables/:id/edit" component={VegetablesEdit} />
+        <SecureRoute path="/vegetables/new" component={VegetablesNew} />
+        <SecureRoute path="/vegetables/:id/edit" component={VegetablesEdit} />
         <Route path="/vegetables/:id" component={VegetablesShow} />
         <Route path="/vegetables" component={VegetablesIndex}/>
 
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />
-        <Route path="/dashboard/:id/edit" component={DashboardEdit} />
-        <Route path="/dashboard" component={Dashboard} />
+        <SecureRoute path="/dashboard/:id/edit" component={DashboardEdit} />
+        <SecureRoute path="/dashboard" component={Dashboard} />
       </Switch>
       <Footer />
     </main>

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const appointmentSchema = new mongoose.Schema({
   selectedPickUpDay: { type: String },
   selectedPickUpTime: { type: String },
-  appointmentStatus: { type: Boolean },
+  appointmentStatus: { type: String },
   vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg', required: true },
   pickerId: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
   expiryDate: { type: String, required: true }
