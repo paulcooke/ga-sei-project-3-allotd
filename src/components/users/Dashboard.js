@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 
 class Dashboard extends React.Component {
@@ -28,8 +29,8 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    const userId = this.props.match.params.id
-    axios.get(`/api/profile/${userId}`, {
+    const userId = this.props.match.params.id//why is this null when i log it?
+    axios.get(`/api/profile/${userId}`, { // how is this working? LN
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
@@ -37,11 +38,11 @@ class Dashboard extends React.Component {
   }
 
   isOwner() {
+    console.log(this.state.data._id)
     return Auth.getPayload().sub === this.state.data._id
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className='dashWrapper'>
         <section className='panelWrapper'>
@@ -86,7 +87,7 @@ class Dashboard extends React.Component {
             {
               this.state.data.listingHistory.map(listing => (
                 <div key={listing.id}>
-                  {listing.title} on {listing.createdAt}
+                  {listing.title} on {moment(listing.createdAt).calendar()}
                 </div>
               ))
             }
