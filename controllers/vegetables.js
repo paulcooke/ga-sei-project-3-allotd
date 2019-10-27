@@ -59,11 +59,24 @@ function deleteRoute(req, res) {
     .catch(err => res.status(400).json(err)) // send any errors if something goes wrong.
 }
 
+function claim(req,res, next) {
+  Veg
+    .findById(req.params.id)
+    .then(vegetable => {
+      if (!vegetable) return res.status(404).json({ message: 'Not Found' })
+      vegetable.set(req.body)
+      return vegetable.save()
+    }) 
+    .then(vegetable => res.status(202).json(vegetable)) 
+    .catch(next)
+}
+
 // exporting our 'Route Handler' functions to be used buy our Router, found in 'config/router.js'
 module.exports = {
   index, 
   create,
   show,
   update,
-  delete: deleteRoute
+  delete: deleteRoute,
+  claim
 } 

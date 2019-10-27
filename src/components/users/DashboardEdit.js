@@ -37,23 +37,23 @@ class DashboardEdit extends React.Component {
     ]
 
     this.timeOptions = [
-      { value: '6', label: '6am' },
-      { value: '7', label: '7am' },
-      { value: '8', label: '8am' },
-      { value: '9', label: '9am' },
-      { value: '10', label: '10am' },
-      { value: '11', label: '11am' },
+      { value: '6', label: '6:00' },
+      { value: '7', label: '7:00' },
+      { value: '8', label: '8:00' },
+      { value: '9', label: '9:00' },
+      { value: '10', label: '10:00' },
+      { value: '11', label: '11:00' },
       { value: '12', label: 'noon' },
-      { value: '13', label: '1pm' },
-      { value: '14', label: '2pm' },
-      { value: '15', label: '3pm' },
-      { value: '16', label: '4pm' },
-      { value: '17', label: '5pm' },
-      { value: '18', label: '6pm' },
-      { value: '19', label: '7pm' },
-      { value: '20', label: '8pm' },
-      { value: '21', label: '9pm' },
-      { value: '22', label: '10pm' }
+      { value: '13', label: '1:00' },
+      { value: '14', label: '2:00' },
+      { value: '15', label: '3:00' },
+      { value: '16', label: '4:00' },
+      { value: '17', label: '5:00' },
+      { value: '18', label: '6:00' },
+      { value: '19', label: '7:00' },
+      { value: '20', label: '8:00' },
+      { value: '21', label: '9:00' },
+      { value: '22', label: '10:00' }
     ]
 
     this.handleChange = this.handleChange.bind(this)

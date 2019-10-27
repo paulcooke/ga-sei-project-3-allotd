@@ -1,0 +1,52 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  background: $navgreen;
+  height: 70px;
+  border: solid 1px $bordergrey;
+  div {
+    display: flex;
+  }
+  a {
+    font-size: 24px;
+    margin: 20px;
+  }
+  .burgerMenu {
+      display: none;
+      flex-direction: column;
+      justify-content: space-around;
+      padding: 10px;
+      margin: 0;
+      max-height: 70px;
+    span {
+      height: 8px;
+      width: 50px;
+      background: $buttonbrown;
+      border-radius: 5px;
+    }
+  }
+}
+
+.burgerOpen {
+  height: 250px;
+  a {
+    display: flex;
+    margin: 6px;
+  }
+
+  div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  nav{
+    .burgerMenu {
+      display: flex;
+    }
+    a {
+      display: none;
+    }
+  }
+}

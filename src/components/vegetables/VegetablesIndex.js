@@ -2,14 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import VegetableCard from './VegetableCard'
-
-
-// paul - might need axios for filtery stuff
-
-
-
 import SearchForm from '../common/SearchForm'
-
 
 class VegetablesIndex extends React.Component {
   constructor() {
@@ -34,12 +27,12 @@ class VegetablesIndex extends React.Component {
 
   submitSearch(e) {
     e.preventDefault()
-    console.log('submit clicked. ')
     axios.get('/api/vegetables')
       .then(res => {
         console.log('search data: ', res.data)
-        const filteredArr = res.data.filter(veg => veg.typeOfVeg === this.state.searchTerm)
-        this.setState({ vegetables: filteredArr })
+        const filteredArr = res.data.filter(veg => new RegExp(this.state.searchTerm, 'i').test(veg.typeOfVeg))
+        // if searchterm is false dont bother doing anything
+        this.state.searchTerm ? this.setState({ vegetables: filteredArr }) : false
       })
       .catch(err => console.log(err))
   }
@@ -49,11 +42,22 @@ class VegetablesIndex extends React.Component {
     if (!this.state.vegetables) return null
     return (
       <>
-        <SearchForm name='searchTerm' onChange={this.onChange} onSubmit={this.submitSearch}/>
+        <SearchForm 
+          name='searchTerm' 
+          onChange={this.onChange} 
+          onSubmit={this.submitSearch}
+        />
         <div className='indexWrapper'>
-          {this.state.vegetables.map(vegetable => (
-            <VegetableCard key={vegetable._id} {...vegetable} />
-          ))}
+          {this.state.vegetables.isClaimed && <p>CLAIMED!</p>}
+          {this.props.location.state && // if a value has been passed from another page then use it to filter
+           this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.typeOfVeg))
+             .map(vegetable => (
+               <VegetableCard key={vegetable._id} {...vegetable} />
+             ))}
+          {!this.props.location.state && // if no value from a redirect then render all on load
+           this.state.vegetables.map(vegetable => (
+             <VegetableCard key={vegetable._id} {...vegetable} />
+           ))}
         </div>
       </>
     )

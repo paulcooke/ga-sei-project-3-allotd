@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import SearchForm from '../common/SearchForm'
 
 class Register extends React.Component {
   constructor() {
@@ -30,50 +31,51 @@ class Register extends React.Component {
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
   render() {
-    console.log('state', this.state)
     const { errors } = this.state
     return (
-      <div className='formWrapper'>
-        
-        <form className='panelWrapper' onSubmit={this.handleSubmit}>
-          <h2>Register</h2>
-          
-          <label>User name</label>
-          <input
-            name='username'
-            placeholder='username'
-            onChange={this.handleChange}
-          />
-          {errors.username && <small>{errors.username}</small>}
+      <>
+        <SearchForm />
+        <div className='formWrapper'>
+          <form className='panelWrapper' onSubmit={this.handleSubmit}>
+            <h2>Register</h2>
 
-          <label>Email</label>
-          <input
-            name='email'
-            placeholder='name@email.com'
-            onChange={this.handleChange}
-          />
-          {errors.email && <small>please enter your email</small>}
+            <label>User name</label>
+            <input
+              name='username'
+              placeholder='username'
+              onChange={this.handleChange}
+            />
+            {errors.username && <small>{errors.username}</small>}
 
-          <label>Password</label>
-          <input
-            name='password'
-            type='password'
-            placeholder='password'
-            onChange={this.handleChange}
-          />
-          {errors.password && <small>{errors.password}</small>}
+            <label>Email</label>
+            <input
+              name='email'
+              placeholder='name@email.com'
+              onChange={this.handleChange}
+            />
+            {errors.email && <small>please enter your email</small>}
 
-          <label>Password Confirmation</label>
-          <input
-            name='passwordConfirmation'
-            type='password'
-            placeholder='password confirmation'
-            onChange={this.handleChange}
-          />
+            <label>Password</label>
+            <input
+              name='password'
+              type='password'
+              placeholder='password'
+              onChange={this.handleChange}
+            />
+            {errors.password && <small>{errors.password}</small>}
 
-          <button type='submit'>Register</button>
-        </form>
-      </div>
+            <label>Password Confirmation</label>
+            <input
+              name='passwordConfirmation'
+              type='password'
+              placeholder='password confirmation'
+              onChange={this.handleChange}
+            />
+
+            <button type='submit'>Register</button>
+          </form>
+        </div>
+      </>
     )
   }
 }

@@ -4,7 +4,7 @@ import makeAnimated from 'react-select/animated'
 
 const animatedComponents = makeAnimated()
 
-const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions } ) => {
+const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation, availablePickUpDays, availablePickUpTimes }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions } ) => {
   console.log('title is: ', title)
   console.log('pickedDate is: ', pickedDate)
   return (
@@ -71,6 +71,11 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           isMulti
           onChange={handleDaySelect}
           components={animatedComponents}
+          value={
+            availablePickUpDays.map(day => (
+              { value: day, label: day }
+            ))
+          }
         />
         <br/>
         <Select 
@@ -78,6 +83,11 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           isMulti
           onChange={handleTimeSelect}
           components={animatedComponents}
+          value={
+            availablePickUpTimes.map(time => (
+              { value: time, label: time + ':00' }
+            ))
+          }
         />
 
         <button type="submit">

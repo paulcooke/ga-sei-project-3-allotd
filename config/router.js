@@ -17,6 +17,7 @@ router.route('/vegetables/:id')
   .get(vegetables.show) 
   .put(secureRoute, vegetables.update) 
   .delete(secureRoute, vegetables.delete)
+  .patch(vegetables.claim)
 
 // router.route('/vegetables/:id/comments') 
 //   .post(vegetables.commentCreate)

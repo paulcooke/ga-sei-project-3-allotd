@@ -16,7 +16,7 @@ mongoose.connect(
             email: 'lloyd@email.com',
             password: 'pass',
             passwordConfirmation: 'pass',
-            availablePickUpDays: [ 'mon', 'tues', 'weds', 'thurs', 'fri', 'sat', 'sun' ], 
+            availablePickUpDays: [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ], 
             availablePickUpTimes: [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23' ]
           },
           {
@@ -24,7 +24,7 @@ mongoose.connect(
             email: 'claire@email.com',
             password: 'pass',
             passwordConfirmation: 'pass',
-            availablePickUpDays: [ 'mon', 'tues', 'weds', 'thurs', 'fri' ], 
+            availablePickUpDays: [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ], 
             availablePickUpTimes: [ '18', '19', '20' ]
           },
           {
@@ -32,7 +32,7 @@ mongoose.connect(
             email: 'jenny@email.com',
             password: 'pass',
             passwordConfirmation: 'pass',
-            availablePickUpDays: [ 'sat', 'sun' ], 
+            availablePickUpDays: [ 'Saturday', 'Sunday' ], 
             availablePickUpTimes: [ '9', '10' ]
           },
           {
@@ -40,7 +40,7 @@ mongoose.connect(
             email: 'paul@email.com',
             password: 'pass',
             passwordConfirmation: 'pass',
-            availablePickUpDays: [ 'tues', 'weds' ], 
+            availablePickUpDays: [ 'Tuesday', 'Wednesday' ], 
             availablePickUpTimes: [ '18', '19', '20' ]
           }
         ])
@@ -56,7 +56,9 @@ mongoose.connect(
             image: 'https://i0.wp.com/images-prod.healthline.com/hlcmsresource/images/AN_images/tomatoes-1296x728-feature.jpg?w=1155&h=1528',
             isClaimed: false,
             vegLocation: 'SW18 4TQ',
-            user: users[0]
+            user: users[0],
+            availablePickUpDays: ['Monday', 'Tuesday'],
+            availablePickUpTimes: ['18', '19']
           },
           {
             title: 'cucumber',
@@ -67,7 +69,9 @@ mongoose.connect(
             image: 'https://www.edenbrothers.com/store/media/Seeds-Vegetables/resized/SVCUC124-1_medium.jpg',
             isClaimed: false,
             vegLocation: 'SW11 1XT',
-            user: users[1]
+            user: users[1],
+            availablePickUpDays: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+            availablePickUpTimes: ['8', '9', '10']
           },
           {
             title: 'aubergine',
@@ -78,7 +82,9 @@ mongoose.connect(
             image: 'https://www.nhm.ac.uk/content/dam/nhmwww/discover/aubergine-evolution/aubergine-shutterstock-full-width.jpg.thumb.1920.1920.png',
             isClaimed: false,
             vegLocation: 'SW13 9PF',
-            user: users[2]
+            user: users[2],
+            availablePickUpDays: ['Saturday', 'Sunday'],
+            availablePickUpTimes: ['9', '10', '11']
           },
           {
             title: 'Asparagus',
@@ -89,7 +95,9 @@ mongoose.connect(
             image: 'https://www.thespruce.com/thmb/AslNxNSnIywOCJuM4fcUAU7VWBA=/1983x1416/filters:fill(auto,1)/Asparagus-GettyImages-135630192-5be349fcc9e77c0051aac6ea.jpg',
             isClaimed: false,
             vegLocation: 'SW12 8RJ',
-            user: users[3]
+            user: users[3],
+            availablePickUpDays: ['Wednesday', 'Thursday', 'Friday'],
+            availablePickUpTimes: ['12', '1']
           }
         ])
       })
