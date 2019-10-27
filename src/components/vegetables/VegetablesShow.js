@@ -63,16 +63,9 @@ class VegetablesShow extends React.Component {
     const errors = { ...this.state.errors, [name]: '' }
     
     this.setState({ newAppointment, errors })
-    //this.makeAppointmentDate(this.state.newAppointment.selectedPickUpTime, this.state.newAppointment.selectedPickUpDay)
-    //const setDayAndTime = this.makeAppointmentDate(this.state.newAppointment.selectedPickUpTime, this.state.newAppointment.selectedPickUpDay)
   }
 
-  // makeAppointmentDate(day, hour) {
-  //   const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
-  //   const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day) + 1, 'days')._d
-  //   const newAppointment = { ...newAppointment, appointmentDateandTime: setDayAndTime }
-  //   this.setState({ newAppointment })
-  // }
+
 
   handleSubmit(e) {
     e.preventDefault()
