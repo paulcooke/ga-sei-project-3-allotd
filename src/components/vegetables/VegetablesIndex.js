@@ -48,6 +48,7 @@ class VegetablesIndex extends React.Component {
           onSubmit={this.submitSearch}
         />
         <div className='indexWrapper'>
+          {this.state.vegetables.isClaimed && <p>CLAIMED!</p>}
           {this.props.location.state && // if a value has been passed from another page then use it to filter
            this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.typeOfVeg))
              .map(vegetable => (

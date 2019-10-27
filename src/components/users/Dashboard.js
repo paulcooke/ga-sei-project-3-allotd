@@ -27,7 +27,8 @@ class Dashboard extends React.Component {
       }
     }
 
-    // bind here
+    this.handleAccept = this.handleAccept.bind(this)
+    this.handleReject = this.handleReject.bind(this)
   }
 
   componentDidMount() {
@@ -37,6 +38,16 @@ class Dashboard extends React.Component {
     })
       .then(res => this.setState({ data: res.data }))
       .catch(err => console.log(err.message))
+  }
+
+  //this needs to update the appointment status in the appointment model
+  handleAccept() {
+    console.log('accepted')
+  }
+
+  //this needs to update the appointment status in the appointment model, possibly also deleting this but needs to update the picker, perhaps it puts them back on the schedule page
+  handleReject() {
+    console.log('rejected')
   }
 
   isOwner() {
@@ -85,14 +96,32 @@ class Dashboard extends React.Component {
                 }).join(', ')}
               </p>
             </div>
+            
+            {this.isOwner() &&
+              <>
+                <Link to={`/dashboard/${this.state.data.id}/edit`}>
+                  <button>Edit profile</button>
+                </Link>
+              </>
+            }
+            
           </section>
+
           <section>
             <div className='panelWrapper'>
               <h2>My listings</h2>
               {
                 this.state.data.listingHistory.map(listing => (
                   <div key={listing.id}>
-                    {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}
+                    <p>
+                      {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}. 
+                    </p>
+                    {listing.isClaimed && 
+                    <div>                      
+                      <p>This veg has been CLAIMED! by CLAIMER GOES HERE. They want to collect in on APPOINTMENT DATE HERE, Would you like to accept this?</p>
+                      <button onClick={this.handleAccept}>Accept</button> <button onClick={this.handleReject}>Reject</button>
+                    </div>
+                    }
                   </div>
                 ))
               }
@@ -102,20 +131,14 @@ class Dashboard extends React.Component {
               {
                 this.state.data.pickedVegHistory.map(picked => (
                   <div key={picked.id}>
-                    {picked.vegId} (veg id)
+                    {picked.appointmentStatus === 'requested' && <span>You have requested </span>} 
+                    {picked.appointmentStatus === 'accepted' && <span>You are scheduled </span>}
+                    to collect VEG NAME HERE from GROWER HERE on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}. 
                   </div>
                 ))
               }
             </div>
-            <div className='panelWrapper'>
-              {this.isOwner() &&
-                <>
-                  <Link to={`/dashboard/${this.state.data.id}/edit`}>
-                    <button>Edit profile</button>
-                  </Link>
-                </>
-              }
-            </div>
+            
           </section>
         </div>
       </>
