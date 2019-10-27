@@ -102,7 +102,7 @@ class Dashboard extends React.Component {
                 this.state.data.pickedVegHistory.map(picked => (
                   <div key={picked.id}>
                     {picked.vegId} (veg id)
-                </div>
+                  </div>
                 ))
               }
             </div>
