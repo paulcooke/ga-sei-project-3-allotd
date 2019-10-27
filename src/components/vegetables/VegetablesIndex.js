@@ -2,14 +2,7 @@ import React from 'react'
 import axios from 'axios'
 
 import VegetableCard from './VegetableCard'
-
-
-// paul - might need axios for filtery stuff
-
-
-
 import SearchForm from '../common/SearchForm'
-
 
 class VegetablesIndex extends React.Component {
   constructor() {
@@ -37,7 +30,7 @@ class VegetablesIndex extends React.Component {
     axios.get('/api/vegetables')
       .then(res => {
         console.log('search data: ', res.data)
-        const filteredArr = res.data.filter(veg => veg.typeOfVeg === this.state.searchTerm)
+        const filteredArr = res.data.filter(veg => new RegExp(this.state.searchTerm).test(veg.typeOfVeg))
         // if searchterm is false dont bother doing anything
         this.state.searchTerm ? this.setState({ vegetables: filteredArr }) : false
       })
@@ -56,11 +49,11 @@ class VegetablesIndex extends React.Component {
         />
         <div className='indexWrapper'>
           {this.props.location.state && // if a value has been passed from another page then use it to filter
-           this.state.vegetables.filter(veg => veg.typeOfVeg === this.props.location.state.detail)
+           this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail).test(veg.typeOfVeg))
              .map(vegetable => (
                <VegetableCard key={vegetable._id} {...vegetable} />
              ))}
-          {!this.props.location.state && // if no value from a redirect then render all on mount
+          {!this.props.location.state && // if no value from a redirect then render all on load
            this.state.vegetables.map(vegetable => (
              <VegetableCard key={vegetable._id} {...vegetable} />
            ))}
