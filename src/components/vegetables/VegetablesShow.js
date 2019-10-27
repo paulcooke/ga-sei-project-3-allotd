@@ -51,13 +51,22 @@ class VegetablesShow extends React.Component {
   
   handleChange({ target: { name, value, type, checked } }) {
     const newValue = type === 'checkbox' ? checked : value
-    const newAppointment = { ...this.state.newAppointment, [name]: newValue }
+    let newAppointment = { ...this.state.newAppointment, [name]: newValue }
     const errors = { ...this.state.errors, [name]: '' }
     this.setState({ newAppointment, errors })
+    const setDayAndTime = this.makeAppointmentDate(this.state.newAppointment.selectedPickUpTime, this.state.newAppointment.selectedPickUpDay)
+    newAppointment = { ...newAppointment, appointmentDateandTime: setDayAndTime }
+    this.setState({ newAppointment })
+  }
+
+  makeAppointmentDate(day, hour) {
+    const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+    return moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day) + 1, 'days')._d
   }
 
   handleSubmit(e) {
     e.preventDefault()
+    
     const vegetableId = this.props.match.params.id
     axios.post(`/api/vegetables/${vegetableId}/appointment`, this.state.newAppointment, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }

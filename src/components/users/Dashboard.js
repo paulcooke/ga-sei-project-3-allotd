@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 
 class Dashboard extends React.Component {
@@ -86,7 +87,7 @@ class Dashboard extends React.Component {
             {
               this.state.data.listingHistory.map(listing => (
                 <div key={listing.id}>
-                  {listing.title} on {listing.createdAt}
+                  {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}
                 </div>
               ))
             }
