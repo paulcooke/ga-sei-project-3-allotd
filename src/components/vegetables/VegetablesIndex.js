@@ -30,7 +30,7 @@ class VegetablesIndex extends React.Component {
     axios.get('/api/vegetables')
       .then(res => {
         console.log('search data: ', res.data)
-        const filteredArr = res.data.filter(veg => new RegExp(this.state.searchTerm).test(veg.typeOfVeg))
+        const filteredArr = res.data.filter(veg => new RegExp(this.state.searchTerm, 'i').test(veg.typeOfVeg))
         // if searchterm is false dont bother doing anything
         this.state.searchTerm ? this.setState({ vegetables: filteredArr }) : false
       })
@@ -49,7 +49,7 @@ class VegetablesIndex extends React.Component {
         />
         <div className='indexWrapper'>
           {this.props.location.state && // if a value has been passed from another page then use it to filter
-           this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail).test(veg.typeOfVeg))
+           this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.typeOfVeg))
              .map(vegetable => (
                <VegetableCard key={vegetable._id} {...vegetable} />
              ))}
