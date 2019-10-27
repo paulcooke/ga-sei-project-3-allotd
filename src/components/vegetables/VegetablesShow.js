@@ -75,7 +75,7 @@ class VegetablesShow extends React.Component {
     return (
       <>
         <SearchForm />
-        <div className='formWrapper'>
+        <div className='showWrapper'>
           <div className='imgAndInfo'>
             <img src={image} alt={title} />
             <div className='panelWrapper'>
@@ -88,16 +88,14 @@ class VegetablesShow extends React.Component {
                 <p>Claimed: {isClaimed}</p>
                 <p>Posted by: {user.username}</p>
               </div>
-              <div>
-                {this.isOwner() &&
-                  <>
-                    <Link to={`/vegetables/${this.state.vegetable._id}/edit`}>
-                      <button>Edit vegetable</button>
-                    </Link>
-                    <button onClick={this.handleDelete}>Delete vegetable</button>
-                  </>
-                }
-              </div>
+              {this.isOwner() &&
+                <div className='buttonWrapper'>
+                  <Link to={`/vegetables/${this.state.vegetable._id}/edit`}>
+                    <button>Edit vegetable</button>
+                  </Link>
+                  <button onClick={this.handleDelete}>Delete vegetable</button>
+                </div>
+              }
               {!this.isOwner() && pickUpAppointment.length < 1 &&
                 <div className="panelWrapper">
                   <form>

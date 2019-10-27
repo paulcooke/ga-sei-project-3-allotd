@@ -1,0 +1,11 @@
+nav {
+  display: flex;
+  justify-content: flex-start;
+  background: $navgreen;
+  height: 70px;
+  border: solid 1px $bordergrey;
+  a{
+    font-size: 24px;
+    margin: 20px;
+  }
+}
