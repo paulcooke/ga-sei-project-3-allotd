@@ -56,13 +56,14 @@ class VegetablesShow extends React.Component {
     const hour = name === 'selectedPickUpTime' ? value : this.state.newAppointment.selectedPickUpTime
     console.log('checking day', day)
     console.log('checking hour', hour)
-    const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+    const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] // for use below in getting the right number for moment's 'day'
     const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day) + 1, 'days')._d
     
-    const newAppointment = { ...this.state.newAppointment, [name]: newValue, appointmentDateandTime: setDayAndTime }
-    const errors = { ...this.state.errors, [name]: '' }
+    const newAppointment = { ...this.state.newAppointment, [name]: newValue, appointmentDateandTime: setDayAndTime, appointmentStatus: 'requested' } // requested added here because if it's sent then this is tru, if it's not, it will dissapear from state when the user moves away from the page
+    const errors = { ...this.state.errors, [name]: '' } // for use in error handling
+    const vegetable = { ...this.state.vegetable, isClaimed: true } // setting state here because if they go ahead it's true, if not it will be lost from state when the user moves away
     
-    this.setState({ newAppointment, errors })
+    this.setState({ newAppointment, errors, vegetable })
   }
 
 
@@ -74,6 +75,7 @@ class VegetablesShow extends React.Component {
     axios.post(`/api/vegetables/${vegetableId}/appointment`, this.state.newAppointment, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
+      .then(() => axios.patch(`/api/vegetables/${vegetableId}`, this.state.vegetable))
       .then(() => this.props.history.push('/vegetables'))
       .catch(err => this.setState({ errors: err.message }))
   }
@@ -93,11 +95,11 @@ class VegetablesShow extends React.Component {
             <div className='panelWrapper'>
               <div>
                 <h1>{title}</h1>
+                {isClaimed && <p>CLAIMED!</p>}
                 <p>Type: {typeOfVeg}</p>
                 <p>Variety: {varietyOfVeg}</p>
                 <p>Picked: {this.handleDate(pickedDate)}</p>
                 <p>Description: {description}</p>
-                <p>Claimed: {isClaimed}</p>
                 <p>Posted by: {user.username}</p>
               </div>
               {this.isOwner() &&
