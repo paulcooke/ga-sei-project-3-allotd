@@ -48,8 +48,8 @@ mongoose.connect(
       .then(users => {
         return Veg.create([
           {
-            title: 'tomato',
-            typeOfVeg: 'fruit',
+            title: 'Box of tomato',
+            typeOfVeg: 'tomato',
             varietyOfVeg: 'cherry',
             pickedDate: 5,
             description: 'very sweet',
@@ -61,8 +61,8 @@ mongoose.connect(
             availablePickUpTimes: ['18', '19']
           },
           {
-            title: 'cucumber',
-            typeOfVeg: 'gourd',
+            title: 'A basket of cucumbers',
+            typeOfVeg: 'cucumber',
             varietyOfVeg: 'armenian',
             pickedDate: 8,
             description: 'mmmmm so juicy',
@@ -74,8 +74,8 @@ mongoose.connect(
             availablePickUpTimes: ['8', '9', '10']
           },
           {
-            title: 'aubergine',
-            typeOfVeg: 'gourd',
+            title: '5 Aubergines',
+            typeOfVeg: 'Aubergine',
             varietyOfVeg: 'English',
             pickedDate: 5,
             description: 'Full of flavour and quite large. ',
@@ -87,7 +87,7 @@ mongoose.connect(
             availablePickUpTimes: ['9', '10', '11']
           },
           {
-            title: 'Asparagus',
+            title: 'A bunch of asparagus',
             typeOfVeg: 'Asparagus',
             varietyOfVeg: 'English',
             pickedDate: 5,

@@ -4,8 +4,6 @@ import Auth from '../../lib/auth'
 import axios from 'axios'
 import moment from 'moment'
 import SearchForm from '../common/SearchForm'
-//import 'moment/locale/en-gb'
-
 
 class VegetablesShow extends React.Component {
   constructor() {
