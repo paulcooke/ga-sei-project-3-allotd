@@ -122,54 +122,55 @@ class VegetablesShow extends React.Component {
                 }
               </div>
               }
-              {!this.isOwner() && Auth.isAuthenticated() && pickUpAppointment.length < 1 &&
-                <div className="panelWrapper">
-                  <form>
-                    <h2>Claim this veg from {user.username}</h2>
-                    <p>Veg location: {vegLocation}</p>
-
-                    <h3>Pick an upcoming day from the grower`&apos;`s preferences</h3>
-                    <div>
-                      {
-                        availablePickUpDays.map(day => (
-                          <label key={day}>
-                            <input
-                              type="radio"
-                              name="selectedPickUpDay"
-                              value={day}
-                              checked={this.state.newAppointment.selectedPickUpDay === day}
-                              onChange={this.handleChange}
-                            />
-                            {day}
-                          </label>
-                        ))
-                      }
-                    </div>
-                    <br />
-                    <h3>and a time...</h3>
-                    <div>
-                      {
-                        availablePickUpTimes.map(time => (
-                          <label key={time}>
-                            <input
-                              type="radio"
-                              name="selectedPickUpTime"
-                              value={time}
-                              checked={this.state.newAppointment.selectedPickUpTime === time}
-                              onChange={this.handleChange}
-                            />
-                            {`${time}:00`}
-                          </label>
-                        ))
-                      }
-                    </div>
-                    {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
-                    <button onClick={this.handleSubmit}>Request pickup</button>
-                  </form>
-                </div>
-              }
             </div>
+            
           </div>
+          {!this.isOwner() && Auth.isAuthenticated() && pickUpAppointment.length < 1 &&
+            <div className="panelWrapper claimWrapper">
+              <form>
+                <h2>Claim this veg from {user.username}</h2>
+                <p>Veg location: {vegLocation}</p>
+
+                <h3>Pick an upcoming day from the grower`&apos;`s preferences</h3>
+                <div>
+                  {
+                    availablePickUpDays.map(day => (
+                      <label key={day}>
+                        <input
+                          type="radio"
+                          name="selectedPickUpDay"
+                          value={day}
+                          checked={this.state.newAppointment.selectedPickUpDay === day}
+                          onChange={this.handleChange}
+                        />
+                        {day}
+                      </label>
+                    ))
+                  }
+                </div>
+                <br />
+                <h3>and a time...</h3>
+                <div>
+                  {
+                    availablePickUpTimes.map(time => (
+                      <label key={time}>
+                        <input
+                          type="radio"
+                          name="selectedPickUpTime"
+                          value={time}
+                          checked={this.state.newAppointment.selectedPickUpTime === time}
+                          onChange={this.handleChange}
+                        />
+                        {`${time}:00`}
+                      </label>
+                    ))
+                  }
+                </div>
+                {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
+                <button onClick={this.handleSubmit}>Request pickup</button>
+              </form>
+            </div>
+          }
         </div>
       </>
     )
