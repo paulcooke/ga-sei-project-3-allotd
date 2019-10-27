@@ -50,19 +50,29 @@ class VegetablesShow extends React.Component {
   }
   
   handleChange({ target: { name, value, type, checked } }) {
-    const newValue = type === 'checkbox' ? checked : value
-    let newAppointment = { ...this.state.newAppointment, [name]: newValue }
+    const newValue = type === 'checkbox' ? checked : value // checks the box if the value matches
+
+    const day = name === 'selectedPickUpDay' ? value : this.state.newAppointment.selectedPickUpDay
+    const hour = name === 'selectedPickUpTime' ? value : this.state.newAppointment.selectedPickUpTime
+    console.log('checking day', day)
+    console.log('checking hour', hour)
+    const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day) + 1, 'days')._d
+    
+    const newAppointment = { ...this.state.newAppointment, [name]: newValue, appointmentDateandTime: setDayAndTime }
     const errors = { ...this.state.errors, [name]: '' }
+    
     this.setState({ newAppointment, errors })
-    const setDayAndTime = this.makeAppointmentDate(this.state.newAppointment.selectedPickUpTime, this.state.newAppointment.selectedPickUpDay)
-    newAppointment = { ...newAppointment, appointmentDateandTime: setDayAndTime }
-    this.setState({ newAppointment })
+    //this.makeAppointmentDate(this.state.newAppointment.selectedPickUpTime, this.state.newAppointment.selectedPickUpDay)
+    //const setDayAndTime = this.makeAppointmentDate(this.state.newAppointment.selectedPickUpTime, this.state.newAppointment.selectedPickUpDay)
   }
 
-  makeAppointmentDate(day, hour) {
-    const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
-    return moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day) + 1, 'days')._d
-  }
+  // makeAppointmentDate(day, hour) {
+  //   const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+  //   const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day) + 1, 'days')._d
+  //   const newAppointment = { ...newAppointment, appointmentDateandTime: setDayAndTime }
+  //   this.setState({ newAppointment })
+  // }
 
   handleSubmit(e) {
     e.preventDefault()
