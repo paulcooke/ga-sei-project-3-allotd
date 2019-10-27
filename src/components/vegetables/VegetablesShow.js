@@ -88,7 +88,6 @@ class VegetablesShow extends React.Component {
                 <p>Claimed: {isClaimed}</p>
                 <p>Posted by: {user.username}</p>
               </div>
-<<<<<<< HEAD
               {this.isOwner() &&
                 <div className='buttonWrapper'>
                   <Link to={`/vegetables/${this.state.vegetable._id}/edit`}>
@@ -98,7 +97,6 @@ class VegetablesShow extends React.Component {
                 </div>
               }
               {!this.isOwner() && pickUpAppointment.length < 1 &&
-=======
               <div>
                 {this.isOwner() &&
                   <>
@@ -109,8 +107,8 @@ class VegetablesShow extends React.Component {
                   </>
                 }
               </div>
+              }
               {!this.isOwner() && Auth.isAuthenticated() && pickUpAppointment.length < 1 &&
->>>>>>> development
                 <div className="panelWrapper">
                   <form>
                     <h2>Claim this veg from {user.username}</h2>
