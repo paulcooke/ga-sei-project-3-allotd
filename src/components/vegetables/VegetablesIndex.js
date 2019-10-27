@@ -13,6 +13,7 @@ class VegetablesIndex extends React.Component {
     }
     this.onChange = this.onChange.bind(this)
     this.submitSearch = this.submitSearch.bind(this)
+    this.filterVegetables = this.filterVegetables.bind(this)
   }
 
   componentDidMount() {
@@ -25,11 +26,18 @@ class VegetablesIndex extends React.Component {
     this.setState({ [name]: value })
   }
 
+  filterVegetables() {
+    const { searchTerm } = this.state
+    const re = new RegExp(searchTerm, 'i')
+    return this.state.vegetables.filter(veg => {
+      return re.test(veg.typeOfVeg)
+    })
+  }
+
   submitSearch(e) {
     e.preventDefault()
     axios.get('/api/vegetables')
       .then(res => {
-        console.log('search data: ', res.data)
         const filteredArr = res.data.filter(veg => new RegExp(this.state.searchTerm, 'i').test(veg.typeOfVeg))
         // if searchterm is false dont bother doing anything
         this.state.searchTerm ? this.setState({ vegetables: filteredArr }) : false
@@ -38,7 +46,6 @@ class VegetablesIndex extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     if (!this.state.vegetables) return null
     return (
       <>
@@ -53,8 +60,8 @@ class VegetablesIndex extends React.Component {
              .map(vegetable => (
                <VegetableCard key={vegetable._id} {...vegetable} />
              ))}
-          {!this.props.location.state && // if no value from a redirect then render all on load
-           this.state.vegetables.map(vegetable => (
+          {!this.props.location.state && // if no value from a redirect then render all after dynamic filter
+           this.filterVegetables().map(vegetable => (
              <VegetableCard key={vegetable._id} {...vegetable} />
            ))}
         </div>

@@ -18,7 +18,7 @@ class SearchForm extends React.Component {
       state: { detail: this.state.valBeforeRedirect }
     })
   }
-
+  
   storeValForRedirect(e) {
     const valBeforeRedirect = [e.target.name] = e.target.value
     this.setState({ valBeforeRedirect })
