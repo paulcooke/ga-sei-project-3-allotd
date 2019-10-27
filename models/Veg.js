@@ -16,7 +16,10 @@ const vegSchema = new mongoose.Schema({
   timestamps: true
 })
 
-//Gets pickUpAppointment from Appointment based on Veg _id in the Appointment vegId
+//Creates pickUpAppointment virtual field
+//the function goes to 'Appointment' VegId
+//and checks if VegId is the same as the 'Veg' _id
+//if yes it adds the Appointment to 'pickUpAppointment'
 vegSchema.virtual('pickUpAppointment', {
   ref: 'Appointment',
   localField: '_id',
