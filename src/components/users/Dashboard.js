@@ -87,7 +87,7 @@ class Dashboard extends React.Component {
             {
               this.state.data.listingHistory.map(listing => (
                 <div key={listing.id}>
-                  {listing.title} on {moment(listing.createdAt).calendar()}
+                  {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}
                 </div>
               ))
             }
