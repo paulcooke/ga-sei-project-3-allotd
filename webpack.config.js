@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-//require('dotenv').config()
+require('dotenv').config()
 
 module.exports = {
   entry: './src/app.js',
