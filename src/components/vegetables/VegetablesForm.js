@@ -71,7 +71,7 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           isMulti
           onChange={handleDaySelect}
           components={animatedComponents}
-          value={
+          value={availablePickUpDays &&
             availablePickUpDays.map(day => (
               { value: day, label: day }
             ))
@@ -83,7 +83,7 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           isMulti
           onChange={handleTimeSelect}
           components={animatedComponents}
-          value={
+          value={availablePickUpTimes &&
             availablePickUpTimes.map(time => (
               { value: time, label: time + ':00' }
             ))

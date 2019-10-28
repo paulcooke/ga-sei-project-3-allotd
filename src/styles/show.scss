@@ -18,3 +18,17 @@
     height: 100%;
   }
 }
+
+.claimWrapper {
+  width: 50%;
+  input {
+    width: 10px;
+    height: 10px;
+  }
+  h2 {
+    margin-bottom: 3px;
+  }
+  h3 {
+    margin: 5px 0;
+  }
+}
