@@ -9,7 +9,8 @@ class VegetablesIndex extends React.Component {
     super()
 
     this.state = {
-      vegetables: null
+      vegetables: null,
+      searchTerm: ''
     }
     this.onChange = this.onChange.bind(this)
     this.submitSearch = this.submitSearch.bind(this)
@@ -22,15 +23,16 @@ class VegetablesIndex extends React.Component {
       .catch(err => console.log(err))
   }
 
-  onChange({ target: { name, value } }) {
-    this.setState({ [name]: value })
+  onChange({ target: { name, value, dataset, innerHTML } }) {
+    console.log('onchange was called. ')
+    value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: (value || innerHTML) })
   }
 
   filterVegetables() {
     const { searchTerm } = this.state
     const re = new RegExp(searchTerm, 'i')
     return this.state.vegetables.filter(veg => {
-      return re.test(veg.typeOfVeg)
+      return re.test(veg.title)
     })
   }
 
@@ -38,7 +40,7 @@ class VegetablesIndex extends React.Component {
     e.preventDefault()
     axios.get('/api/vegetables')
       .then(res => {
-        const filteredArr = res.data.filter(veg => new RegExp(this.state.searchTerm, 'i').test(veg.typeOfVeg))
+        const filteredArr = res.data.filter(veg => new RegExp(this.state.searchTerm, 'i').test(veg.title))
         // if searchterm is false dont bother doing anything
         this.state.searchTerm ? this.setState({ vegetables: filteredArr }) : false
       })
@@ -47,6 +49,7 @@ class VegetablesIndex extends React.Component {
 
   render() {
     if (!this.state.vegetables) return null
+    console.log(this.state)
     return (
       <>
         <SearchForm 
@@ -56,7 +59,7 @@ class VegetablesIndex extends React.Component {
         />
         <div className='indexWrapper'>
           {this.props.location.state && // if a value has been passed from another page then use it to filter
-           this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.typeOfVeg))
+           this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.title))
              .map(vegetable => (
                <VegetableCard key={vegetable._id} {...vegetable} />
              ))}
