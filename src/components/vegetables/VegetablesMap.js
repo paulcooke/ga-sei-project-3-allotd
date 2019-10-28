@@ -3,7 +3,7 @@ import MapGL, { Popup, GeolocateControl, NavigationControl } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
+import SearchForm from '../common/SearchForm'
 
 class VegetablesMap extends React.Component {
   constructor() {
@@ -12,6 +12,7 @@ class VegetablesMap extends React.Component {
     this.state = { 
       vegetables: null,
       postcodes: [],
+      searchTerm: '',
 
       viewport: {
         latitude: 51.515,
@@ -21,7 +22,7 @@ class VegetablesMap extends React.Component {
       showPopup: true
     }
     this.mapRef = React.createRef()
-    
+    this.onChange = this.onChange.bind(this)
   }
   
   componentDidMount() {
@@ -43,18 +44,28 @@ class VegetablesMap extends React.Component {
     const postcodes = this.state.vegetables.map(veg => veg.vegLocation.replace(' ', ''))
     axios.post('https://cors-anywhere.herokuapp.com/api.postcodes.io/postcodes/', { postcodes } )
       .then(res => {
-        this.setState({ postcodes: res.data.result })
+        console.log(res.data.result)
+        const filteredArr = res.data.result.filter(data => new RegExp(this.state.searchTerm, 'i').test(data.query))
+        this.setState({ postcodes: filteredArr })
       })
       .catch(err => console.log(err))
-    
   }
 
+  onChange({ target: { name, value, dataset, innerHTML } }) {
+    console.log('onchange was called. ')
+    value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: (value || innerHTML) })
+  }
 
   render() {
     if (!this.state.vegetables) return null
     const { showPopup } = this.state
     return (
       <main>
+        <SearchForm
+          name='searchTerm'
+          onChange={this.onChange}
+          onSubmit={this.submitSearch}
+        />
         <MapGL
           mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
           height={'100vh'}
