@@ -25,14 +25,21 @@ const appointmentSchema = new mongoose.Schema({
 //   foreignField: 'listingHistory'
 // })
 
-// appointmentSchema.set('toJSON', {
-//   virtuals: true,
-//   transform(doc, json) {
-//     delete json.password
-//     delete json.email
-//     return json
-//   }
-// })
+
+appointmentSchema.virtual('vegId', {
+  ref: 'Veg',
+  localField: '_id',
+  foreignField: 'pickUpAppointment'
+})
+
+appointmentSchema.set('toJSON', {
+  virtuals: true,
+  transform(doc, json) {
+    delete json.password
+    delete json.email
+    return json
+  }
+})
 
 appointmentSchema.plugin(require('mongoose-unique-validator'))
 appointmentSchema.plugin(require('mongoose-autopopulate'))

@@ -36,13 +36,11 @@ function create(req, res, next) {
   //   .catch(next) 
 }
 
-// show route GET - vegatables/:id/appointment/:apointmentId
+// show route GET - (vegatables/:id/)appointment/:apointmentId
 function show(req, res) {
   Appointment
     .findById(req.params.id) 
-    .populate('pickerId')
-    // .populate('vegId')
-    // .populate('growerId')
+    .populate('vegId')
     .then(appointment => {
       if (!appointment) return res.status(404).json({ message: 'Not Found ' })
       res.status(200).json(appointment)
