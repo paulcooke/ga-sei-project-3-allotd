@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import SearchForm from '../common/SearchForm'
+import Auth from '../../lib/auth'
 
 class Register extends React.Component {
   constructor() {
@@ -27,7 +28,10 @@ class Register extends React.Component {
   handleSubmit(e) {
     e.preventDefault()
     axios.post('/api/register', this.state.data)
-      .then(() => this.props.history.push('/vegetables'))
+      .then((res) => {
+        Auth.setToken(res.data.token)
+        this.props.history.push('/vegetables')
+      })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
   render() {
