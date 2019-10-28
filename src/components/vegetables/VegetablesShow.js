@@ -84,6 +84,7 @@ class VegetablesShow extends React.Component {
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
+    console.log()
     return (
       <>
         <SearchForm />

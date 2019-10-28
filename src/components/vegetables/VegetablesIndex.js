@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import VegetableCard from './VegetableCard'
 import SearchForm from '../common/SearchForm'
+import VegetableMap from '../vegetables/VegetablesMap'
 
 class VegetablesIndex extends React.Component {
   constructor() {
@@ -10,11 +11,13 @@ class VegetablesIndex extends React.Component {
 
     this.state = {
       vegetables: null,
-      searchTerm: ''
+      searchTerm: '',
+      mapSwitch: false
     }
     this.onChange = this.onChange.bind(this)
     this.submitSearch = this.submitSearch.bind(this)
     this.filterVegetables = this.filterVegetables.bind(this)
+    this.handleCheckbox = this.handleCheckbox.bind(this)
   }
 
   componentDidMount() {
@@ -24,7 +27,7 @@ class VegetablesIndex extends React.Component {
   }
 
   onChange({ target: { name, value, dataset, innerHTML } }) {
-    console.log('onchange was called. ')
+    //for the <li> dropdown, value is wiped during re render. use dataset and innerhtml in that case
     value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: (value || innerHTML) })
   }
 
@@ -47,27 +50,45 @@ class VegetablesIndex extends React.Component {
       .catch(err => console.log(err))
   }
 
+  handleCheckbox({ target: { name, checked } }) {
+    this.setState({ [name]: checked })
+  }
+
   render() {
     if (!this.state.vegetables) return null
     console.log(this.state)
     return (
-      <>
-        <SearchForm 
-          name='searchTerm' 
-          onChange={this.onChange} 
-          onSubmit={this.submitSearch}
-        />
-        <div className='indexWrapper'>
-          {this.props.location.state && // if a value has been passed from another page then use it to filter
-           this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.title))
-             .map(vegetable => (
-               <VegetableCard key={vegetable._id} {...vegetable} />
-             ))}
-          {!this.props.location.state && // if no value from a redirect then render all after dynamic filter
-           this.filterVegetables().map(vegetable => (
-             <VegetableCard key={vegetable._id} {...vegetable} />
-           ))}
-        </div>
+      <> 
+        <input 
+          type='checkbox'
+          name='mapSwitch'
+          onChange={this.handleCheckbox} />
+        {!this.state.mapSwitch &&
+          <>
+            <SearchForm
+              name='searchTerm'
+              value={this.state.mapSwitch}
+              onChange={this.onChange}
+              onSubmit={this.submitSearch}
+            />
+            <div className='indexWrapper'>
+              {this.props.location.state && // if a value has been passed from another page then use it to filter
+                this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.title))
+                  .map(vegetable => (
+                    <VegetableCard key={vegetable._id} {...vegetable} />
+                  ))}
+              {!this.props.location.state && // if no value from a redirect then render all after dynamic filter
+                this.filterVegetables().map(vegetable => (
+                  <VegetableCard key={vegetable._id} {...vegetable} />
+                ))}
+            </div>
+          </>
+        }
+        {this.state.mapSwitch &&
+          <>
+            <VegetableMap />
+          </>
+        }
       </>
     )
   }
