@@ -144,7 +144,7 @@ class Dashboard extends React.Component {
                     }
                     {!listing.isClaimed &&
                       <div>
-                        {listing.title} is not currently claimed.
+                        Not currently claimed.
                       </div>
                     }
                   </div>
@@ -156,9 +156,13 @@ class Dashboard extends React.Component {
               {
                 this.state.data.pickedVegHistory.map(picked => (
                   <div key={picked.id}>
-                    {picked.appointmentStatus === 'requested' && <span>You have requested </span>} 
-                    {picked.appointmentStatus === 'accepted' && <span>You are scheduled </span>}
-                    to collect VEG NAME HERE from GROWER HERE on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}. 
+                    {picked.appointmentStatus === 'requested' && 
+                      <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
+                    {picked.appointmentStatus === 'accepted' &&
+                      <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
+                    {picked.appointmentStatus === 'rejected' &&
+                      <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
+                    } 
                   </div>
                 ))
               }
