@@ -33,25 +33,26 @@ class imageUpload extends Component {
             firebaseImageURL: url, 
             imageUpLoading: false
           })
+          document.getElementById("imgurl").value = this.state.firebaseImageURL
           console.log(this.state.firebaseImageURL)
         })
       })
   }
 
+  
+
   render() {
     return (
-      <div className="main-container">
-        <h3 className="main-heading">Image Upload</h3>
-        <div className="process">
-          <input type="file" className="process__upload-btn" onChange={(e) => this.uploadImage(e)} />
-          {this.state.imageUpLoading &&
+      <>
+        <label>Image Upload</label>
+        <input name='image' type="file" className="process__upload-btn" onChange={(e) => this.uploadImage(e)} />
+        {this.state.imageUpLoading &&
           <p>Your image is uploading...this might take a second</p>
-          }
-          { this.state.firebaseImageURL &&
+        }
+        { this.state.firebaseImageURL &&
           <p>Your image uploaded</p>
-          }
-        </div>
-      </div>
+        }
+      </>
     )
   }
 }
