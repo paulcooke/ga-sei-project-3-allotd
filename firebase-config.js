@@ -20,7 +20,13 @@ import 'firebase/storage'
 // }
 
 var firebaseConfig = {
-//PASTE HERE 
+  apiKey: "AIzaSyCXrou7TUOFltSGXe6H01w5db7ipFkMt9Y",
+  authDomain: "alloted-82773.firebaseapp.com",
+  databaseURL: "https://alloted-82773.firebaseio.com",
+  projectId: "alloted-82773",
+  storageBucket: "alloted-82773.appspot.com",
+  messagingSenderId: "659366657542",
+  appId: "1:659366657542:web:8e2fc02d5aa221dc454d87"
 }
 
 firebase.initializeApp(firebaseConfig)
