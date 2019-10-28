@@ -12,7 +12,8 @@ class VegetablesShow extends React.Component {
     this.state = {
       vegetable: null,
       newAppointment: {},
-      errors: {}
+      errors: {},
+      recipes: []
     }
     
     this.handleDelete = this.handleDelete.bind(this)
@@ -24,8 +25,18 @@ class VegetablesShow extends React.Component {
   componentDidMount() {
     const vegId = this.props.match.params.id //only need this reference once
     axios.get(`/api/vegetables/${vegId}`)
-      .then(res => this.setState({ vegetable: res.data }))
+      .then(res => {
+        this.setState({ vegetable: res.data })
+        console.log(this.state.vegetable.typeOfVeg)
+        return this.state.vegetable.typeOfVeg
+      })
+      .then(veg => {
+        axios.post(`https://www.food2fork.com/api/search?key=7c2c0126975faf042379b539ba2d5d10&q=${veg}`)
+          .then(res => this.setState({ recipes: res.data.recipes }))
+          .catch(err => console.log(err)) 
+      })
       .catch(err => console.log(err))
+    
   }
 
   handleDelete() {
@@ -81,6 +92,7 @@ class VegetablesShow extends React.Component {
   render() {
     console.log(this.state)
     if (!this.state.vegetable) return null
+    if (!this.state.recipes) return null
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
@@ -168,8 +180,21 @@ class VegetablesShow extends React.Component {
                 {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
                 <button onClick={this.handleSubmit}>Request pickup</button>
               </form>
+             
             </div>
+            
           }
+          <div className='panelWrapper'>
+            <h2>Recipes with {typeOfVeg}</h2>
+            <div>
+              {this.state.recipes.map(recipe => (
+                <label key={recipe.recipe_id}>
+                  <h3>{recipe.title}</h3>
+                </label>
+              ))}
+            </div>
+              
+          </div>
         </div>
       </>
     )

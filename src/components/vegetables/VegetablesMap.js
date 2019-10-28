@@ -44,7 +44,7 @@ class VegetablesMap extends React.Component {
     const postcodes = this.state.vegetables.map(veg => veg.vegLocation.replace(' ', ''))
     axios.post('https://cors-anywhere.herokuapp.com/api.postcodes.io/postcodes/', { postcodes } )
       .then(res => {
-        console.log(res.data.result)
+        // console.log(res.data.result)
         const filteredArr = res.data.result.filter(data => new RegExp(this.state.searchTerm, 'i').test(data.query))
         this.setState({ postcodes: filteredArr })
       })
@@ -80,18 +80,19 @@ class VegetablesMap extends React.Component {
           {...this.state.viewport}
           onViewportChange={(viewport) => this.setState({ viewport })}>
 
-          <GeolocateControl 
+          {/* <GeolocateControl 
             positionOptions={{ enableHighAccuracy: true, timeOut: 6000 }}
             showUserLocation={true}
             trackUserLocation={false}
             
-          />
+          /> */}
 
 
           {this.state.postcodes.map(postcode => (
-            <>
+
+            <div key={postcode.result.eastings}>
               {showPopup && <Popup
-                key={postcode.result.eastings}
+                
                 latitude={postcode.result.latitude}
                 longitude={postcode.result.longitude}
                 closeButton={false}
@@ -103,7 +104,7 @@ class VegetablesMap extends React.Component {
                  
 
                 {this.state.vegetables.map(veg => 
-                  <div key ={veg.title}> 
+                  <div key ={veg._id}> 
                     {veg.vegLocation.replace(' ', '') === postcode.query ? <Link  to={`/vegetables/${veg._id}`}>   
                       {veg.title} {veg.vegLocation} 🍅</Link>  : null}
                  
@@ -111,7 +112,7 @@ class VegetablesMap extends React.Component {
               
               </Popup>}
          
-            </>
+            </div>
           ))}
           
           <div style={{ position: 'absolute', right: 0 }}>
