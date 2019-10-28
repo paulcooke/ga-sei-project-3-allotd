@@ -84,6 +84,7 @@ class VegetablesShow extends React.Component {
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
+    console.log()
     return (
       <>
         <SearchForm />
@@ -108,7 +109,7 @@ class VegetablesShow extends React.Component {
                   <button onClick={this.handleDelete}>Delete vegetable</button>
                 </div>
               }
-              {!this.isOwner() && pickUpAppointment.length < 1 &&
+              {!this.isOwner() && !pickUpAppointment &&
               <div>
                 {this.isOwner() &&
                   <>
@@ -123,7 +124,7 @@ class VegetablesShow extends React.Component {
             </div>
             
           </div>
-          {!this.isOwner() && Auth.isAuthenticated() && pickUpAppointment.length < 1 &&
+          {!this.isOwner() && Auth.isAuthenticated() && !pickUpAppointment &&
             <div className="panelWrapper claimWrapper">
               <form>
                 <h2>Claim this veg from {user.username}</h2>
