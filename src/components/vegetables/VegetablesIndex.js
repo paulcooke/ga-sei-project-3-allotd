@@ -58,11 +58,16 @@ class VegetablesIndex extends React.Component {
     if (!this.state.vegetables) return null
     console.log(this.state)
     return (
-      <> 
-        <input 
-          type='checkbox'
-          name='mapSwitch'
-          onChange={this.handleCheckbox} />
+      <>
+        <label className='checkbox'> Toggle Map 
+          <input 
+            type='checkbox'
+            name='mapSwitch'
+            onChange={this.handleCheckbox} 
+          />
+          <span className='checkmark'></span>
+        </label> 
+        
         {!this.state.mapSwitch &&
           <>
             <SearchForm

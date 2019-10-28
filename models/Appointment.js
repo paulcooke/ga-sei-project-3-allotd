@@ -5,12 +5,14 @@ const appointmentSchema = new mongoose.Schema({
   selectedPickUpTime: { type: String },
   appointmentStatus: { type: String },
   appointmentDateandTime: { type: Date },
-  //vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg', required: true },
+  vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg', autopopulate: true },
   pickerId: { type: mongoose.Schema.ObjectId, ref: 'User', required: true, autopopulate: true },
   expiryDate: { type: String, required: true } // this needs to be pased in insomnia as an empty string it gets populated outomatically in controllers/appointments.js in function create where 48 hours (172800 * 1000) are added to the current Date.
 }, {
   timestamps: true
 })
+
+
 
 //Creates GrowerID as a virtual fiels in appointmentSchema
 //The function goes to models/User.js with the Appointment.js _id (so the id of the given appointment)
@@ -26,11 +28,11 @@ const appointmentSchema = new mongoose.Schema({
 // })
 
 
-appointmentSchema.virtual('vegId', {
-  ref: 'Veg',
-  localField: '_id',
-  foreignField: 'pickUpAppointment'
-})
+// appointmentSchema.virtual('vegId', {
+//   ref: 'Veg',
+//   localField: '_id',
+//   foreignField: 'pickUpAppointment'
+// })
 
 appointmentSchema.set('toJSON', {
   virtuals: true,
