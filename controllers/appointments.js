@@ -22,6 +22,7 @@ function create(req, res, next) {
     .findById(req.params.id )
     .then(veg => {
       foundVeg = veg
+      req.body.vegId = veg.id
       return Appointment.create(req.body)
     })
     .then(appointment => {
