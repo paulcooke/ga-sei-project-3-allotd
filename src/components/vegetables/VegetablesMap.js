@@ -1,5 +1,5 @@
 import React from 'react'
-import MapGL, { Marker, Popup, GeolocateControl, NavigationControl } from 'react-map-gl'
+import MapGL, { Popup, GeolocateControl, NavigationControl } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -83,17 +83,18 @@ class VegetablesMap extends React.Component {
                 key={postcode.result.eastings}
                 latitude={postcode.result.latitude}
                 longitude={postcode.result.longitude}
-                closeButton={true}
-                closeOnClick={false}
-                onClose={() => this.setState({ showPopup: false })}
-                anchor="top" >
-                {/* <div>you are here</div> */}
-              
-              
+                closeButton={false}
+                closeOnClick={true}
+                tipSize={12}
+                sortByDepth={true}
+                // onClose={() => this.setState({ showPopup: false })}
+                anchor="bottom" >
+                 
+
                 {this.state.vegetables.map(veg => 
-                  <div key ={veg._id}> 
+                  <div key ={veg.title}> 
                     {veg.vegLocation.replace(' ', '') === postcode.query ? <Link  to={`/vegetables/${veg._id}`}>   
-                      {veg.title} {veg.vegLocation}</Link>  : null}
+                      {veg.title} {veg.vegLocation} 🍅</Link>  : null}
                  
                   </div>)}
               
@@ -102,27 +103,6 @@ class VegetablesMap extends React.Component {
             </>
           ))}
           
-   
-          {this.state.postcodes.map(postcode => (
-            <>
-              <Marker
-                key={postcode.result.eastings}
-                latitude={postcode.result.latitude}
-                longitude={postcode.result.longitude}
-              >
-              
-                {this.state.vegetables.map(veg => 
-                  <div key ={veg._id}> 
-                    {veg.vegLocation.replace(' ', '') === postcode.query ? <Link  to={`/vegetables/${veg._id}`}>   
-                    🍅 </Link>  : null}
-                 
-                  </div>)}
-              
-              </Marker>
-         
-            </>
-          ))}
-
           <div style={{ position: 'absolute', right: 0 }}>
             <NavigationControl />
           </div>
