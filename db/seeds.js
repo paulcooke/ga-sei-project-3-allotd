@@ -97,7 +97,7 @@ mongoose.connect(
             vegLocation: 'SW12 8RJ',
             user: users[3],
             availablePickUpDays: ['Wednesday', 'Thursday', 'Friday'],
-            availablePickUpTimes: ['12', '1']
+            availablePickUpTimes: ['12', '13']
           }
         ])
       })
