@@ -30,7 +30,7 @@ function show(req, res) {
     .catch(() => res.status(404).json({ message: 'Not Found ' })) 
 }
 
-// update route - /animals/id
+// update route - /vegetables/:id
 function update(req, res, next) {
   Veg
     .findById(req.params.id)
@@ -43,7 +43,7 @@ function update(req, res, next) {
     .then(vegetable => res.status(202).json(vegetable)) // if anything goes wrong we send back the error response
 }
 
-// delete route - /animals/id
+// delete route - /vegetables/:id
 function deleteRoute(req, res) {
   Veg
     .findById(req.params.id) // special method to find by the id and remove in one step
@@ -55,6 +55,7 @@ function deleteRoute(req, res) {
     .catch(err => res.status(400).json(err)) // send any errors if something goes wrong.
 }
 
+//change claim value in veg 
 function claim(req,res, next) {
   Veg
     .findById(req.params.id)
@@ -66,6 +67,7 @@ function claim(req,res, next) {
     .then(vegetable => res.status(202).json(vegetable)) 
     .catch(next)
 }
+
 
 // exporting our 'Route Handler' functions to be used buy our Router, found in 'config/router.js'
 module.exports = {
