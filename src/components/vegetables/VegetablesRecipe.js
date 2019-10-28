@@ -50,7 +50,7 @@ class VegetablesRecipe extends React.Component {
      
         {!this.state.recipeShow &&
         <div value={this.state.recipeShow}>
-          <button onClick = {this.handleClick}>view more recipes...</button>
+          <button onClick = {this.handleClick}>show more recipes...</button>
         </div>} 
         
 
