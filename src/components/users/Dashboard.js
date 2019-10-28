@@ -32,6 +32,10 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
+    this.getUserInfo()
+  }
+
+  getUserInfo () {
     const userId = this.props.match.params.id//why is this null when i log it?
     axios.get(`/api/profile/${userId}`, { // how is this working? LN
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -41,13 +45,23 @@ class Dashboard extends React.Component {
   }
 
   //this needs to update the appointment status in the appointment model
-  handleAccept() {
-    console.log('accepted')
+  handleAccept(e) {
+    const appointmentId = e.target.value
+    console.log(appointmentId)
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'accepted' })
+      .then(() => this.getUserInfo())
+      .catch(err => console.log(err))
   }
 
   //this needs to update the appointment status in the appointment model, possibly also deleting this but needs to update the picker, perhaps it puts them back on the schedule page
-  handleReject() {
-    console.log('rejected')
+  handleReject(e) {
+    const appointmentId = e.target.value
+    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
+    console.log('veg id', vegetableId)
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected' })
+      .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
+      .then(() => this.getUserInfo())
+      .catch(err => console.log(err))
   }
 
   isOwner() {
@@ -116,11 +130,22 @@ class Dashboard extends React.Component {
                     <p>
                       {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}. 
                     </p>
-                    {listing.isClaimed && 
+                    {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
                     <div>                      
-                      <p>This veg has been CLAIMED! by CLAIMER GOES HERE. They want to collect in on APPOINTMENT DATE HERE, Would you like to accept this?</p>
-                      <button onClick={this.handleAccept}>Accept</button> <button onClick={this.handleReject}>Reject</button>
+                      <p>This veg has been CLAIMED by {listing.pickUpAppointment.pickerId.username}. They want to collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('h:mm')}.</p>
+                      <p>Would you like to accept this?</p>
+                      <button onClick={this.handleAccept} value={listing.pickUpAppointment._id}>Accept</button> <button onClick={this.handleReject} value={listing.pickUpAppointment._id}>Reject</button>
                     </div>
+                    }
+                    {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'accepted' &&
+                      <div>
+                        <p>{listing.pickUpAppointment.pickerId.username} claimed the {listing.title.toLowerCase()} and will collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('h:mm')}</p>
+                      </div>
+                    }
+                    {!listing.isClaimed &&
+                      <div>
+                        Not currently claimed.
+                      </div>
                     }
                   </div>
                 ))
@@ -131,9 +156,13 @@ class Dashboard extends React.Component {
               {
                 this.state.data.pickedVegHistory.map(picked => (
                   <div key={picked.id}>
-                    {picked.appointmentStatus === 'requested' && <span>You have requested </span>} 
-                    {picked.appointmentStatus === 'accepted' && <span>You are scheduled </span>}
-                    to collect VEG NAME HERE from GROWER HERE on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}. 
+                    {picked.appointmentStatus === 'requested' && 
+                      <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
+                    {picked.appointmentStatus === 'accepted' &&
+                      <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
+                    {picked.appointmentStatus === 'rejected' &&
+                      <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
+                    } 
                   </div>
                 ))
               }
