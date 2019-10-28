@@ -20,7 +20,7 @@ import 'firebase/storage'
 // }
 
 var firebaseConfig = {
-//PASTE HERE
+//PASTE HERE 
 }
 
 firebase.initializeApp(firebaseConfig)

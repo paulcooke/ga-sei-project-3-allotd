@@ -1,7 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-require('dotenv').config()
+//require('dotenv').config()
 
 module.exports = {
   entry: './src/app.js',
@@ -38,6 +38,6 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     }), 
-    new webpack.EnvironmentPlugin(['REACT_APP_WEATHER_ACCESS_KEY', 'REACT_APP_NEWS_ACCESS_KEY'])
+    new webpack.EnvironmentPlugin(['MAPBOX_ACCESS_TOKEN', 'FIREBASE_API_KEY', 'FIREBASE_AUTH_DOMAIN', 'FIREBASE_DATABASE_URL', 'FIREBASE_PROJECT_ID', 'FIREBASE_STORAGE_BUCKET', 'FIREBASE_MESSAGING_SENDER_ID', 'FIREBASE_APP_ID'])
   ]
 }
