@@ -56,7 +56,7 @@ class VegetablesMap extends React.Component {
     return (
       <main>
         <MapGL
-          mapboxApiAccessToken={'pk.eyJ1IjoiY2xhaXJlc21pdGgiLCJhIjoiY2syN255N3hoMXBpcjNjbXFtd3BsM3lpOSJ9.AKF2QJycaXdGIQ6zvolN9A'}
+          mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
           height={'100vh'}
           width={'100vw'}
           mapStyle="mapbox://styles/mapbox/streets-v10"
