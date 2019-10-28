@@ -6,8 +6,6 @@ const Veg = require('../models/Veg')
 function index(req, res) {
   Veg
     .find()
-    .populate('user')
-    .populate('pickUpAppointment')
     .then(vegetables => res.status(200).json(vegetables)) 
     .catch(() => res.status(404).json({ message: 'Not Found' })) 
 }
@@ -25,8 +23,6 @@ function create(req, res, next) {
 function show(req, res) {
   Veg
     .findById(req.params.id) 
-    .populate('user')
-    .populate('pickUpAppointment')
     .then(vegetable => {
       if (!vegetable) return res.status(404).json({ message: 'Not Found ' }) 
       res.status(200).json(vegetable) 

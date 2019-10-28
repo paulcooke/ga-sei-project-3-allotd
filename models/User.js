@@ -30,6 +30,13 @@ userSchema.virtual('listingHistory', {
   foreignField: 'user'
 })
 
+// //yourVegToBePickedUp - unfinished
+// userSchema.virtual('yourVegToBePickedUp', {
+//   ref: 'Veg',
+//   localField: '_id',
+//   foreignField: 'user'
+// })
+
 //Creates pickedVegHistory virtual field in userSchema
 //the function goes to 'Appointment' object finds pickerId 
 //and checks if the pickerId is the same as the User _id if yes
