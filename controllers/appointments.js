@@ -1,34 +1,48 @@
 const Appointment = require('../models/Appointment')
+const Vegetable = require('../models/Veg')
 
 // index route - /appointments
 function index(req, res) {
   Appointment
     .find()
     .populate('pickerId')
-    .populate('vegId')
-    .populate('growerId')
+    // .populate('vegId')
+    // .populate('growerId')
     .then(appointment => res.status(200).json(appointment)) 
     .catch(() => res.status(404).json({ message: 'Not Found' })) 
 }
 
 // create route - /vegetables/:id/appointment
 function create(req, res, next) {
-  req.body.vegId = req.params.id 
+  //req.body.vegId = req.params.id 
   req.body.pickerId = req.currentUser 
   req.body.expiryDate = new Date(Date.now() + 172800 * 1000).toISOString()
-  Appointment
-    .create(req.body) 
-    .then(appointment => res.status(201).json(appointment)) 
+  let foundVeg = null
+  Vegetable
+    .findById(req.params.id )
+    .then(veg => {
+      foundVeg = veg
+      return Appointment.create(req.body)
+    })
+    .then(appointment => {
+      foundVeg.pickUpAppointment = appointment._id
+      return foundVeg.save()
+    })
+    .then(veg => res.status(201).json(veg)) 
     .catch(next) 
+  // Appointment
+  //   .create(req.body) 
+  //   .then(appointment => res.status(201).json(appointment)) 
+  //   .catch(next) 
 }
 
-// show route GET - /appointment/:id
+// show route GET - vegatables/:id/appointment/:apointmentId
 function show(req, res) {
   Appointment
     .findById(req.params.id) 
     .populate('pickerId')
-    .populate('vegId')
-    .populate('growerId')
+    // .populate('vegId')
+    // .populate('growerId')
     .then(appointment => {
       if (!appointment) return res.status(404).json({ message: 'Not Found ' })
       res.status(200).json(appointment)
