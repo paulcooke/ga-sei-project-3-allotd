@@ -1,5 +1,5 @@
 import React from 'react'
-import MapGL, { Popup, GeolocateControl, NavigationControl } from 'react-map-gl'
+import MapGL, { Popup, NavigationControl } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'

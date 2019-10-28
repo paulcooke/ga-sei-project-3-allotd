@@ -4,6 +4,7 @@ import Auth from '../../lib/auth'
 import axios from 'axios'
 import moment from 'moment'
 import SearchForm from '../common/SearchForm'
+import VegetablesRecipe from './VegetablesRecipe'
 
 class VegetablesShow extends React.Component {
   constructor() {
@@ -27,16 +28,9 @@ class VegetablesShow extends React.Component {
     axios.get(`/api/vegetables/${vegId}`)
       .then(res => {
         this.setState({ vegetable: res.data })
-        console.log(this.state.vegetable.typeOfVeg)
-        return this.state.vegetable.typeOfVeg
       })
-      .then(veg => {
-        axios.post(`https://www.food2fork.com/api/search?key=7c2c0126975faf042379b539ba2d5d10&q=${veg}`)
-          .then(res => this.setState({ recipes: res.data.recipes }))
-          .catch(err => console.log(err)) 
-      })
+     
       .catch(err => console.log(err))
-    
   }
 
   handleDelete() {
@@ -66,7 +60,7 @@ class VegetablesShow extends React.Component {
     console.log('checking day', day)
     console.log('checking hour', hour)
     const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] // for use below in getting the right number for moment's 'day'
-    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day) + 1, 'days')._d
+    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day), 'days')._d
     
     const newAppointment = { ...this.state.newAppointment, [name]: newValue, appointmentDateandTime: setDayAndTime, appointmentStatus: 'requested' } // requested added here because if it's sent then this is tru, if it's not, it will dissapear from state when the user moves away from the page
     const errors = { ...this.state.errors, [name]: '' } // for use in error handling
@@ -92,7 +86,6 @@ class VegetablesShow extends React.Component {
   render() {
     console.log(this.state)
     if (!this.state.vegetable) return null
-    if (!this.state.recipes) return null
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
@@ -187,11 +180,10 @@ class VegetablesShow extends React.Component {
           <div className='panelWrapper'>
             <h2>Recipes with {typeOfVeg}</h2>
             <div>
-              {this.state.recipes.map(recipe => (
-                <label key={recipe.recipe_id}>
-                  <h3>{recipe.title}</h3>
-                </label>
-              ))}
+              <VegetablesRecipe
+                id={this.props.match.params.id}
+                veg={this.state.vegetable}
+              />
             </div>
               
           </div>
