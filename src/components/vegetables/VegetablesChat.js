@@ -8,16 +8,16 @@ class VegetableChat extends React.Component {
 
     this.state = {
       text: '',
-      messages: this.props.appointment
+      messages: this.props.messages
     }
     this.handleDeleteMessage = this.handleDeleteMessage.bind(this)
     this.handleSubmitMessage = this.handleSubmitMessage.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
   
-  handleDeleteComment(e) {
+  handleDeleteMessage(e) {
     e.preventDefault()
-    axios.delete(`/api/appointments/${this.props.appointmentId}/comments/${this.props.appointmentId}`, {
+    axios.delete(`/api/appointments/${this.props.appointmentId}/comments/${this.props.messageId}`, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((res) => {
@@ -28,7 +28,7 @@ class VegetableChat extends React.Component {
       .catch(err => console.log(err))
   }
 
-  handleSubmitComment(e) {
+  handleSubmitMessage(e) {
     e.preventDefault()
     axios.post(`/api/appointments/${this.props.appointmentId}/messages`, { text: this.state.text }, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -36,6 +36,7 @@ class VegetableChat extends React.Component {
       .then((res) => { 
         const messagesArr = [...res.data.messages]
         this.setState({ messages: messagesArr })
+        console.log('should re render.')
       })
       .catch(err => console.log('error: ', err))
   }
@@ -49,10 +50,26 @@ class VegetableChat extends React.Component {
   }
 
   render() {
+    console.log(this.props.appointmentId)
     return (
       <>
-        <h1>Vegetable Chat</h1>
-        <p></p>
+        {this.props.messages.map(msg => {
+          return (
+            <p key={msg._id}>{msg.text}</p>
+          )
+        })}
+        <form className='panelWrapper' onSubmit={this.handleSubmitMessage}>
+          <textarea
+            rows='4'
+            cols='5'
+            type='textarea'
+            placeholder="Message"
+            name="text"
+            onChange={this.handleChange}
+            value={this.state.text}
+          />
+          <button type='submit'>Add message</button>
+        </form>
       </>
     )
   }

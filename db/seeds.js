@@ -17,7 +17,11 @@ mongoose.connect(
             password: 'pass',
             passwordConfirmation: 'pass',
             availablePickUpDays: [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ], 
-            availablePickUpTimes: [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23' ]
+            availablePickUpTimes: [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23' ],
+            addressLineOne: 'Peaches Castle', 
+            addressLineTwo: '', 
+            addressCity: 'The mushroom Kingdom', 
+            addressPostcode: 'M4R1O'
           },
           {
             username: 'Claire',
@@ -25,7 +29,11 @@ mongoose.connect(
             password: 'pass',
             passwordConfirmation: 'pass',
             availablePickUpDays: [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday' ], 
-            availablePickUpTimes: [ '18', '19', '20' ]
+            availablePickUpTimes: [ '18', '19', '20' ],
+            addressLineOne: '60 Disney Lane', 
+            addressLineTwo: 'Marshmellow World', 
+            addressCity: 'Paris', 
+            addressPostcode: 'E8 2RS'
           },
           {
             username: 'jenny',
@@ -33,7 +41,11 @@ mongoose.connect(
             password: 'pass',
             passwordConfirmation: 'pass',
             availablePickUpDays: [ 'Saturday', 'Sunday' ], 
-            availablePickUpTimes: [ '9', '10' ]
+            availablePickUpTimes: [ '9', '10' ],
+            addressLineOne: 'Round here', 
+            addressLineTwo: 'Aldgate', 
+            addressCity: 'Lodon', 
+            addressPostcode: 'E156TW'
           },
           {
             username: 'Paul',
@@ -41,7 +53,11 @@ mongoose.connect(
             password: 'pass',
             passwordConfirmation: 'pass',
             availablePickUpDays: [ 'Tuesday', 'Wednesday' ], 
-            availablePickUpTimes: [ '18', '19', '20' ]
+            availablePickUpTimes: [ '18', '19', '20' ],
+            addressLineOne: '15 Cerulean Lane', 
+            addressLineTwo: '', 
+            addressCity: 'Cerulean City', 
+            addressPostcode: 'P0K3M0N' 
           }
         ])
       })

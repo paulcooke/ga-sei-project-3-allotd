@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
   availablePickUpDays: { type: [String] }, 
   availablePickUpTimes: { type: [String] },
   userLocation: { type: String }, 
+  addressLineOne: { type: String }, 
+  addressLineTwo: { type: String }, 
+  addressCity: { type: String }, 
+  addressPostcode: { type: String }, 
   vegGrown: { type: [String] },
   vegLookingFor: { type: [String] },
   rating: { type: Number }
