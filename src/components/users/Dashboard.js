@@ -35,9 +35,8 @@ class Dashboard extends React.Component {
     this.getUserInfo()
   }
 
-  getUserInfo () {
-    const userId = this.props.match.params.id//why is this null when i log it?
-    axios.get(`/api/profile/${userId}`, { // how is this working? LN
+  getUserInfo () {//why is this null when i log it?
+    axios.get('/api/profile', { // how is this working? LN
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
@@ -70,7 +69,7 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    console.log(this.state)
+    console.log('STATE IS', this.state)
     return (
       <>
         <SearchForm />
@@ -126,9 +125,18 @@ class Dashboard extends React.Component {
               <h2>My listings</h2>
               {
                 this.state.data.listingHistory.map(listing => (
-                  <div key={listing.id}>
+                  <div key={listing._id}>
                     <p>
                       {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}. 
+                      <div>
+                        <Link to={`/vegetables/${listing._id}/edit`}>
+                          {!listing.isClaimed && <button>Edit vegetable</button>}
+                          {listing.isClaimed && <button disabled>Edit vegetable</button>}
+                        </Link>
+                        {!listing.isClaimed && <button onClick={this.handleDelete}>Delete vegetable</button>}
+                        {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
+                        {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
+                      </div>
                     </p>
                     {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
                     <div>                      
@@ -155,12 +163,13 @@ class Dashboard extends React.Component {
               <h2>My pickups</h2>
               {
                 this.state.data.pickedVegHistory.map(picked => (
+                  
                   <div key={picked.id}>
                     {picked.appointmentStatus === 'requested' && 
                       <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
                     {picked.appointmentStatus === 'accepted' &&
-                      <span>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title} {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
-                    {picked.appointmentStatus === 'rejected' &&
+                      <span>{picked.vegId && picked.vegId.user.username} has accepted your request to collect {picked.vegId.title} {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
+                    {picked.vegId && picked.appointmentStatus === 'rejected' &&
                       <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                     } 
                   </div>
