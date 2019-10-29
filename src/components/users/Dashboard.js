@@ -151,10 +151,12 @@ class Dashboard extends React.Component {
                         {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
                         {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
                         {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
-                        <VegetableChat 
-                          appointmentId={listing.pickUpAppointment._id}
-                          messages={listing.pickUpAppointment.messages}
-                        />
+                        {listing.pickUpAppointment &&
+                          <VegetableChat 
+                            appointmentId={listing.pickUpAppointment._id}
+                            messages={listing.pickUpAppointment.messages}
+                          />
+                        }
                       </div>
                     </div>
                     {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&

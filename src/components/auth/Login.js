@@ -12,6 +12,7 @@ class Login extends React.Component {
       data: {},
       errors: {}
     }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -33,6 +34,8 @@ class Login extends React.Component {
   }
   
   render() {
+    console.log('render state LOgin', this.state)
+    console.log('render errors', this.state.errors)
     const { errors } = this.state
     return (
       <>
@@ -50,11 +53,12 @@ class Login extends React.Component {
             <input
               name='password'
               type='password'
-              placeholder='password'
+              placeholder='Password'
               onChange={this.handleChange}
             />
-
-            {!errors && <small>oops, something went wrong. please try again</small>}
+            <br/>
+            {!errors && 
+            <p>Oops, something went wrong. please try again</p>}
             <button type='submit'>Login</button>
           </form>
         </div>

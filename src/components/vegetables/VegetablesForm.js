@@ -13,14 +13,14 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
         <h2>New Vegetable</h2>
         <label>Name</label>
         <input
-          placeholder= {errors.title ? 'This field is required.' : 'Name'} 
+          placeholder={errors.title ? 'This field is required.' : 'Name'} 
           name='title'
           onChange={(e) => handleChange(e)}
           value={title}
         />
         <label>Type</label>
         <input
-          placeholder= {errors.typeOfVeg ? 'This field is required.' : 'Type'} 
+          placeholder={errors.typeOfVeg ? 'This field is required.' : 'Type'} 
           name='typeOfVeg'
           onChange={(e) => handleChange(e)}
           value={typeOfVeg}
@@ -34,17 +34,17 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
         />
         <label>Date Picked</label>
         <input
-          placeholder= {errors.pickedDate ? 'This field is required. Please fill in DD/MM/YYYY' : 'DD/MM/YYYY'} 
+          placeholder={errors.pickedDate ? 'This field is required. Please fill in DD/MM/YYYY' : 'DD/MM/YYYY'} 
           name='pickedDate'
           onChange={(e) => handleChange(e)}
           value={pickedDate}
         />
         <ImageUpload />
-        <input hidden id='imgurl' name='image' value={image} onChange={(e) => handleChange(e)} />
+        <input hidden id='imgurl' name='image' value={image} onChange={(e) => handleChange(e)}/>
 
         <label>Location</label>
         <input
-          placeholder= {errors.pickedDate ? 'This field is required. Please fill in your postcode.' : 'Postcode'} 
+          placeholder={errors.pickedDate ? 'This field is required. Please fill in your postcode.' : 'Postcode'} 
           name='vegLocation'
           onChange={(e) => handleChange(e)}
           value={vegLocation}
