@@ -16,7 +16,7 @@ class VegetablesNew extends React.Component {
         varietyOfVeg: '', //{ type: String },
         pickedDate: '', //{ type: Date, required: true },
         description: '', // { type: String, maxlength: 200 },
-        image: 'HIiiiiii', //{ type: String },
+        image: '', //{ type: String },
         isClaimed: false,
         vegLocation: '', //{ type: String, required: true },
         availablePickUpDays: [],
@@ -73,14 +73,16 @@ class VegetablesNew extends React.Component {
   }
 
   handleChange(e) {
-    const image = document.getElementById("imgurl").value
-    const data = { ...this.state.data, [e.target.name]: e.target.value, image: image }
+    const data = { ...this.state.data, [e.target.name]: e.target.value }
     const errors = { ...this.state.errors, [e.target.name]: '' }
     this.setState({ data, errors })
   }
 
   handleSubmit(e) {
     e.preventDefault()
+    const image = document.getElementById('imgurl').value
+    const data = { ...this.state.data, image: image }
+    this.setState({ data })
     axios.post('/api/vegetables', this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
