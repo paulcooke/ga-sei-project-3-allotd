@@ -1,10 +1,10 @@
 import React from 'react'
-import VegetablesForm from './VegetablesForm'
 import axios from 'axios'
 //import moment from 'moment'
 
 import Auth from '../../lib/auth'
 import SearchForm from '../common/SearchForm'
+import VegetablesForm from './VegetablesForm'
 
 class VegetablesEdit extends React.Component {
   constructor() {

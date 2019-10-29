@@ -1,9 +1,9 @@
 import React from 'react'
-import VegetablesForm from './VegetablesForm'
 import axios from 'axios'
 
 import Auth from '../../lib/auth'
 import SearchForm from '../common/SearchForm'
+import VegetablesForm from './VegetablesForm'
 
 class VegetablesNew extends React.Component {
   constructor() {

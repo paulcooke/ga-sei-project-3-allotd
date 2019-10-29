@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+
 import SearchForm from '../common/SearchForm'
 import Auth from '../../lib/auth'
 
@@ -34,7 +35,10 @@ class Register extends React.Component {
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
+
   render() {
+    console.log('render state Register', this.state)
+    console.log('render errors', this.state.errors)
     const { errors } = this.state
     return (
       <>
@@ -43,36 +47,33 @@ class Register extends React.Component {
           <form className='panelWrapper' onSubmit={this.handleSubmit}>
             <h2>Register</h2>
 
-            <label>User name</label>
+            <label>Username</label>
             <input
               name='username'
-              placeholder='username'
+              placeholder={errors.username ? 'This field is required.' : 'Username'} 
               onChange={this.handleChange}
             />
-            {errors.username && <small>{errors.username}</small>}
 
             <label>Email</label>
             <input
               name='email'
-              placeholder='name@email.com'
+              placeholder={errors.email ? 'This field is required.' : 'name@email.com'}
               onChange={this.handleChange}
             />
-            {errors.email && <small>please enter your email</small>}
 
             <label>Password</label>
             <input
               name='password'
               type='password'
-              placeholder='password'
+              placeholder={errors.password ? 'This field is required.' : 'Password'}
               onChange={this.handleChange}
             />
-            {errors.password && <small>{errors.password}</small>}
 
             <label>Password Confirmation</label>
             <input
               name='passwordConfirmation'
               type='password'
-              placeholder='password confirmation'
+              placeholder='Password Confirmation'
               onChange={this.handleChange}
             />
 
