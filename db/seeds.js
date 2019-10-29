@@ -57,8 +57,9 @@ mongoose.connect(
             addressLineOne: '15 Cerulean Lane', 
             addressLineTwo: '', 
             addressCity: 'Cerulean City', 
-            addressPostcode: 'P0K3M0N' 
+            addressPostcode: 'NW10 7AB' 
           }
+          
         ])
       })
       .then(users => {
@@ -114,6 +115,42 @@ mongoose.connect(
             user: users[3],
             availablePickUpDays: ['Wednesday', 'Thursday', 'Friday'],
             availablePickUpTimes: ['12', '13']
+          },
+          { title: 'Delicious Broad beans',
+            typeOfVeg: 'Broad Beans',
+            varietyOfVeg: 'English',
+            pickedDate: 5,
+            description: 'freshly picked and crunchy',
+            image: 'https://www.thompson-morgan.com/static-images/master/static-images/how-to-grow-broadbeans/how-to-grow-broad-beans-lead.jpg',
+            isClaimed: false,
+            vegLocation: 'E8 2RS',
+            user: users[4],
+            availablePickUpDays: ['Friday', 'Saturday'],
+            availablePickUpTimes: ['14', '15']
+          },
+          { title: 'Halloween Pumpkins',
+            typeOfVeg: 'Pumpkin',
+            varietyOfVeg: 'American',
+            pickedDate: 5,
+            description: 'Big, scary pumpkins',
+            image: 'https://www.quickenloans.com/blog/wp-content/uploads/2013/10/Stock-HalloweenPumpkins-t20_knkgvE.jpg',
+            isClaimed: false,
+            vegLocation: 'NW6 3PJ',
+            user: users[5],
+            availablePickUpDays: ['Friday', 'Saturday'],
+            availablePickUpTimes: ['14', '15']
+          },
+          { title: 'Mushrooms',
+            typeOfVeg: 'Mushrooms',
+            varietyOfVeg: 'French',
+            pickedDate: 2,
+            description: 'yum yum yum',
+            image: 'https://www.goodnewsnetwork.org/wp-content/uploads/2019/03/Mushrooms-National-University-of-Singapore-Released.jpg',
+            isClaimed: false,
+            vegLocation: 'W4 2LJ',
+            user: users[3],
+            availablePickUpDays: ['Monday', 'Tuesday'],
+            availablePickUpTimes: ['19', '20']
           }
         ])
       })
