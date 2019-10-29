@@ -70,7 +70,7 @@ class DashboardEdit extends React.Component {
   componentDidMount() {
     const userId = this.props.match.params.id
     console.log(userId)
-    axios.get(`/api/profile/${userId}`, {
+    axios.get('/api/profile', {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
