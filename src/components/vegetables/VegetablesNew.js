@@ -22,9 +22,8 @@ class VegetablesNew extends React.Component {
         availablePickUpDays: [],
         availablePickUpTimes: []
       }, 
-      errors: {
-
-      }
+      errors: {}, 
+      picture: true
     }
 
     this.dayOptions = [
@@ -61,6 +60,7 @@ class VegetablesNew extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDaySelect = this.handleDaySelect.bind(this)
     this.handleTimeSelect = this.handleTimeSelect.bind(this)
+    this.setStateImage = this.setStateImage.bind(this)
   }
 
   handleDaySelect(selected) {
@@ -83,19 +83,29 @@ class VegetablesNew extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    const image = document.getElementById('imgurl').value
-    const data = { ...this.state.data, image: image }
-    this.setState({ data })
+    console.log('handleSubmit', document.getElementById('imgurl').value)
     axios.post('/api/vegetables', this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.props.history.push(`/vegetables/${res.data._id}`))
       .catch(err => this.setState({ errors: err.response.data.errors }))
+    console.log('submit',this.state.data)
   }  
 
+  componentDidUpdate() {
+    if (document.getElementById('imgurl').value && this.state.picture) return this.setStateImage()
+  }
+
+  setStateImage() {
+    const image = document.getElementById('imgurl').value
+    console.log('set state VegetablesNew', image)
+    const data = { ...this.state.data, image }
+    this.setState({ data, picture: false })
+  }
+
   render() {
-    console.log('render',this.state)
-    console.log('render', this.state.errors)
+    console.log('render state VegetablesNew',this.state)
+    console.log('render errors', this.state.errors)
     return (
       <>
         <SearchForm />
@@ -115,3 +125,29 @@ class VegetablesNew extends React.Component {
 }
 
 export default VegetablesNew
+
+// For dashboard 
+// handleSubmit(e) {
+//   e.preventDefault()
+//   // const image = document.getElementById('imgurl').value
+//   // const data = { ...this.state.data, userImage: image }
+//   // this.setState({ data })
+//   console.log('handle submit', this.state.data)
+//   const userId = this.props.match.params.id
+//   axios.put(`/api/profile/${userId}/edit`, this.state.data, {
+//     headers: { Authorization: `Bearer ${Auth.getToken()}` }
+//   })
+//     .then(() => this.props.history.push('/dashboard'))
+//     .catch(err => this.setState({ errors: err.message }))
+// } 
+
+// componentDidUpdate() {
+//   if (document.getElementById('imgurl').value && this.state.picture) return this.setStateImage()
+// }
+
+// setStateImage() {
+//   const image = document.getElementById('imgurl').value
+//   console.log('set state Dashboard Edit', image)
+//   const data = { ...this.state.data, userImage: image }
+//   this.setState({ data, picture: false })
+// }

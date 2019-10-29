@@ -22,9 +22,8 @@ class VegetablesEdit extends React.Component {
         availablePickUpDays: [],
         availablePickUpTimes: []
       },
-      errors: {
-
-      }
+      errors: {}, 
+      picture: true
     }
 
     this.dayOptions = [
@@ -61,6 +60,7 @@ class VegetablesEdit extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDaySelect = this.handleDaySelect.bind(this)
     this.handleTimeSelect = this.handleTimeSelect.bind(this)
+    this.setStateImage = this.setStateImage.bind(this)
   }
 
   componentDidMount() {
@@ -90,15 +90,32 @@ class VegetablesEdit extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    // const image = document.getElementById('imgurl').value
+    // console.log('handle submit', image)
+    // const data = { ...this.state.data, image: image }
+    // this.setState({ data })
     const vegetableId = this.props.match.params.id
     axios.put(`/api/vegetables/${vegetableId}`, this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.props.history.push(`/vegetables/${res.data._id}`))
       .catch(err => this.setState({ errors: err.response.data.errors }))
+    console.log('submit', this.state)
+  }
+
+  componentDidUpdate() {
+    if (document.getElementById('imgurl').value && this.state.picture) return this.setStateImage()
+  }
+
+  setStateImage() {
+    const image = document.getElementById('imgurl').value
+    console.log('set state VegetablesEdit', image)
+    const data = { ...this.state.data, image }
+    this.setState({ data, picture: false })
   }
 
   render() {
+    console.log('render state VegetablesEdit',this.state)
     console.log('render', this.state.errors)
     return (
       <>

@@ -84,12 +84,12 @@ class VegetablesShow extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     if (!this.state.vegetable) return null
+    console.log('render', this.state.vegetable )
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
-    console.log()
+    console.log('render', image , 'render')
     return (
       <>
         <SearchForm />
