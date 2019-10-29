@@ -8,7 +8,7 @@ class VegetableChat extends React.Component {
 
     this.state = {
       text: '',
-      messages: this.props.appointment
+      messages: this.props.messages
     }
     this.handleDeleteMessage = this.handleDeleteMessage.bind(this)
     this.handleSubmitMessage = this.handleSubmitMessage.bind(this)
@@ -36,6 +36,7 @@ class VegetableChat extends React.Component {
       .then((res) => { 
         const messagesArr = [...res.data.messages]
         this.setState({ messages: messagesArr })
+        console.log('should re render.')
       })
       .catch(err => console.log('error: ', err))
   }
@@ -52,6 +53,11 @@ class VegetableChat extends React.Component {
     console.log(this.props.appointmentId)
     return (
       <>
+        {this.props.messages.map(msg => {
+          return (
+            <p key={msg._id}>{msg.text}</p>
+          )
+        })}
         <form className='panelWrapper' onSubmit={this.handleSubmitMessage}>
           <textarea
             rows='4'
