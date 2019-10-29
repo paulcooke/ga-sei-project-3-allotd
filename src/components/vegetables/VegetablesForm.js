@@ -1,12 +1,13 @@
 import React from 'react'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+import CreatableSelect from 'react-select/creatable'
 
 import ImageUpload from '../images/ImageUpload'
 
 const animatedComponents = makeAnimated()
 
-const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation, availablePickUpDays, availablePickUpTimes }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions, errors } ) => {
+const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, description, image, vegLocation, availablePickUpDays, availablePickUpTimes }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions, errors, components, handleVegType, options } ) => {
   return (
     <div className='formWrapper'>
       <form className='panelWrapper' onSubmit={(e) => handleSubmit(e)}>
@@ -19,11 +20,11 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           value={title}
         />
         <label>Type</label>
-        <input
-          placeholder={errors.typeOfVeg ? 'This field is required.' : 'Type'} 
-          name='typeOfVeg'
-          onChange={(e) => handleChange(e)}
-          value={typeOfVeg}
+        <CreatableSelect
+          placeholder={errors.typeOfVeg ? 'This field is required.' : 'Select the veg you grow or type your own'} 
+          onChange={handleVegType}
+          components={components}
+          options={options}
         />
         <label>Variety</label>
         <input
@@ -41,7 +42,6 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
         />
         <ImageUpload />
         <input hidden id='imgurl' name='image' value={image} onChange={(e) => handleChange(e)}/>
-
         <label>Location</label>
         <input
           placeholder={errors.pickedDate ? 'This field is required. Please fill in your postcode.' : 'Postcode'} 
@@ -59,7 +59,6 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           onChange={(e) => handleChange(e)}
           value={description}
         />
-
         <label>Set your preferences for when you would like people to collect from you</label>
         <Select 
           name='availablePickUpDays'
@@ -85,7 +84,6 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
             ))
           }
         />
-
         <button type='submit'>
           submit
         </button>

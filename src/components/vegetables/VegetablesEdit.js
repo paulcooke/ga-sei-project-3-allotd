@@ -6,6 +6,10 @@ import Auth from '../../lib/auth'
 import SearchForm from '../common/SearchForm'
 import VegetablesForm from './VegetablesForm'
 
+const components = {
+  DropdownIndicator: null
+}
+
 class VegetablesEdit extends React.Component {
   constructor() {
     super()
@@ -25,6 +29,16 @@ class VegetablesEdit extends React.Component {
       errors: {}, 
       picture: true
     }
+
+    this.options = [
+      { value: 'Tomato', label: 'Tomato' },
+      { value: 'Aubergine', label: 'Aubergine' },
+      { value: 'Pumpkin', label: 'Pumpkin' }, 
+      { value: 'Carrots', label: 'Carrots' }, 
+      { value: 'Parsnips', label: 'Parsnips' }, 
+      { value: 'Garlic', label: 'Garlic' }, 
+      { value: 'Onions', label: 'Onions' }
+    ]
 
     this.dayOptions = [
       { value: 'Monday', label: 'Monday' },
@@ -61,6 +75,7 @@ class VegetablesEdit extends React.Component {
     this.handleDaySelect = this.handleDaySelect.bind(this)
     this.handleTimeSelect = this.handleTimeSelect.bind(this)
     this.setStateImage = this.setStateImage.bind(this)
+    this.handleVegType = this.handleVegType.bind(this)
   }
 
   componentDidMount() {
@@ -110,6 +125,14 @@ class VegetablesEdit extends React.Component {
     this.setState({ data, picture: false })
   }
 
+  handleVegType(selected) {
+    console.log(selected)
+    const typeOfVeg = selected.value
+    const data = { ...this.state.data, typeOfVeg: typeOfVeg }
+    this.setState({ data })
+    console.log(data)
+  }
+
   render() {
     console.log('render state VegetablesEdit',this.state)
     console.log('render', this.state.errors)
@@ -122,9 +145,12 @@ class VegetablesEdit extends React.Component {
           handleSubmit={this.handleSubmit}
           handleDaySelect={this.handleDaySelect}
           handleTimeSelect={this.handleTimeSelect}
+          handleVegType={this.handleVegType}
           dayOptions={this.dayOptions}
           timeOptions={this.timeOptions}
           errors={this.state.errors}
+          components={components}
+          options={this.options}
         />
       </>
     )
