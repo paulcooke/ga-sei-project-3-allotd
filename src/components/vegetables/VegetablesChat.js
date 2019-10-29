@@ -8,7 +8,7 @@ class VegetableChat extends React.Component {
 
     this.state = {
       text: '',
-      messages: this.props.appointment.
+      messages: this.props.appointment
     }
     this.handleDeleteMessage = this.handleDeleteMessage.bind(this)
     this.handleSubmitMessage = this.handleSubmitMessage.bind(this)
