@@ -94,7 +94,9 @@ describe('POST /vegetables', () => {
       })
   })
   it('should return the correct data types', done => {
-    api.get(`/api/vegetables/${vegetable._id}`) 
+    api.post('/api/vegetables/')
+      .set('Authorization', `Bearer ${token}`) 
+      .send(testVeg)
       .end((err, res) => {
         expect(res.body._id).to.be.a('string')
         expect(res.body.title).to.be.a('string')
