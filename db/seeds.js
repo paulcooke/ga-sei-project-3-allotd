@@ -33,7 +33,7 @@ mongoose.connect(
             addressLineOne: '60 Disney Lane', 
             addressLineTwo: 'Marshmellow World', 
             addressCity: 'Paris', 
-            addressPostcode: 'E8 2RS', 
+            addressPostcode: 'E8 2RS'
           },
           {
             username: 'jenny',
