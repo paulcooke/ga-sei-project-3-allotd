@@ -29,6 +29,7 @@ class Dashboard extends React.Component {
 
     this.handleAccept = this.handleAccept.bind(this)
     this.handleReject = this.handleReject.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount() {
@@ -46,7 +47,7 @@ class Dashboard extends React.Component {
   //this needs to update the appointment status in the appointment model
   handleAccept(e) {
     const appointmentId = e.target.value
-    console.log(appointmentId)
+    // console.log(appointmentId)
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'accepted' })
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
@@ -64,8 +65,17 @@ class Dashboard extends React.Component {
   }
 
   isOwner() {
-    console.log(this.state.data._id)
+    // console.log(this.state.data._id)
     return Auth.getPayload().sub === this.state.data._id
+  }
+
+  handleDelete(e) {
+    const vegetableId = e.target.value
+    axios.delete(`/api/vegetables/${vegetableId}`, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => this.getUserInfo())
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -126,18 +136,18 @@ class Dashboard extends React.Component {
               {
                 this.state.data.listingHistory.map(listing => (
                   <div key={listing._id}>
-                    <p>
+                    <div>
                       {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}. 
                       <div>
                         <Link to={`/vegetables/${listing._id}/edit`}>
                           {!listing.isClaimed && <button>Edit vegetable</button>}
                           {listing.isClaimed && <button disabled>Edit vegetable</button>}
                         </Link>
-                        {!listing.isClaimed && <button onClick={this.handleDelete}>Delete vegetable</button>}
+                        {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
                         {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
                         {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
                       </div>
-                    </p>
+                    </div>
                     {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
                     <div>                      
                       <p>This veg has been CLAIMED by {listing.pickUpAppointment.pickerId.username}. They want to collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('h:mm')}.</p>
@@ -167,8 +177,8 @@ class Dashboard extends React.Component {
                   <div key={picked.id}>
                     {picked.appointmentStatus === 'requested' && 
                       <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
-                    {picked.appointmentStatus === 'accepted' &&
-                      <span>{picked.vegId && picked.vegId.user.username} has accepted your request to collect {picked.vegId.title} {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
+                    {picked.vegId && picked.appointmentStatus === 'accepted' &&
+                      <span>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title} {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
                     {picked.vegId && picked.appointmentStatus === 'rejected' &&
                       <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                     } 
