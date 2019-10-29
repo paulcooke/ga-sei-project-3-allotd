@@ -49,4 +49,15 @@ router.route('/appointments/:id')
   .delete(appointments.deleteAppointment)
   .get(appointments.show)
 
+
+router.route('/appointments/:id/messages')
+  .post(secureRoute, appointments.messageCreate)
+
+router.route('/appointments/:id/messages/:messageId')
+  .delete(secureRoute, appointments.messageDelete)
+
+//appointments/appt id / comments
+//appointments/appt id / comments / comment id 
+
+
 module.exports = router  // exporting our router module for use in index.js
