@@ -125,29 +125,3 @@ class VegetablesNew extends React.Component {
 }
 
 export default VegetablesNew
-
-// For dashboard 
-// handleSubmit(e) {
-//   e.preventDefault()
-//   // const image = document.getElementById('imgurl').value
-//   // const data = { ...this.state.data, userImage: image }
-//   // this.setState({ data })
-//   console.log('handle submit', this.state.data)
-//   const userId = this.props.match.params.id
-//   axios.put(`/api/profile/${userId}/edit`, this.state.data, {
-//     headers: { Authorization: `Bearer ${Auth.getToken()}` }
-//   })
-//     .then(() => this.props.history.push('/dashboard'))
-//     .catch(err => this.setState({ errors: err.message }))
-// } 
-
-// componentDidUpdate() {
-//   if (document.getElementById('imgurl').value && this.state.picture) return this.setStateImage()
-// }
-
-// setStateImage() {
-//   const image = document.getElementById('imgurl').value
-//   console.log('set state Dashboard Edit', image)
-//   const data = { ...this.state.data, userImage: image }
-//   this.setState({ data, picture: false })
-// }

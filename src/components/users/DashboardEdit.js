@@ -28,7 +28,8 @@ class DashboardEdit extends React.Component {
         addressCity: '', 
         addressPostcode: ''
       },
-      errors: {}
+      errors: {}, 
+      picture: true
     }
 
     this.dayOptions = [
@@ -65,6 +66,7 @@ class DashboardEdit extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDaySelect = this.handleDaySelect.bind(this)
     this.handleTimeSelect = this.handleTimeSelect.bind(this)
+    this.setStateImage = this.setStateImage.bind(this)
   }
 
   componentDidMount() {
@@ -95,12 +97,26 @@ class DashboardEdit extends React.Component {
     this.setState({ data })
   }
 
+  // handleSubmit(e) {
+  //   e.preventDefault()
+  //   const image = document.getElementById('imgurl').value
+  //   const data = { ...this.state.data, userImage: image }
+  //   this.setState({ data })
+  //   console.log('handle submit', data, image)
+  //   const userId = this.props.match.params.id
+  //   axios.put(`/api/profile/${userId}/edit`, this.state.data, {
+  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
+  //   })
+  //     .then(() => this.props.history.push('/dashboard'))
+  //     .catch(err => this.setState({ errors: err.message }))
+  // } 
+
   handleSubmit(e) {
     e.preventDefault()
-    const image = document.getElementById('imgurl').value
-    const data = { ...this.state.data, userImage: image }
-    this.setState({ data })
-    console.log('handle submit', data, image)
+    // const image = document.getElementById('imgurl').value
+    // const data = { ...this.state.data, userImage: image }
+    // this.setState({ data })
+    console.log('handle submit', this.state.data)
     const userId = this.props.match.params.id
     axios.put(`/api/profile/${userId}/edit`, this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -109,8 +125,19 @@ class DashboardEdit extends React.Component {
       .catch(err => this.setState({ errors: err.message }))
   } 
 
+  componentDidUpdate() {
+    if (document.getElementById('imgurl').value && this.state.picture) return this.setStateImage()
+  }
+
+  setStateImage() {
+    const image = document.getElementById('imgurl').value
+    console.log('set state Dashboard Edit', image)
+    const data = { ...this.state.data, userImage: image }
+    this.setState({ data, picture: false })
+  }
+
   render() {
-    console.log('from render', this.state)
+    console.log('from render Dashboard Edit', this.state)
     const { data } = this.state
     return (
       <div className='dashWrapper'>
