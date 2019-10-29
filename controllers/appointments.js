@@ -88,10 +88,41 @@ function deleteAppointment(req, res) {
 // }
 
 // exporting our 'Route Handler' functions to be used buy our Router, found in 'config/router.js'
+
+function commentCreate(req, res , next) {
+  req.body.user = req.currentUser
+  Appointment. 
+    findById(req.params.id)
+    .populate('user')
+    .populate('comments.user')
+    .then(appointment => {
+      if (!appointment) return res.status(404).json( { message: 'Not Found' })
+      appointment.comments.push(req.body)
+      return appointment.save()
+    })
+    .then(appointment=> res.status(201).json(appointment))
+    .catch(next)
+}
+
+function commentDelete(req, res) {
+  Appointment
+    .findById(req.params.id)
+    .then(appointment => {
+      if (!appointment) return res.status(404).json({ message: 'Not Found' })
+      const comment = appointment.comments.id(req.params.commentId)
+      comment.remove()
+      return appointment.save()
+    })
+}
+
+
+
 module.exports = { 
   create, 
   update, 
   deleteAppointment, 
   show, 
-  index
+  index,
+  commentCreate, 
+  commentDelete
 } 
