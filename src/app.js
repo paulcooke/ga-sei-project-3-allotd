@@ -29,7 +29,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path ="/vegetables/map" component={VegetablesMap} />
-        <Route path ="/vegetables/Chat" component={VegetablesChat} />
+        <Route path ="/vegetables/chat" component={VegetablesChat} />
         <SecureRoute path="/vegetables/new" component={VegetablesNew} />
         <SecureRoute path="/vegetables/:id/edit" component={VegetablesEdit} />
         <Route path="/vegetables/:id" component={VegetablesShow} />

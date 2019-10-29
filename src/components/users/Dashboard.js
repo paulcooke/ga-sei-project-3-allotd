@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import moment from 'moment'
 
 import SearchForm from '../common/SearchForm'
+import VegetableChat from '../vegetables/VegetablesChat'
 
 
 class Dashboard extends React.Component {
@@ -136,6 +137,7 @@ class Dashboard extends React.Component {
                         {!listing.isClaimed && <button onClick={this.handleDelete}>Delete vegetable</button>}
                         {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
                         {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
+                      
                       </div>
                     </p>
                     {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
