@@ -21,6 +21,9 @@ class VegetablesNew extends React.Component {
         vegLocation: '', //{ type: String, required: true },
         availablePickUpDays: [],
         availablePickUpTimes: []
+      }, 
+      errors: {
+
       }
     }
 
@@ -87,11 +90,12 @@ class VegetablesNew extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.props.history.push(`/vegetables/${res.data._id}`))
-      .catch(err => this.setState({ errors: err.message }))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   }  
 
   render() {
-    console.log(this.state)
+    console.log('render',this.state)
+    console.log('render', this.state.errors)
     return (
       <>
         <SearchForm />
@@ -103,6 +107,7 @@ class VegetablesNew extends React.Component {
           handleTimeSelect={this.handleTimeSelect}
           dayOptions={this.dayOptions}
           timeOptions={this.timeOptions}
+          errors={this.state.errors}
         />
       </>
     )

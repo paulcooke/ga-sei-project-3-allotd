@@ -22,7 +22,9 @@ class VegetablesEdit extends React.Component {
         availablePickUpDays: [],
         availablePickUpTimes: []
       },
-      errors: null
+      errors: {
+
+      }
     }
 
     this.dayOptions = [
@@ -65,7 +67,7 @@ class VegetablesEdit extends React.Component {
     const vegetableId = this.props.match.params.id
     axios.get(`/api/vegetables/${vegetableId}`)
       .then(res => this.setState({ data: res.data }))
-      .catch(err => console.log(err))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
   handleDaySelect(selected) {
@@ -93,10 +95,11 @@ class VegetablesEdit extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.props.history.push(`/vegetables/${res.data._id}`))
-      .catch(err => this.setState({ errors: err.message }))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
   render() {
+    console.log('render', this.state.errors)
     return (
       <>
         <SearchForm />
@@ -108,6 +111,7 @@ class VegetablesEdit extends React.Component {
           handleTimeSelect={this.handleTimeSelect}
           dayOptions={this.dayOptions}
           timeOptions={this.timeOptions}
+          errors={this.state.errors}
         />
       </>
     )

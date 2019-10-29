@@ -40,7 +40,8 @@ function update(req, res, next) {
       return vegetable.set(req.body) 
     })
     .then(vegetable => vegetable.save()) 
-    .then(vegetable => res.status(202).json(vegetable)) // if anything goes wrong we send back the error response
+    .then(vegetable => res.status(202).json(vegetable))
+    .catch(next) 
 }
 
 // delete route - /vegetables/:id
