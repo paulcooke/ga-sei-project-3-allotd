@@ -34,12 +34,9 @@ class imageUpload extends Component {
             imageUpLoading: false
           })
           document.getElementById("imgurl").value = this.state.firebaseImageURL
-          console.log(this.state.firebaseImageURL)
         })
       })
   }
-
-  
 
   render() {
     return (

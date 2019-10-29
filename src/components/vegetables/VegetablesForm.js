@@ -8,9 +8,6 @@ import ImageUpload from '../images/ImageUpload'
 const animatedComponents = makeAnimated()
 
 const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDate, description, image, vegLocation, availablePickUpDays, availablePickUpTimes }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions } ) => {
-  console.log('title is: ', title)
-  console.log('pickedDate is: ', pickedDate)
-  console.log('image', image)
   return (
     <div className='formWrapper'>
       <form className='panelWrapper' onSubmit={(e) => handleSubmit(e)}>
@@ -43,17 +40,8 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           onChange={(e) => handleChange(e)}
           value={pickedDate}
         />
-
         <ImageUpload />
-        <input id="imgurl" name='image' value={image} onMouseMove={(e) => handleChange(e)}/>
-
-        {/* <input
-          placeholder='Image URL'
-          name='image'
-          onChange={(e) => handleChange(e)}
-          value={image}
-          onPointerMove
-        /> */}
+        <input hidden id="imgurl" name='image' value={image}/>
         <label>Location</label>
         <input
           placeholder='Postcode'
