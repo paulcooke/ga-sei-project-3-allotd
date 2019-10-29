@@ -22,7 +22,11 @@ class DashboardEdit extends React.Component {
         vegLookingFor: '', // this should be an array
         rating: '',
         availablePickUpDays: [],
-        availablePickUpTimes: []
+        availablePickUpTimes: [],
+        addressLineOne: '', 
+        addressLineTwo: '', 
+        addressCity: '', 
+        addressPostcode: ''
       },
       errors: {}
     }
@@ -126,14 +130,41 @@ class DashboardEdit extends React.Component {
 
             <ImageUpload />
             <input hidden id='imgurl' name="userImage" value={data.userImage} onChange={this.handleChange}/>
-
             <br/>
-            <label>Your location</label>
+
+            <label>Addres line 1</label>
             <input
-              placeholder="Enter your location here."
-              name="userLocation"
+              placeholder="Addres line 1."
+              name="addressLineOne"
               onChange={this.handleChange}
-              value={data.userLocation}
+              value={data.addressLineOne}
+            />
+            <br/>
+
+            <label>Addres line 2</label>
+            <input
+              placeholder="Addres line 2."
+              name="addressLineTwo"
+              onChange={this.handleChange}
+              value={data.addressLineTwo}
+            />
+            <br/>
+
+            <label>City or town</label>
+            <input
+              placeholder="City or town."
+              name="addressCity"
+              onChange={this.handleChange}
+              value={data.addressCity}
+            />
+            <br/>
+
+            <label>Postcode</label>
+            <input
+              placeholder="Postcode."
+              name="addressPostcode"
+              onChange={this.handleChange}
+              value={data.addressPostcode}
             />
             <br/>
 
