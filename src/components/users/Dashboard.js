@@ -24,7 +24,11 @@ class Dashboard extends React.Component {
         availablePickUpDays: [],
         availablePickUpTimes: [], 
         listingHistory: [],
-        pickedVegHistory: []
+        pickedVegHistory: [],
+        addressLineOne: '', 
+        addressLineTwo: '', 
+        addressCity: '', 
+        addressPostcode: ''
       }
     }
 
