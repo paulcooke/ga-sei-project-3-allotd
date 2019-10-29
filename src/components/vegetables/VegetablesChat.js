@@ -7,8 +7,7 @@ class VegetableChat extends React.Component {
     super(props)
 
     this.state = {
-      text: '',
-      messages: this.props.messages
+      text: ''
     }
     this.handleDeleteMessage = this.handleDeleteMessage.bind(this)
     this.handleSubmitMessage = this.handleSubmitMessage.bind(this)
@@ -30,15 +29,14 @@ class VegetableChat extends React.Component {
 
   handleSubmitMessage(e) {
     e.preventDefault()
-    axios.post(`/api/appointments/${this.props.appointmentId}/messages`, { text: this.state.text }, {
+    axios.post(`/api/appointments/${this.props.appointmentId}/messages`, this.state, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
-      .then((res) => { 
-        const messagesArr = [...res.data.messages]
-        this.setState({ messages: messagesArr })
-        console.log('should re render.')
+      .then(() => {
+        this.props.getUserInfo()
+        this.setState({ text: '' })
       })
-      .catch(err => console.log('error: ', err))
+      .catch(err => console.log(err))
   }
 
   handleChange(e) {
@@ -53,11 +51,6 @@ class VegetableChat extends React.Component {
     console.log(this.props.appointmentId)
     return (
       <>
-        {this.props.messages.map(msg => {
-          return (
-            <p key={msg._id}>{msg.text}</p>
-          )
-        })}
         <form className='panelWrapper' onSubmit={this.handleSubmitMessage}>
           <textarea
             rows='4'
