@@ -2,11 +2,17 @@ import React from 'react'
 import axios from 'axios'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
+//import Creatable from 'react-select/creatable'
+import CreatableSelect from 'react-select/creatable'
 
 import Auth from '../../lib/auth'
 import ImageUpload from '../images/ImageUpload'
 
 const animatedComponents = makeAnimated()
+
+const components = {
+  DropdownIndicator: null
+}
 
 class DashboardEdit extends React.Component {
   constructor() {
@@ -62,11 +68,23 @@ class DashboardEdit extends React.Component {
       { value: '22', label: '22:00' }
     ]
 
+    this.options = [
+      { value: 'Tomato', label: 'Tomato' },
+      { value: 'Aubergine', label: 'Aubergine' },
+      { value: 'Pumpkin', label: 'Pumpkin' }, 
+      { value: 'Carrots', label: 'Carrots' }, 
+      { value: 'Parsnips', label: 'Parsnips' }, 
+      { value: 'Garlic', label: 'Garlic' }, 
+      { value: 'Onions', label: 'Onions' }
+    ]
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleDaySelect = this.handleDaySelect.bind(this)
     this.handleTimeSelect = this.handleTimeSelect.bind(this)
     this.setStateImage = this.setStateImage.bind(this)
+    this.handleMultiSelectGrown = this.handleMultiSelectGrown.bind(this)
+    this.handleMultiSelectLike = this.handleMultiSelectLike.bind(this)
   }
 
   componentDidMount() {
@@ -76,7 +94,7 @@ class DashboardEdit extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
-      .catch(err => this.setState({ errors: err.message }))
+      .catch(err => this.setState({ errors: err.response.data.errors  }))
   }
 
   handleChange(e) {
@@ -97,32 +115,15 @@ class DashboardEdit extends React.Component {
     this.setState({ data })
   }
 
-  // handleSubmit(e) {
-  //   e.preventDefault()
-  //   const image = document.getElementById('imgurl').value
-  //   const data = { ...this.state.data, userImage: image }
-  //   this.setState({ data })
-  //   console.log('handle submit', data, image)
-  //   const userId = this.props.match.params.id
-  //   axios.put(`/api/profile/${userId}/edit`, this.state.data, {
-  //     headers: { Authorization: `Bearer ${Auth.getToken()}` }
-  //   })
-  //     .then(() => this.props.history.push('/dashboard'))
-  //     .catch(err => this.setState({ errors: err.message }))
-  // } 
-
   handleSubmit(e) {
     e.preventDefault()
-    // const image = document.getElementById('imgurl').value
-    // const data = { ...this.state.data, userImage: image }
-    // this.setState({ data })
     console.log('handle submit', this.state.data)
     const userId = this.props.match.params.id
     axios.put(`/api/profile/${userId}/edit`, this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.props.history.push('/dashboard'))
-      .catch(err => this.setState({ errors: err.message }))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   } 
 
   componentDidUpdate() {
@@ -134,6 +135,22 @@ class DashboardEdit extends React.Component {
     console.log('set state Dashboard Edit', image)
     const data = { ...this.state.data, userImage: image }
     this.setState({ data, picture: false })
+  }
+
+  handleMultiSelectGrown(selected) {
+    console.log(selected)
+    const vegGrown = selected ? selected.map( item => item.value) : []
+    const data = { ...this.state.data, vegGrown }
+    this.setState({ data })
+    console.log(data)
+  }
+
+  handleMultiSelectLike(selected) {
+    console.log(selected)
+    const vegLookingFor = selected ? selected.map( item => item.value) : []
+    const data = { ...this.state.data, vegLookingFor }
+    this.setState({ data })
+    console.log(data)
   }
 
   render() {
@@ -154,29 +171,25 @@ class DashboardEdit extends React.Component {
               value={data.username}
             />
             <br/>
-
             <ImageUpload />
             <input hidden id='imgurl' name="userImage" value={data.userImage} onChange={this.handleChange}/>
             <br/>
-
-            <label>Addres line 1</label>
+            <label>Address line 1</label>
             <input
-              placeholder="Addres line 1."
+              placeholder="Address line 1."
               name="addressLineOne"
               onChange={this.handleChange}
               value={data.addressLineOne}
             />
             <br/>
-
-            <label>Addres line 2</label>
+            <label>Address line 2</label>
             <input
-              placeholder="Addres line 2."
+              placeholder="Address line 2."
               name="addressLineTwo"
               onChange={this.handleChange}
               value={data.addressLineTwo}
             />
             <br/>
-
             <label>City or town</label>
             <input
               placeholder="City or town."
@@ -185,7 +198,6 @@ class DashboardEdit extends React.Component {
               value={data.addressCity}
             />
             <br/>
-
             <label>Postcode</label>
             <input
               placeholder="Postcode."
@@ -194,25 +206,24 @@ class DashboardEdit extends React.Component {
               value={data.addressPostcode}
             />
             <br/>
-
             <label>The veg you grow</label>
-            <input
-              placeholder="Enter the veg you grow here."
-              name="vegGrown"
-              onChange={this.handleChange}
-              value={data.vegGrown}
+            <CreatableSelect
+              isMulti
+              onChange={this.handleMultiSelectGrown}
+              components={components}
+              options={this.options}
+              placeholder="Select the veg you grow or type your own"
             />
             <br/>
-
             <label>The veg you are looking for</label>
-            <input
-              placeholder="Enter the veg you want here."
-              name="vegLookingFor"
-              onChange={this.handleChange}
-              value={data.vegLookingFor}
+            <CreatableSelect
+              isMulti
+              onChange={this.handleMultiSelectLike}
+              components={components}
+              options={this.options}
+              placeholder="Select the veg you are looking for or type your own."
             />
             <br/>
-
             <label>Set your preferences for when you would like people to collect from you</label>
             <Select 
               name="availablePickUpDays"
@@ -238,13 +249,15 @@ class DashboardEdit extends React.Component {
                 ))
               }
             />
+            <br/>
+            {!this.errors && 
+            <p>Oops, something went wrong. please try again</p>}
             <button onClick={this.handleSubmit}>Submit</button>
           </div>
         </section>
       </div>
     )
   }
-
 }
 
 export default DashboardEdit

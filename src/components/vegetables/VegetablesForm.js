@@ -40,7 +40,7 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           value={pickedDate}
         />
         <ImageUpload />
-        <input hidden id='imgurl' name='image' value={image} onChange={(e) => handleChange(e)} />
+        <input hidden id='imgurl' name='image' value={image} onChange={(e) => handleChange(e)}/>
 
         <label>Location</label>
         <input

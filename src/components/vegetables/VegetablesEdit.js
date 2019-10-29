@@ -90,10 +90,6 @@ class VegetablesEdit extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    // const image = document.getElementById('imgurl').value
-    // console.log('handle submit', image)
-    // const data = { ...this.state.data, image: image }
-    // this.setState({ data })
     const vegetableId = this.props.match.params.id
     axios.put(`/api/vegetables/${vegetableId}`, this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
