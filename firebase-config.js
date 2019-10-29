@@ -10,7 +10,7 @@ const messagingSenderId = process.env.FIREBASE_MESSAGING_SENDER_ID
 const appId = process.env.FIREBASE_APP_ID
 console.log(apiKey, authDomain )
 
-var firebaseConfig = {
+const firebaseConfig = {
   apiKey: apiKey,
   authDomain: authDomain,
   databaseURL: databaseURL,
@@ -22,7 +22,7 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig)
 
-var storage = firebase.storage()
+const storage = firebase.storage()
 
 export {
   storage, firebase as default
