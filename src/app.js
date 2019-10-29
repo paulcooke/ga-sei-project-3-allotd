@@ -13,6 +13,7 @@ import VegetablesShow from './components/vegetables/VegetablesShow'
 import VegetablesNew from './components/vegetables/VegetablesNew'
 import VegetablesEdit from './components/vegetables/VegetablesEdit'
 import VegetablesMap from './components/vegetables/VegetablesMap'
+import VegetablesChat from './components/vegetables/VegetablesChat'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
@@ -28,6 +29,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path ="/vegetables/map" component={VegetablesMap} />
+        <Route path ="/vegetables/Chat" component={VegetablesChat} />
         <SecureRoute path="/vegetables/new" component={VegetablesNew} />
         <SecureRoute path="/vegetables/:id/edit" component={VegetablesEdit} />
         <Route path="/vegetables/:id" component={VegetablesShow} />
