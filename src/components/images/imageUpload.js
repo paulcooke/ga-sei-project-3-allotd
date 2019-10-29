@@ -6,7 +6,7 @@
 import React, { Component } from 'react'
 import { storage } from '../../../firebase-config'
 
-class imageUpload extends Component {
+class ImageUpload extends Component {
   constructor(props) {
     super(props)
 
@@ -22,7 +22,7 @@ class imageUpload extends Component {
     const uploadImage = storage.ref(`images/${currentImageName}`).put(e.target.files[0]) 
 
     uploadImage.on('state_changed',
-      (snapshot) => { },
+      () => { },
       (error) => {
         alert(error)
       },
@@ -33,7 +33,7 @@ class imageUpload extends Component {
             firebaseImageURL: url, 
             imageUpLoading: false
           })
-          document.getElementById("imgurl").value = this.state.firebaseImageURL
+          document.getElementById('imgurl').value = this.state.firebaseImageURL
         })
       })
   }
@@ -54,4 +54,4 @@ class imageUpload extends Component {
   }
 }
 
-export default imageUpload
+export default ImageUpload

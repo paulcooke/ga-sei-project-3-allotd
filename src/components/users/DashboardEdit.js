@@ -4,6 +4,7 @@ import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 
 import Auth from '../../lib/auth'
+import ImageUpload from '../images/ImageUpload'
 
 const animatedComponents = makeAnimated()
 
@@ -21,7 +22,11 @@ class DashboardEdit extends React.Component {
         vegLookingFor: '', // this should be an array
         rating: '',
         availablePickUpDays: [],
-        availablePickUpTimes: []
+        availablePickUpTimes: [],
+        addressLineOne: '', 
+        addressLineTwo: '', 
+        addressCity: '', 
+        addressPostcode: ''
       },
       errors: {}
     }
@@ -69,7 +74,7 @@ class DashboardEdit extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
-      .catch(err => console.log(err.message))
+      .catch(err => this.setState({ errors: err.message }))
   }
 
   handleChange(e) {
@@ -92,16 +97,20 @@ class DashboardEdit extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const image = document.getElementById('imgurl').value
+    const data = { ...this.state.data, userImage: image }
+    this.setState({ data })
+    console.log('handle submit', data, image)
     const userId = this.props.match.params.id
     axios.put(`/api/profile/${userId}/edit`, this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.props.history.push('/dashboard'))
       .catch(err => this.setState({ errors: err.message }))
-  }
+  } 
 
   render() {
-    console.log(this.state)
+    console.log('from render', this.state)
     const { data } = this.state
     return (
       <div className='dashWrapper'>
@@ -119,21 +128,43 @@ class DashboardEdit extends React.Component {
             />
             <br/>
 
-            <label>Image url</label>
+            <ImageUpload />
+            <input hidden id='imgurl' name="userImage" value={data.userImage} onChange={this.handleChange}/>
+            <br/>
+
+            <label>Addres line 1</label>
             <input
-              placeholder="Add your image url address here"
-              name="userImage"
+              placeholder="Addres line 1."
+              name="addressLineOne"
               onChange={this.handleChange}
-              value={data.userImage}
+              value={data.addressLineOne}
             />
             <br/>
 
-            <label>Your location</label>
+            <label>Addres line 2</label>
             <input
-              placeholder="Enter your location here."
-              name="userLocation"
+              placeholder="Addres line 2."
+              name="addressLineTwo"
               onChange={this.handleChange}
-              value={data.userLocation}
+              value={data.addressLineTwo}
+            />
+            <br/>
+
+            <label>City or town</label>
+            <input
+              placeholder="City or town."
+              name="addressCity"
+              onChange={this.handleChange}
+              value={data.addressCity}
+            />
+            <br/>
+
+            <label>Postcode</label>
+            <input
+              placeholder="Postcode."
+              name="addressPostcode"
+              onChange={this.handleChange}
+              value={data.addressPostcode}
             />
             <br/>
 
@@ -188,7 +219,5 @@ class DashboardEdit extends React.Component {
   }
 
 }
-
-
 
 export default DashboardEdit

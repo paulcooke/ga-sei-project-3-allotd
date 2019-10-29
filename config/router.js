@@ -32,7 +32,7 @@ router.route('/register')
 router.route('/login') 
   .post(users.login) 
 
-router.route('/profile/:id')
+router.route('/profile')
   .get(secureRoute, users.profile)
 
 router.route('/profile/:id/edit')  

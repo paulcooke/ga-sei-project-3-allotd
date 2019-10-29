@@ -79,7 +79,7 @@ class VegetablesShow extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, this.state.vegetable))
-      .then(() => this.props.history.push('/vegetables'))
+      .then(() => this.props.history.push('/dashboard'))
       .catch(err => this.setState({ errors: err.message }))
   }
 
@@ -109,9 +109,12 @@ class VegetablesShow extends React.Component {
               {this.isOwner() &&
                 <div className='buttonWrapper'>
                   <Link to={`/vegetables/${this.state.vegetable._id}/edit`}>
-                    <button>Edit vegetable</button>
+                    {!isClaimed && <button>Edit vegetable</button>}
+                    {isClaimed && <button disabled>Edit vegetable</button>}
                   </Link>
-                  <button onClick={this.handleDelete}>Delete vegetable</button>
+                  {!isClaimed && <button onClick={this.handleDelete}>Delete vegetable</button>}
+                  {isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
+                  {isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
                 </div>
               }
               {!this.isOwner() && !pickUpAppointment &&

@@ -13,13 +13,14 @@ import VegetablesShow from './components/vegetables/VegetablesShow'
 import VegetablesNew from './components/vegetables/VegetablesNew'
 import VegetablesEdit from './components/vegetables/VegetablesEdit'
 import VegetablesMap from './components/vegetables/VegetablesMap'
+import VegetablesChat from './components/vegetables/VegetablesChat'
 
 import Register from './components/auth/Register'
 import Login from './components/auth/Login'
 import Dashboard from './components/users/Dashboard'
 import DashboardEdit from './components/users/DashboardEdit'
 
-import imageUpload from './components/images/imageUpload'
+import ImageUpload from './components/images/ImageUpload'
 
 const App = () => (
   <BrowserRouter>
@@ -28,11 +29,12 @@ const App = () => (
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path ="/vegetables/map" component={VegetablesMap} />
+        <Route path ="/vegetables/chat" component={VegetablesChat} />
         <SecureRoute path="/vegetables/new" component={VegetablesNew} />
         <SecureRoute path="/vegetables/:id/edit" component={VegetablesEdit} />
         <Route path="/vegetables/:id" component={VegetablesShow} />
         <Route path="/vegetables" component={VegetablesIndex}/>
-        <Route path="/uploadbase" component={imageUpload}/>
+        <Route path="/uploadbase" component={ImageUpload}/>
 
         <Route path="/register" component={Register} />
         <Route path="/login" component={Login} />

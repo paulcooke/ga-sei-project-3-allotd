@@ -22,21 +22,16 @@ class VegetablesIndex extends React.Component {
   }
 
   componentDidMount() {
-    //this.handleIncomingRedirect()
+    // check if it exist, if so, use it as the serach term when page loads
+    const searchFromRedirect = this.props.location.state ? this.props.location.state.detail : ''
     axios.get('/api/vegetables')
-      .then(res => this.setState({ vegetables: res.data }))
+      .then(res => this.setState({ vegetables: res.data, searchTerm: searchFromRedirect }))
       .catch(err => console.log(err))
   }
 
   onChange({ target: { name, value, dataset, innerHTML } }) {
     //for the <li> dropdown, value is wiped during re render. use dataset and innerhtml in that case
     value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: (value || innerHTML) })
-  }
-
-  //if has been redirected, set search term to equal this.props.location.state.detail
-  handleIncomingRedirect() {
-    //if there is a value stored from redirect then update searchTerm
-    this.props.location.state.detail ? this.setState({ searchTerm: this.props.location.state.detail }) : false
   }
 
   filterVegetables() {
@@ -85,15 +80,9 @@ class VegetablesIndex extends React.Component {
               onSubmit={this.submitSearch}
             />
             <div className='indexWrapper'>
-              {this.props.location.state && // if a value has been passed from another page then use it to filter
-                this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.title))
-                  .map(vegetable => (
-                    <VegetableCard key={vegetable._id} {...vegetable} />
-                  ))}
-              {!this.props.location.state && // if no value from a redirect then render all after dynamic filter
-                this.filterVegetables().map(vegetable => (
-                  <VegetableCard key={vegetable._id} {...vegetable} />
-                ))}
+              {this.filterVegetables().map(vegetable => (
+                <VegetableCard key={vegetable._id} {...vegetable} />
+              ))}
             </div>
           </>
         }
@@ -108,3 +97,13 @@ class VegetablesIndex extends React.Component {
 }
 
 export default VegetablesIndex
+
+// {this.props.location.state && // if a value has been passed from another page then use it to filter
+//   this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.title))
+//     .map(vegetable => (
+//       <VegetableCard key={vegetable._id} {...vegetable} />
+//     ))}
+// {!this.props.location.state && // if no value from a redirect then render all after dynamic filter
+//   this.filterVegetables().map(vegetable => (
+//     <VegetableCard key={vegetable._id} {...vegetable} />
+//   ))}

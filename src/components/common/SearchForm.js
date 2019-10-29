@@ -17,12 +17,12 @@ class SearchForm extends React.Component {
       pathname: '/vegetables',
       search: '?query=abc',
       // use innerHTML from dropdown or vbr for search text
-      state: { detail: e.target.innerHTML || this.state.valBeforeRedirect }
+      state: { detail: this.state.valBeforeRedirect || e.target.innerHTML }
     })
   }
   
   storeValForRedirect(e) {
-    const valBeforeRedirect = e.target.name || e.target.innerHTML// = e.target.value
+    const valBeforeRedirect = e.target.name || e.target.value
     this.setState({ valBeforeRedirect: valBeforeRedirect })
   }
 

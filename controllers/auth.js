@@ -31,14 +31,15 @@ function login(req, res) {
 
 // profile route  /profile/:id
 function profile(req, res) { // route for a user profile
+  console.log('current user', req.currentUser._id)
   User
     .findById(req.currentUser._id) // this must be a secureRoute, it uses the user id gathered from the token, to find the user in our DB
     .populate('listingHistory')
     .populate('pickedVegHistory')
     .populate('pickedVegHistory.vegId')
     .then(user => {
-      console.log(user)
-      res.status(200).json(user)
+      console.log('found user', user)
+      return res.status(200).json(user)
     }) //sending the found user back
     .catch(err => res.json(err)) // sending any errors
 }
