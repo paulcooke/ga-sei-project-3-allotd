@@ -37,14 +37,14 @@ describe('POST /register', () => {
       })
   })
 
-  it('should return a 201 if user is created', done => {
-    api.post('/api/register')
-      .send(testDataIncorrect)
-      .end((err, res) => {
-        expect(res.status).to.eq(201)
-        done()
-      })
-  })
+  // it('should return a 201 if user is created', done => {
+  //   api.post('/api/register')
+  //     .send(testDataIncorrect)
+  //     .end((err, res) => {
+  //       expect(res.status).to.eq(201)
+  //       done()
+  //     })
+  // })
 
   it('should return a 422 response if email does not contain @', done => { //issue here all answers are the same
     api.post('/api/register')
