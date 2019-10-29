@@ -12,19 +12,18 @@ class SearchForm extends React.Component {
     this.storeValForRedirect = this.storeValForRedirect.bind(this)
   }
 
-  handleRedirect() {
-    console.log('handle redirect was called. ')
+  handleRedirect(e) {
     if (this.props.location.pathname !== '/vegetables') this.props.history.push({
       pathname: '/vegetables',
       search: '?query=abc',
-      state: { detail: this.state.valBeforeRedirect }
+      // use innerHTML from dropdown or vbr for search text
+      state: { detail: e.target.innerHTML || this.state.valBeforeRedirect }
     })
   }
   
   storeValForRedirect(e) {
-    console.log('svfr was called. ')
-    const valBeforeRedirect = [e.target.name] = e.target.value
-    this.setState({ valBeforeRedirect })
+    const valBeforeRedirect = e.target.name || e.target.innerHTML// = e.target.value
+    this.setState({ valBeforeRedirect: valBeforeRedirect })
   }
 
   render() {
@@ -39,11 +38,9 @@ class SearchForm extends React.Component {
         >
           <Dropdown
             vegetable={this.state.region}
-            onClick={onChange ? onChange : (e) => {
-              this.storeValForRedirect(e)
-              this.handleRedirect()
-            }} />
-          <input name={name} placeholder='Search by title' />
+            onClick={onChange ? onChange : this.handleRedirect}
+          />
+          <input name={name} placeholder='Search...' />
           <button type='submit'>Search</button>
         </form>
       </>

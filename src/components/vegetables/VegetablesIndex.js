@@ -18,9 +18,11 @@ class VegetablesIndex extends React.Component {
     this.submitSearch = this.submitSearch.bind(this)
     this.filterVegetables = this.filterVegetables.bind(this)
     this.handleCheckbox = this.handleCheckbox.bind(this)
+    this.handleIncomingRedirect = this.handleCheckbox.bind(this)
   }
 
   componentDidMount() {
+    //this.handleIncomingRedirect()
     axios.get('/api/vegetables')
       .then(res => this.setState({ vegetables: res.data }))
       .catch(err => console.log(err))
@@ -29,6 +31,12 @@ class VegetablesIndex extends React.Component {
   onChange({ target: { name, value, dataset, innerHTML } }) {
     //for the <li> dropdown, value is wiped during re render. use dataset and innerhtml in that case
     value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: (value || innerHTML) })
+  }
+
+  //if has been redirected, set search term to equal this.props.location.state.detail
+  handleIncomingRedirect() {
+    //if there is a value stored from redirect then update searchTerm
+    this.props.location.state.detail ? this.setState({ searchTerm: this.props.location.state.detail }) : false
   }
 
   filterVegetables() {

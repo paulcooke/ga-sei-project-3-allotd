@@ -1,5 +1,14 @@
 const mongoose = require('mongoose')
 
+const messageSchema = new mongoose.Schema({  
+  text: { type: String, required: true },
+  user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true }
+}, {
+  timestamps: true
+})
+
+
+
 const appointmentSchema = new mongoose.Schema({
   selectedPickUpDay: { type: String },
   selectedPickUpTime: { type: String },
@@ -7,7 +16,8 @@ const appointmentSchema = new mongoose.Schema({
   appointmentDateandTime: { type: Date },
   vegId: { type: mongoose.Schema.ObjectId, ref: 'Veg', autopopulate: true },
   pickerId: { type: mongoose.Schema.ObjectId, ref: 'User', required: true, autopopulate: true },
-  expiryDate: { type: String, required: true } // this needs to be pased in insomnia as an empty string it gets populated outomatically in controllers/appointments.js in function create where 48 hours (172800 * 1000) are added to the current Date.
+  expiryDate: { type: String, required: true }, // this needs to be pased in insomnia as an empty string it gets populated outomatically in controllers/appointments.js in function create where 48 hours (172800 * 1000) are added to the current Date.
+  messages: [messageSchema]
 }, {
   timestamps: true
 })

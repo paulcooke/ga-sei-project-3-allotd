@@ -1,7 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
-import { Link } from 'react-router-dom'
 
 import ImageUpload from '../images/ImageUpload'
 
@@ -41,7 +40,7 @@ const VegetablesForm = ( { vegetable: { title, typeOfVeg, varietyOfVeg, pickedDa
           value={pickedDate}
         />
         <ImageUpload />
-        <input hidden id="imgurl" name='image' value={image}/>
+        <input hidden id='imgurl' name='image' value={image}/>
         <label>Location</label>
         <input
           placeholder='Postcode'

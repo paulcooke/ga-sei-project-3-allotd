@@ -4,6 +4,7 @@ import Select from 'react-select'
 import makeAnimated from 'react-select/animated'
 
 import Auth from '../../lib/auth'
+import ImageUpload from '../images/ImageUpload'
 
 const animatedComponents = makeAnimated()
 
@@ -69,7 +70,7 @@ class DashboardEdit extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
-      .catch(err => console.log(err.message))
+      .catch(err => this.setState({ errors: err.message }))
   }
 
   handleChange(e) {
@@ -92,16 +93,20 @@ class DashboardEdit extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    const image = document.getElementById('imgurl').value
+    const data = { ...this.state.data, userImage: image }
+    this.setState({ data })
+    console.log('handle submit', data, image)
     const userId = this.props.match.params.id
     axios.put(`/api/profile/${userId}/edit`, this.state.data, {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(() => this.props.history.push('/dashboard'))
       .catch(err => this.setState({ errors: err.message }))
-  }
+  } 
 
   render() {
-    console.log(this.state)
+    console.log('from render', this.state)
     const { data } = this.state
     return (
       <div className='dashWrapper'>
@@ -119,15 +124,10 @@ class DashboardEdit extends React.Component {
             />
             <br/>
 
-            <label>Image url</label>
-            <input
-              placeholder="Add your image url address here"
-              name="userImage"
-              onChange={this.handleChange}
-              value={data.userImage}
-            />
-            <br/>
+            <ImageUpload />
+            <input hidden id='imgurl' name="userImage" value={data.userImage} onChange={this.handleChange}/>
 
+            <br/>
             <label>Your location</label>
             <input
               placeholder="Enter your location here."
@@ -188,7 +188,5 @@ class DashboardEdit extends React.Component {
   }
 
 }
-
-
 
 export default DashboardEdit
