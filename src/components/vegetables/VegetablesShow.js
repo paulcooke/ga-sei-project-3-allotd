@@ -137,16 +137,14 @@ class VegetablesShow extends React.Component {
                 </Link>
               }
             </div>
-            
           </div>
-          
           {!this.isOwner() && Auth.isAuthenticated() && !pickUpAppointment &&
             <div className="panelWrapper claimWrapper">
               <form>
                 <h2>Claim this vegetable from {user.username}</h2>
                 <p>Vegetable location: {vegLocation}</p>
 
-                <h3>Pick an upcoming day from the grower`&apos;`s preferences</h3>
+                <h3>Pick an upcoming day</h3>
                 <div>
                   {
                     availablePickUpDays.map(day => (
@@ -164,7 +162,7 @@ class VegetablesShow extends React.Component {
                   }
                 </div>
                 <br />
-                <h3>and a time...</h3>
+                <h3>and time...</h3>
                 <div>
                   {
                     availablePickUpTimes.map(time => (
@@ -184,11 +182,9 @@ class VegetablesShow extends React.Component {
                 {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
                 <button onClick={this.handleSubmit}>Request pickup</button>
               </form>
-            
             </div>
-            
           }
-          <div className='panelWrapper'>
+          <div className='VegRec'>
             <h2>Recipes with {typeOfVeg}</h2>
             <div>
               <VegetablesRecipe
@@ -196,7 +192,6 @@ class VegetablesShow extends React.Component {
                 veg={this.state.vegetable}
               />
             </div>
-              
           </div>
         </div>
       </>

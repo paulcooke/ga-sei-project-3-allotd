@@ -41,7 +41,7 @@ class Register extends React.Component {
     console.log('render errors', this.state.errors)
     const { errors } = this.state
     return (
-      <>
+      <div className='mainFormWrapRegister'>
         <div className='formWrapper'>
           <form className='panelWrapper' onSubmit={this.handleSubmit}>
             <h2>Register</h2>
@@ -82,7 +82,7 @@ class Register extends React.Component {
             </Link>
           </form>
         </div>
-      </>
+      </div>
     )
   }
 }

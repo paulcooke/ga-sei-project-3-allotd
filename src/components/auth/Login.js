@@ -40,7 +40,7 @@ class Login extends React.Component {
     console.log('history', this.props.history)
     const { errors } = this.state
     return (
-      <>
+      <div className='mainFormWrapLogin'>
         <div className='formWrapper'>
           <form className='panelWrapper' onSubmit={this.handleSubmit}>
             <h2>Login</h2>
@@ -66,7 +66,7 @@ class Login extends React.Component {
             </Link>
           </form>
         </div>
-      </>
+      </div>
     )
   }
 }
