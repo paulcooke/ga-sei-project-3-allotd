@@ -21,7 +21,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
         />
         <label>Type</label>
         <CreatableSelect
-          placeholder={errors.typeOfVeg ? 'This field is required.' : 'Select the veg you grow or type your own'} 
+          placeholder={errors.typeOfVeg ? 'This field is required.' : 'Click here to select or start typing'} 
           onChange={handleVegType}
           components={components}
           options={options}

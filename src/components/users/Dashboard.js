@@ -83,6 +83,16 @@ class Dashboard extends React.Component {
       .catch(err => console.log(err))
   }
 
+  handleSubmitMessage(appId, text) {
+    axios.post(`/api/appointments/${appId}/messages`, { text }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => {
+        this.getUserInfo()
+      })
+      .catch(err => console.log(err))
+  }
+
   render() {
     console.log('STATE IS', this.state)
     return (
@@ -151,18 +161,12 @@ class Dashboard extends React.Component {
                         {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
                         {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
                         {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
-                        {listing.pickUpAppointment &&
-                          listing.pickUpAppointment.messages.map(msg => {
-                            return (
-                              <p key={msg._id}>{msg.text}</p>
-                            )
-                          })
-                        }  
                         {listing.pickUpAppointment && 
                         <VegetableChat 
                           appointmentId={listing.pickUpAppointment._id}
                           messages={listing.pickUpAppointment.messages}
                           getUserInfo={() => this.getUserInfo()}
+                          handleSubmitMessage={this.handleSubmitMessage}
                         />
                         }
                         {console.log('pickupApointment: ',listing.pickUpAppointment)}
@@ -208,13 +212,6 @@ class Dashboard extends React.Component {
                     } 
                     {console.log('picked id: ', picked._id)}
                     {console.log('picked Appointments: ', picked)}
-                    {picked &&
-                          picked.messages.map(msg => {
-                            return (
-                              <p key={msg._id}>{msg.text}</p>
-                            )
-                          })
-                    }  
                     {picked && 
                         <VegetableChat 
                           appointmentId={picked._id}
@@ -222,7 +219,6 @@ class Dashboard extends React.Component {
                           getUserInfo={() => this.getUserInfo()}
                         />
                     }
-                    
                   </div>
                 ))
               }
