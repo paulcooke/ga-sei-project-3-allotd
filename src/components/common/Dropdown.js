@@ -22,6 +22,11 @@ class Dropdown extends React.Component {
           <li data-name="searchTerm" onClick={this.props.onClick}>Aubergine</li>
           <li data-name="searchTerm" onClick={this.props.onClick}>Apple</li>
           <li data-name="searchTerm" onClick={this.props.onClick}>Cucumber</li>
+          <li data-name="searchTerm" onClick={this.props.onClick}>Pumpkin</li>
+          <li data-name="searchTerm" onClick={this.props.onClick}>Carrots</li>
+          <li data-name="searchTerm" onClick={this.props.onClick}>Parsnips</li>
+          <li data-name="searchTerm" onClick={this.props.onClick}>Garlic</li>
+          <li data-name="searchTerm" onClick={this.props.onClick}>Onions</li>
         </div>
       </div>
     )
