@@ -9,17 +9,18 @@
     margin: 0;
     min-width: 400px;
     max-width: 400px;
+    color: white;
 
     .vegCard {
-      background: $boxcolor;
+      //background: $boxcolor;
       margin-bottom: 40px;
       padding: 20px;
       width: 90%;
       min-width: 400px;
       max-width: 400px;
       border-radius: 5px;
-      border: solid 1px grey;
-      box-shadow: 3px 4px 10px -1px $bordergrey;
+      border: solid 2px white;
+      box-shadow: 1px 1px 20px -10px white;
       font-family: 'IBM Plex Sans', sans-serif;
       img {
         width: 100%;
