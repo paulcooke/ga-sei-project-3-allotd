@@ -7,7 +7,6 @@ import moment from 'moment'
 import SearchForm from '../common/SearchForm'
 import VegetableChat from '../vegetables/VegetablesChat'
 
-
 class Dashboard extends React.Component {
   constructor() {
     super()
@@ -29,18 +28,34 @@ class Dashboard extends React.Component {
         addressLineTwo: '', 
         addressCity: '', 
         addressPostcode: ''
+      },
+      displayStatus: {
+        
       }
     }
 
     this.handleAccept = this.handleAccept.bind(this)
     this.handleReject = this.handleReject.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    // this.handleChatButton = this.handleChatButton.bind(this)
+    // this.handleChatButton = this.handleChatButton.bind(this)
   }
 
   componentDidMount() {
-    this.getUserInfo()
+    
+    axios.get('/api/profile', { // how is this working? LN
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(res => {
+        const displayStatus = {}
+        res.data.listingHistory.forEach(listing => {
+          displayStatus[listing._id] = false 
+        })
+        this.setState({ data: res.data, displayStatus })
+      })
+      .catch(err => console.log(err.message))
   }
-
+  //res.data.listingHistory.listing.pickUpAppointment.id
   getUserInfo () {//why is this null when i log it?
     axios.get('/api/profile', { // how is this working? LN
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -95,44 +110,52 @@ class Dashboard extends React.Component {
 
   render() {
     console.log('STATE IS', this.state)
+    console.log('displayStatus: ', this.state.displayStatus)
     return (
       <>
-        <SearchForm />
         <div className='dashWrapper'>
-          <section className='panelWrapper'>
+          <section className='dashPanelWrapper'>
             <div>
               <h1>Dashboard</h1>
             </div>
             <div>
               <h2>Username: {this.state.data.username}</h2>
-              <h3>User Rating {this.state.data.rating}: </h3>
+              {this.state.data.rating && <h2>User Rating {this.state.data.rating}: </h2>}
             </div>
+
+            {this.state.data.vegGrown.length > 0 &&
             <div>
               <h2>Grown by me</h2>
               {this.state.data.vegGrown.map(veg =>
                 <p key={veg}>{veg}</p>
               )}
             </div>
+            }
+
+            {this.state.data.vegLookingFor.length > 0 && 
             <div>
               <h2>Veggies I like</h2>
               {this.state.data.vegLookingFor.map(veg =>
                 <p key={veg}>{veg}</p>
               )}
             </div>
+            }
+
             <div>
-              <h2>My availability</h2>
-              <p>
+              <h2>My preferred days for people to collect from me:</h2>
+              <ul>
                 {this.state.data.availablePickUpDays.map(day => {
-                  return day
-                }).join(', ')}
-              </p>
+                  return <li key={day}>{day}</li>
+                })}
+              </ul>
             </div>
             <div>
-              <p>
+              <p>At:</p>
+              <ul>
                 {this.state.data.availablePickUpTimes.map(time => {
-                  return time
-                }).join(', ')}
-              </p>
+                  return <li key={time}>{time}:00</li>
+                })}
+              </ul>
             </div>
             
             {this.isOwner() &&
@@ -146,11 +169,11 @@ class Dashboard extends React.Component {
           </section>
 
           <section>
-            <div className='panelWrapper'>
+            <div className='dashPanelWrapper'>
               <h2>My listings</h2>
               {
                 this.state.data.listingHistory.map(listing => (
-                  <div key={listing._id}>
+                  <div key={listing._id} className="listingWrapper">
                     <div>
                       {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}. 
                       <div>
@@ -161,14 +184,7 @@ class Dashboard extends React.Component {
                         {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
                         {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
                         {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
-                        {listing.pickUpAppointment && 
-                        <VegetableChat 
-                          appointmentId={listing.pickUpAppointment._id}
-                          messages={listing.pickUpAppointment.messages}
-                          getUserInfo={() => this.getUserInfo()}
-                          handleSubmitMessage={this.handleSubmitMessage}
-                        />
-                        }
+                        
                         {console.log('pickupApointment: ',listing.pickUpAppointment)}
                       </div>
                     </div>
@@ -189,11 +205,19 @@ class Dashboard extends React.Component {
                         Not currently claimed.
                       </div>
                     }
+                    {listing.pickUpAppointment && 
+                        <VegetableChat 
+                          appointmentId={listing.pickUpAppointment._id}
+                          messages={listing.pickUpAppointment.messages}
+                          getUserInfo={() => this.getUserInfo()}
+                          handleSubmitMessage={this.handleSubmitMessage}
+                        />
+                    }
                   </div>
                 ))
               }
             </div>
-            <div className='panelWrapper'>
+            <div className='dashPanelWrapper'>
               <h2>My pickups</h2>
               {
                 this.state.data.pickedVegHistory.map(picked => (
@@ -217,18 +241,17 @@ class Dashboard extends React.Component {
                           appointmentId={picked._id}
                           messages={picked.messages}
                           getUserInfo={() => this.getUserInfo()}
+                          handleSubmitMessage={this.handleSubmitMessage}
                         />
                     }
                   </div>
                 ))
               }
             </div>
-            
           </section>
         </div>
       </>
     )
   }
 }
-{/*  */}
 export default Dashboard

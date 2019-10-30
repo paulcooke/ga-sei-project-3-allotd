@@ -7,10 +7,12 @@ class VegetableChat extends React.Component {
     super(props)
 
     this.state = {
-      text: ''
+      text: '',
+      isOpen: false
     }
     this.handleDeleteMessage = this.handleDeleteMessage.bind(this)
     this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
   
   handleDeleteMessage(e) {
@@ -19,7 +21,6 @@ class VegetableChat extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((res) => {
-        console.log('comments: ', res.data.messages)
         const messages = [...res.data.messages]
         this.setState({ messages })
       })
@@ -34,17 +35,27 @@ class VegetableChat extends React.Component {
     return Auth.getPayload().sub === this.props.userId
   }
 
+  handleClick(e) {
+    e.preventDefault()
+    this.setState({ isOpen: !this.state.isOpen })
+  }
+
   render() {
-    console.log(this.props.appointmentId)
+
+    if (!this.state.isOpen) return (
+      <button onClick={this.handleClick}>Open Chat</button>
+    )
     return (
       <>
-        {this.props.messages.map(msg => {
-          console.log(msg)
-          return (
-            <p key={msg._id}>{msg.text}</p>
-          )
-        })}
-        <form className='panelWrapper' onSubmit={(e) => {
+        {
+          this.props.messages.map(msg => {
+            console.log(msg)
+            return (
+              <p key={msg._id}>{msg.text}</p>
+            )
+          })
+        }
+        < form className='panelWrapper' onSubmit={(e) => {
           e.preventDefault()
           this.setState({ text: '' }, this.props.handleSubmitMessage(this.props.appointmentId, this.state.text))
         }}>
@@ -58,6 +69,7 @@ class VegetableChat extends React.Component {
             value={this.state.text}
           />
           <button type='submit'>Add message</button>
+          <button onClick={this.handleClick}>Hide Chat</button>
         </form>
       </>
     )
