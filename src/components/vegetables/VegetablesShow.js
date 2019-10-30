@@ -69,8 +69,6 @@ class VegetablesShow extends React.Component {
     this.setState({ newAppointment, errors, vegetable })
   }
 
-
-
   handleSubmit(e) {
     e.preventDefault()
     
@@ -101,9 +99,13 @@ class VegetablesShow extends React.Component {
                 <h1>{title}</h1>
                 {isClaimed && <p>CLAIMED!</p>}
                 <p>Type: {typeOfVeg}</p>
+                {varietyOfVeg &&
                 <p>Variety: {varietyOfVeg}</p>
+                }
                 <p>Picked: {this.handleDate(pickedDate)}</p>
+                {description &&
                 <p>Description: {description}</p>
+                }
                 <p>Posted by: {user.username}</p>
               </div>
               {this.isOwner() &&
