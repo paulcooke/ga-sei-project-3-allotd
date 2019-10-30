@@ -37,8 +37,8 @@ class Dashboard extends React.Component {
     this.handleAccept = this.handleAccept.bind(this)
     this.handleReject = this.handleReject.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
-    this.handleChatButton = this.handleChatButton.bind(this)
-    this.handleChatButton = this.handleChatButton.bind(this)
+    // this.handleChatButton = this.handleChatButton.bind(this)
+    // this.handleChatButton = this.handleChatButton.bind(this)
   }
 
   componentDidMount() {
@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
       })
       .catch(err => console.log(err.message))
   }
-//res.data.listingHistory.listing.pickUpAppointment.id
+  //res.data.listingHistory.listing.pickUpAppointment.id
   getUserInfo () {//why is this null when i log it?
     axios.get('/api/profile', { // how is this working? LN
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -98,9 +98,14 @@ class Dashboard extends React.Component {
       .catch(err => console.log(err))
   }
 
-  handleChatButton(e) {
-    const displayStatus = { ...this.state.displayStatus, [e.target.name]: !(e.target.value) }
-    this.setState({ displayStatus })
+  handleSubmitMessage(appId, text) {
+    axios.post(`/api/appointments/${appId}/messages`, { text }, {
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(() => {
+        this.getUserInfo()
+      })
+      .catch(err => console.log(err))
   }
 
   render() {
@@ -172,28 +177,15 @@ class Dashboard extends React.Component {
                         {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
                         {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
                         {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
-                        <div>
-                          {listing.pickUpAppointment &&
-                            listing.pickUpAppointment.messages.map(msg => {
-                              return (
-                                <p key={msg._id}>{msg.text}</p>
-                              )
-                            })
-                          }
-                          {listing.pickUpAppointment &&
-                            <VegetableChat
-                              appointmentId={listing.pickUpAppointment._id}
-                              messages={listing.pickUpAppointment.messages}
-                              getUserInfo={() => this.getUserInfo()j}
-                            />
-                          }
-                        </div>
-                        {listing.pickUpAppointment &&
-                        <button
-                          name={listing.pickUpAppointment._id}
-                          value={this.state.displayStatus[listing.pickUpAppointment._id]}
-                          onClick={this.handleChatButton}
-                        >Chat</button>}
+                        {listing.pickUpAppointment && 
+                        <VegetableChat 
+                          appointmentId={listing.pickUpAppointment._id}
+                          messages={listing.pickUpAppointment.messages}
+                          getUserInfo={() => this.getUserInfo()}
+                          handleSubmitMessage={this.handleSubmitMessage}
+                        />
+                        }
+                        {console.log('pickupApointment: ',listing.pickUpAppointment)}
                       </div>
                     </div>
                     {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
@@ -234,27 +226,15 @@ class Dashboard extends React.Component {
                     {picked.vegId && picked.appointmentStatus === 'rejected' &&
                       <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                     } 
-                    {<div id={picked._id}>
-                      {picked &&
-                          picked.messages.map(msg => {
-                            return (
-                              <p key={msg._id}>{msg.text}</p>
-                            )
-                          })
-                      }  
-                      {picked && 
+                    {console.log('picked id: ', picked._id)}
+                    {console.log('picked Appointments: ', picked)}
+                    {picked && 
                         <VegetableChat 
                           appointmentId={picked._id}
                           messages={picked.messages}
                           getUserInfo={() => this.getUserInfo()}
                         />
-                      }
-                    </div>}
-                    <button
-                      name={picked._id}
-                      value={false}
-                      onClick={this.handleChatButton}
-                    >Chat</button>
+                    }
                   </div>
                 ))
               }

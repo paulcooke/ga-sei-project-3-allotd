@@ -1,6 +1,6 @@
 .hero {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,4 +9,81 @@
   font-family: 'Anton', sans-serif;
   font-size: 100px;
   font-weight: bold;
+  background-image: url('https://images.unsplash.com/photo-1452948491233-ad8a1ed01085?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9');
+
+  .homeTitle {
+    align-self: flex-start;
+    color: white;
+    text-shadow: 10px 10px;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 120px;
+    height: auto;
+    width: 70%;
+    margin: 20px;
+  }
+
+  .about {
+    align-self: flex-start;
+    margin: 30px;
+  }
+
+
+.searchHome {
+
+  align-self: center;
+
+  form.searchForm {
+    width: 700px;
+    margin: 20px;
+    align-self: center;
+    background-color: rgba($color: white, $alpha: 0.0);
+
+    button {
+      background: unset;
+      box-shadow: 1px 5px 25px 5px black;
+      color: white;
+      border: solid white 2px;
+      
+    }
+
+  }
+  
 }
+
+.indexLink {
+  align-self: center;
+  align-items: center;
+  margin: 20px;
+  height: 100px;
+  div {
+    border-radius: 10px;
+    font-size: 45px;
+    text-align: center;
+    width: 800px;
+    background: unset;
+    box-shadow: 1px 1px 25px 1px black;
+    color: white;
+    border: solid white 2px;
+    letter-spacing: 1px;
+   
+  }
+  .indexLink:hover {
+    color: black;
+  }
+
+}
+
+
+
+.about {
+  font-size: 30px;
+  color: white;
+}
+
+}  
+
+
+
+  

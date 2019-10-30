@@ -10,7 +10,6 @@ class VegetableChat extends React.Component {
       text: ''
     }
     this.handleDeleteMessage = this.handleDeleteMessage.bind(this)
-    this.handleSubmitMessage = this.handleSubmitMessage.bind(this)
     this.handleChange = this.handleChange.bind(this)
   }
   
@@ -26,18 +25,6 @@ class VegetableChat extends React.Component {
       .catch(err => console.log(err))
   }
 
-  handleSubmitMessage(e) {
-    e.preventDefault()
-    axios.post(`/api/appointments/${this.props.appointmentId}/messages`, this.state, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(() => {
-        this.props.getUserInfo()
-        this.setState({ text: '' })
-      })
-      .catch(err => console.log(err))
-  }
-
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value })
   }
@@ -49,7 +36,16 @@ class VegetableChat extends React.Component {
   render() {
     return (
       <>
-        <form className='panelWrapper' onSubmit={this.handleSubmitMessage}>
+        {this.props.messages.map(msg => {
+          console.log(msg)
+          return (
+            <p key={msg._id}>{msg.text}</p>
+          )
+        })}
+        <form className='panelWrapper' onSubmit={(e) => {
+          e.preventDefault()
+          this.setState({ text: '' }, this.props.handleSubmitMessage(this.props.appointmentId, this.state.text))
+        }}>
           <textarea
             rows='4'
             cols='5'

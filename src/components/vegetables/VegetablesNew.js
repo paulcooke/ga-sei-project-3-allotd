@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 
 import Auth from '../../lib/auth'
-import SearchForm from '../common/SearchForm'
 import VegetablesForm from './VegetablesForm'
 
 const components = {
@@ -131,7 +130,6 @@ class VegetablesNew extends React.Component {
     console.log('render errors', this.state.errors)
     return (
       <>
-        <SearchForm />
         <VegetablesForm
           vegetable={this.state}
           handleChange={this.handleChange}

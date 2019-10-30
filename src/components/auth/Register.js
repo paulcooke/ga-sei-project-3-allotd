@@ -1,7 +1,6 @@
 import React from 'react'
 import axios from 'axios'
 
-import SearchForm from '../common/SearchForm'
 import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 
@@ -43,7 +42,6 @@ class Register extends React.Component {
     const { errors } = this.state
     return (
       <>
-        <SearchForm />
         <div className='formWrapper'>
           <form className='panelWrapper' onSubmit={this.handleSubmit}>
             <h2>Register</h2>

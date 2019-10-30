@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Staatliches&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Anton|Staatliches&display=swap');
-@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Anton|Staatliches&display=swap'); //title on hame page
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans&display=swap'); //default font
 
 $navgreen: #2E933C;
 $bordergrey: #64403E;
@@ -17,4 +16,6 @@ $footergreen: #204E4A;
 @import "./index.scss";
 @import "./show.scss";
 @import "./dash.scss";
-@import "./footer.scss"
+@import "./footer.scss";
+@import "./forms.scss";
+@import "./formNewVeg.scss"

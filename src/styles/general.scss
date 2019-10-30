@@ -1,6 +1,7 @@
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 main {
@@ -15,7 +16,7 @@ main {
 }
 
 h1 {
-  font-size: 120px;
+  font-size: 90px;
 }
 
 a {
@@ -33,7 +34,7 @@ button {
 	box-shadow: 0px 10px 14px -7px #3e7327;
 	background: $buttonbrown;
 	background-color: $buttonbrown;
-	border-radius:4px;
+	border-radius:5px;
 	border:1px solid $bordergrey;
 	display:inline-block;
 	cursor:pointer;
@@ -52,7 +53,7 @@ button:active {
 
 textarea {
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   margin: 8px;
   width: 96%;
   font-size: 18px;
@@ -60,7 +61,7 @@ textarea {
 
 input {
   border: none;
-  border-radius: 10px;
+  border-radius: 5px;
   width: 96%;
   height: 40px;
   border-radius: 5px;
@@ -81,24 +82,11 @@ label {
   margin: 20px;
   padding: 20px;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 5px;
   border: solid 1px grey;
   box-shadow: 3px 4px 10px -1px $bordergrey;
 }
 
-.formWrapper {
-  margin: 80px;
-  min-height: 100vh;
-  padding: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .panelWrapper {
-    width: 30%;
-    min-width: 500px;
-    max-width: 500px;
-  }
-  button {
-    margin-left: auto;
-  }
+.footer {
+  text-align: center;
 }
