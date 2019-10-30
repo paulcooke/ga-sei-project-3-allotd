@@ -87,19 +87,6 @@ label {
   box-shadow: 3px 4px 10px -1px $bordergrey;
 }
 
-.formWrapper {
-  margin: 80px;
-  min-height: 100vh;
-  padding: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .panelWrapper {
-    width: 30%;
-    min-width: 500px;
-    max-width: 500px;
-  }
-  button {
-    margin-left: auto;
-  }
+.footer {
+  text-align: center;
 }
