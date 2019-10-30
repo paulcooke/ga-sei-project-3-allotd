@@ -5,6 +5,7 @@ import VegetableCard from './VegetableCard'
 import SearchForm from '../common/SearchForm'
 import VegetableMap from '../vegetables/VegetablesMap'
 
+
 class VegetablesIndex extends React.Component {
   constructor() {
     super()
@@ -19,6 +20,8 @@ class VegetablesIndex extends React.Component {
     this.filterVegetables = this.filterVegetables.bind(this)
     this.handleCheckbox = this.handleCheckbox.bind(this)
     this.handleIncomingRedirect = this.handleCheckbox.bind(this)
+    this.handleUncheck = this.handleUncheck.bind(this)
+    
   }
 
   componentDidMount() {
@@ -57,19 +60,40 @@ class VegetablesIndex extends React.Component {
     this.setState({ [name]: checked })
   }
 
+  handleUncheck() {
+    this.setState({ mapSwitch: false })
+  }
+
   render() {
     if (!this.state.vegetables) return null
     console.log(this.state)
     return (
       <>
-        <label className='checkbox'> Toggle Map 
-          <input 
-            type='checkbox'
-            name='mapSwitch'
-            onChange={this.handleCheckbox} 
-          />
-          <span className='checkmark'></span>
-        </label> 
+
+        {!this.state.mapSwitch &&
+        <>
+          <label className='checkbox'> Map View 
+            <input 
+              type='checkbox'
+              name='mapSwitch'
+              onChange={this.handleCheckbox} 
+            />
+            <span className='checkmark'></span>
+          </label> 
+        </>
+        }
+        {this.state.mapSwitch &&
+        <>
+          <label className='checkbox'> List View 
+            <input 
+              type='checkbox'
+              name='mapSwitch'
+              onChange={this.handleUncheck}
+            />
+            <span className='checkmark'></span>
+          </label> 
+        </>
+        }
         
         {!this.state.mapSwitch &&
           <>
