@@ -7,6 +7,7 @@ const logger = require('./lib/logger')
 const errorHandler = require('./lib/errorHandler')
 const { dbURI, port } = require('./config/environment')
 
+
 mongoose.connect(
   dbURI, 
   { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
@@ -24,5 +25,8 @@ app.use(errorHandler)
 app.get('/*', (req, res) => res.status(404).json({ message: 'Not Found checking' })) // catch all
 
 app.listen(port, () => console.log(`server listening on port ${port}`))
+
+
+
 
 module.exports = app

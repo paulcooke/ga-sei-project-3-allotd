@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from 'axios'
 
+
+
 class VegetablesRecipe extends React.Component {
   constructor() {
     super()
@@ -15,10 +17,13 @@ class VegetablesRecipe extends React.Component {
   }
 
   componentDidMount() {
+
     const veg = this.props.veg.typeOfVeg
     axios.post(`https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?q=${veg}`)
       .then(res => this.setState({ recipes: res.data.results }))
       .catch(err => console.log(err)) 
+  
+
   }
 
   handleClick() {
