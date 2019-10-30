@@ -19,16 +19,25 @@ main {
     border: solid 2px white;
     justify-content: center;
     align-items: center;
+    padding: 20px;
     box-shadow: 1px 1px 20px -10px white;
-    margin: 100px 0;
+    margin: 50px 0;
+    border-radius: 5px;
   }
   
   button {
-    margin-left: auto;
+    margin-left: 320px;
     background: unset;
     box-shadow: 1px 5px 25px 5px black;
     color: white;
     border: solid white 2px;
+    align-self: flex-end;
+    font-size: 18px;
+  }
+
+  button:hover {
+    background:linear-gradient(to bottom, #685369 5%, #685369 100%);
+    background-color:#685369;
   }
 
   small {
@@ -38,14 +47,76 @@ main {
 
   .input-select {
     box-shadow: 1px 1px 20px 1px black;
+    padding: 1px;
+    margin: 5px;
+    width: 96%;
+    color: black;
+  }
+
+  .css-2b097c-container {
+    height: 40px;
+    align-items: center;
+  }
+
+  .css-yk16xz-control {
+    align-items: center;
+    display: flex;
+    border: none;
+    height: 40px;
+  }
+  
+  .css-1hwfws3 {
+    display: flex;
+    align-items: center;
+    height: 40px;
+  }
+
+  .css-1uccc91-singleValue {
+    display: flex;
+    align-items: center;
+    top: 75%;
+  }
+
+  .css-css-1rhbuit-multiValue, .css-1rhbuit-multiValue {
+    margin: 0px;
+    align-items: center;
   }
 
   input {
     box-shadow: 1px 1px 20px 1px black;
+    margin: 5px 5px 10px 5px;
+    padding: 8px;
   }
+
+  input::placeholder, textarea::placeholder {
+    color: #685369;
+    padding: 2px 5px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 17px;
+  }
+
+  .css-1wa3eu0-placeholder {
+    color: #685369;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 17px;
+    align-items: center;
+  }
+
+  .process__upload-btn {
+    box-shadow: none;
+    color: white;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 17px;
+    align-items: center;
+  }
+
+  // .css-b8ldur-Input {
+  //   background-color: white;
+  // }
 
   h2 {
     font-size: 45px;
+    text-align: center;
   }
 
   label {

@@ -7,7 +7,8 @@ $boxcolor: #81C14B;
 $buttonbrown: #ECBA82;
 $footergreen: #204E4A;
 
-@import "./general.scss";
+@import "./forms.scss";
+@import "./formNewVeg.scss";
 @import "./navbar.scss";
 @import "./search.scss";
 @import "./dropdown.scss";
@@ -17,5 +18,4 @@ $footergreen: #204E4A;
 @import "./show.scss";
 @import "./dash.scss";
 @import "./footer.scss";
-@import "./forms.scss";
-@import "./formNewVeg.scss"
+@import "./general.scss"
