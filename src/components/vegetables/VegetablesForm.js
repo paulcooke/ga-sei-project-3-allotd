@@ -12,20 +12,22 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
     <div className='formWrapperVeg'>
       <form className='panelWrapperVeg' onSubmit={(e) => handleSubmit(e)}>
         <h2>New Vegetable</h2>
-        <label>Name</label>
+        <label>Name<span>*</span></label>
         <input
           placeholder={errors.title ? 'This field is required.' : 'Name'} 
           name='title'
           onChange={(e) => handleChange(e)}
           value={title}
         />
-        <label>Type</label>
-        <CreatableSelect
-          placeholder={errors.typeOfVeg ? 'This field is required.' : 'Click here to select or start typing'} 
-          onChange={handleVegType}
-          components={components}
-          options={options}
-        />
+        <label>Type<span>*</span></label>
+        <div className='input-select'>
+          <CreatableSelect
+            placeholder={errors.typeOfVeg ? 'This field is required.' : 'Click here to select or start typing'} 
+            onChange={handleVegType}
+            components={components}
+            options={options}
+          />
+        </div>
         <label>Variety</label>
         <input
           placeholder='Variety'
@@ -33,7 +35,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
           onChange={(e) => handleChange(e)}
           value={varietyOfVeg}
         />
-        <label>Date Picked</label>
+        <label>Date Picked<span>*</span></label>
         <input
           placeholder={errors.pickedDate ? 'This field is required. Please fill in DD/MM/YYYY' : 'DD/MM/YYYY'} 
           name='pickedDate'
@@ -42,7 +44,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
         />
         <ImageUpload />
         <input hidden id='imgurl' name='image' value={image} onChange={(e) => handleChange(e)}/>
-        <label>Location</label>
+        <label>Location<span>*</span></label>
         <input
           placeholder={errors.pickedDate ? 'This field is required. Please fill in your postcode.' : 'Postcode'} 
           name='vegLocation'
@@ -60,30 +62,36 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
           value={description}
         />
         <label>Set your preferences for when you would like people to collect from you</label>
-        <Select 
-          name='availablePickUpDays'
-          options={dayOptions}
-          isMulti
-          onChange={handleDaySelect}
-          components={animatedComponents}
-          value={availablePickUpDays &&
+        <div className='input-select'>
+          <Select 
+            name='availablePickUpDays'
+            placeholder='Select day(s) you are available'
+            options={dayOptions}
+            isMulti
+            onChange={handleDaySelect}
+            components={animatedComponents}
+            value={availablePickUpDays &&
             availablePickUpDays.map(day => (
               { value: day, label: day }
             ))
-          }
-        />
+            }
+          />
+        </div>
         <br/>
-        <Select 
-          options={timeOptions}
-          isMulti
-          onChange={handleTimeSelect}
-          components={animatedComponents}
-          value={availablePickUpTimes &&
+        <div className='input-select'>
+          <Select 
+            options={timeOptions}
+            placeholder='Select time you are available'
+            isMulti
+            onChange={handleTimeSelect}
+            components={animatedComponents}
+            value={availablePickUpTimes &&
             availablePickUpTimes.map(time => (
               { value: time, label: time + ':00' }
             ))
-          }
-        />
+            }
+          />
+        </div>
         <button type='submit'>
           Submit
         </button>
