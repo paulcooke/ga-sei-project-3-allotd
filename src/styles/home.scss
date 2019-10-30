@@ -1,6 +1,6 @@
 .hero {
   display: flex;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,4 +9,41 @@
   font-family: 'Anton', sans-serif;
   font-size: 100px;
   font-weight: bold;
+
+  .homeTitle {
+    align-self: flex-start;
+    color: white;
+    text-shadow: 10px 10px;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    -webkit-background-clip: text;
+    font-size: 120px;
+    height: auto;
+    width: 70%;
+    margin: 20px;
+  }
+
+.searchHome {
+
+  align-self: center;
+
+  form.searchForm {
+    width: 700px;
+    margin: 20px;
+    align-self: center;
+
+
+  }
+
 }
+
+.indexLink {
+  align-self: center;
+
+}
+
+}  
+
+
+
+  
