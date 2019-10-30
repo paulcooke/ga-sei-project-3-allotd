@@ -1,4 +1,32 @@
 .dashWrapper {
-  height: 400vh;
-  padding: 10px 50px 10px 10px;
+  //min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(164, 197, 137);
 }
+
+.dashPanelWrapper {
+  background-color: rgb(216, 238, 198);
+  margin: 20px;
+  padding: 20px;
+  // border: 1px solid black
+
+.listingWrapper {
+  border: 1px solid black;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: white;
+}
+
+  button {
+    margin: 5px;
+    width: 120px;
+    height: 50px;
+    box-shadow: 0px 10px 14px -7px #3e7327;
+  }
+}
+
+h1 {
+  font-size: 48px;
+}
+
