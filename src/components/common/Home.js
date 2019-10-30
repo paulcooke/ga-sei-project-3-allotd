@@ -5,7 +5,7 @@ const Home = () => (
   <>
     <SearchForm />
     <main className='hero'>
-      <h1>Growers & Showers</h1>
+      <h1>ALLOTTED</h1>
     </main>
   </>
 )
