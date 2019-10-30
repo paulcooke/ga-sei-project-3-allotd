@@ -31,23 +31,32 @@ a {
 }
 
 button {
+  margin-left: auto;
+  background: unset;
+  box-shadow: 1px 5px 25px 5px black;
+  color: white;
+  border: solid white 2px;
+  font-size: 18px;
+}
+
+button {
+  color: white;
+  background: unset;
   outline: none;
   margin: 5px;
   width: 120px;
   height: 50px;
-	box-shadow: 0px 10px 14px -7px #3e7327;
-	background: $buttonbrown;
-	background-color: $buttonbrown;
+	box-shadow: 1px 5px 25px 5px black;
 	border-radius:5px;
-	border:1px solid $bordergrey;
+  border: solid white 2px;
 	display:inline-block;
 	cursor:pointer;
-	font-size:14px;
+	font-size: 18px;
 }
 
 button:hover {
-	background:linear-gradient(to bottom, #72b352 5%, #77b55a 100%);
-	background-color:#72b352;
+ // background:linear-gradient(to bottom, #685369 5%, #685369 100%);
+  background-color:rgba(255, 255, 255, 0.5);
 }
 
 button:active {
