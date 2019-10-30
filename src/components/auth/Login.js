@@ -2,7 +2,6 @@ import React from 'react'
 import axios from 'axios'
 
 import Auth from '../../lib/auth'
-import SearchForm from '../common/SearchForm'
 import { Link } from 'react-router-dom'
 
 class Login extends React.Component {
@@ -42,7 +41,6 @@ class Login extends React.Component {
     const { errors } = this.state
     return (
       <>
-        <SearchForm />
         <div className='formWrapper'>
           <form className='panelWrapper' onSubmit={this.handleSubmit}>
             <h2>Login</h2>
