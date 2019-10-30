@@ -9,8 +9,8 @@ const animatedComponents = makeAnimated()
 
 const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, description, image, vegLocation, availablePickUpDays, availablePickUpTimes }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions, errors, components, handleVegType, options } ) => {
   return (
-    <div className='formWrapper'>
-      <form className='panelWrapper' onSubmit={(e) => handleSubmit(e)}>
+    <div className='formWrapperVeg'>
+      <form className='panelWrapperVeg' onSubmit={(e) => handleSubmit(e)}>
         <h2>New Vegetable</h2>
         <label>Name</label>
         <input
