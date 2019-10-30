@@ -7,7 +7,6 @@ import moment from 'moment'
 import SearchForm from '../common/SearchForm'
 import VegetableChat from '../vegetables/VegetablesChat'
 
-
 class Dashboard extends React.Component {
   constructor() {
     super()
@@ -29,18 +28,34 @@ class Dashboard extends React.Component {
         addressLineTwo: '', 
         addressCity: '', 
         addressPostcode: ''
+      },
+      displayStatus: {
+        
       }
     }
 
     this.handleAccept = this.handleAccept.bind(this)
     this.handleReject = this.handleReject.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    // this.handleChatButton = this.handleChatButton.bind(this)
+    // this.handleChatButton = this.handleChatButton.bind(this)
   }
 
   componentDidMount() {
-    this.getUserInfo()
+    
+    axios.get('/api/profile', { // how is this working? LN
+      headers: { Authorization: `Bearer ${Auth.getToken()}` }
+    })
+      .then(res => {
+        const displayStatus = {}
+        res.data.listingHistory.forEach(listing => {
+          displayStatus[listing._id] = false 
+        })
+        this.setState({ data: res.data, displayStatus })
+      })
+      .catch(err => console.log(err.message))
   }
-
+  //res.data.listingHistory.listing.pickUpAppointment.id
   getUserInfo () {//why is this null when i log it?
     axios.get('/api/profile', { // how is this working? LN
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
@@ -95,6 +110,7 @@ class Dashboard extends React.Component {
 
   render() {
     console.log('STATE IS', this.state)
+    console.log('displayStatus: ', this.state.displayStatus)
     return (
       <>
         <SearchForm />
@@ -217,18 +233,17 @@ class Dashboard extends React.Component {
                           appointmentId={picked._id}
                           messages={picked.messages}
                           getUserInfo={() => this.getUserInfo()}
+                          handleSubmitMessage={this.handleSubmitMessage}
                         />
                     }
                   </div>
                 ))
               }
             </div>
-            
           </section>
         </div>
       </>
     )
   }
 }
-{/*  */}
 export default Dashboard
