@@ -233,6 +233,7 @@ class Dashboard extends React.Component {
                           appointmentId={picked._id}
                           messages={picked.messages}
                           getUserInfo={() => this.getUserInfo()}
+                          handleSubmitMessage={this.handleSubmitMessage}
                         />
                     }
                   </div>
