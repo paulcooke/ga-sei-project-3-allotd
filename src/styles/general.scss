@@ -1,5 +1,6 @@
 * {
   margin: 0;
+  border:0;
   box-sizing: border-box;
   font-family: 'IBM Plex Sans', sans-serif;
 }
@@ -8,16 +9,14 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: unset;
-  box-shadow: 1px 5px 25px 5px black;
-  color: white;
-  border: solid white 2px;
-  background-image: url('https://images.unsplash.com/photo-1498109175427-80f595c1b49f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2026&q=80');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
-  color: rgb(27, 14, 14);
 }
+
+//30/10/2019 - Please be very careful what you add in the MAIN here.
+//I had delete a bunch of things like a white border that appeared over every element of the website. 
+//If you include anything check EVERY page to make sure it did not break things-JJ 
 
 h1 {
   font-size: 90px;

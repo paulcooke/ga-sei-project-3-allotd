@@ -46,21 +46,21 @@ class Register extends React.Component {
           <form className='panelWrapper' onSubmit={this.handleSubmit}>
             <h2>Register</h2>
 
-            <label>Username</label>
+            <label>Username<span>*</span></label>
             <input
               name='username'
               placeholder={errors.username ? 'This field is required.' : 'Username'} 
               onChange={this.handleChange}
             />
 
-            <label>Email</label>
+            <label>Email<span>*</span></label>
             <input
               name='email'
               placeholder={errors.email ? 'This field is required.' : 'name@email.com'}
               onChange={this.handleChange}
             />
 
-            <label>Password</label>
+            <label>Password<span>*</span></label>
             <input
               name='password'
               type='password'
@@ -68,7 +68,7 @@ class Register extends React.Component {
               onChange={this.handleChange}
             />
 
-            <label>Password Confirmation</label>
+            <label>Password Confirmation<span>*</span></label>
             <input
               name='passwordConfirmation'
               type='password'
