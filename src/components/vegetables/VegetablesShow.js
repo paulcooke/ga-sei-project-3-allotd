@@ -131,9 +131,15 @@ class VegetablesShow extends React.Component {
                 }
               </div>
               }
+              {!Auth.isAuthenticated() &&  
+                <Link to={'/login'}>
+                  <button>Claim veg</button>
+                </Link>
+              }
             </div>
             
           </div>
+          
           {!this.isOwner() && Auth.isAuthenticated() && !pickUpAppointment &&
             <div className="panelWrapper claimWrapper">
               <form>
@@ -178,7 +184,7 @@ class VegetablesShow extends React.Component {
                 {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
                 <button onClick={this.handleSubmit}>Request pickup</button>
               </form>
-             
+            
             </div>
             
           }
