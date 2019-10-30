@@ -1,9 +1,11 @@
 .indexWrapper {
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden; //horizontal
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  min-height: 100vh;
   padding: 20px;
   
   a {
@@ -11,23 +13,5 @@
     min-width: 400px;
     max-width: 400px;
     color: white;
-
-    .vegCard {
-      //background: $boxcolor;
-      margin-bottom: 40px;
-      padding: 20px;
-      width: 90%;
-      min-width: 400px;
-      max-width: 400px;
-      border-radius: 5px;
-      border: solid 2px white;
-      box-shadow: 1px 1px 20px -10px white;
-      font-family: 'IBM Plex Sans', sans-serif;
-      img {
-        width: 100%;
-        height: 300px;
-        border-radius: 5px;
-      }
-    }
   }
 }

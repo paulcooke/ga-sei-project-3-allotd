@@ -1,0 +1,18 @@
+.vegCard {
+  //background: $boxcolor;
+  margin-bottom: 40px;
+  padding: 20px;
+  width: 90%;
+  min-width: 400px;
+  max-width: 400px;
+  border-radius: 5px;
+  border: solid 2px white;
+  box-shadow: 1px 1px 20px -10px white;
+  font-family: 'IBM Plex Sans', sans-serif;
+  img {
+    width: 100%;
+    height: 300px;
+    border-radius: 5px;
+    object-fit: cover
+  }
+}
