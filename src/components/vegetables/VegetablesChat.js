@@ -20,7 +20,6 @@ class VegetableChat extends React.Component {
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then((res) => {
-        console.log('comments: ', res.data.messages)
         const messages = [...res.data.messages]
         this.setState({ messages })
       })
@@ -48,7 +47,6 @@ class VegetableChat extends React.Component {
   }
 
   render() {
-    console.log(this.props.appointmentId)
     return (
       <>
         <form className='panelWrapper' onSubmit={this.handleSubmitMessage}>
