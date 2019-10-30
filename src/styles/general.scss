@@ -1,9 +1,3 @@
-$navgreen: #2E933C;
-$bordergrey: #64403E;
-$boxcolor: #81C14B;
-$buttonbrown: #ECBA82;
-$footergreen: #204E4A;
-
 * {
   margin: 0;
   box-sizing: border-box;
@@ -13,11 +7,10 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-image: url('https://images.unsplash.com/photo-1516211697506-8360dbcfe9a4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80');
+  background-image: url('https://images.unsplash.com/photo-1452948491233-ad8a1ed01085?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  font-family: 'Indie Flower', cursive;
   color: rgb(27, 14, 14);
 }
 

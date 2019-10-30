@@ -198,7 +198,11 @@ class Dashboard extends React.Component {
                     {picked.appointmentStatus === 'requested' && 
                       <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
                     {picked.vegId && picked.appointmentStatus === 'accepted' &&
-                      <span>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title} {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
+                      <>
+                        <p>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title}.</p>
+                        <p>Collect from {picked.vegId.user.addressLineOne}, {picked.vegId.user.addressPostcode} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}</p>
+                      </>
+                    } 
                     {picked.vegId && picked.appointmentStatus === 'rejected' &&
                       <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                     } 

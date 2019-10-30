@@ -3,6 +3,7 @@ import axios from 'axios'
 
 import SearchForm from '../common/SearchForm'
 import Auth from '../../lib/auth'
+import { Link } from 'react-router-dom'
 
 class Register extends React.Component {
   constructor() {
@@ -78,6 +79,9 @@ class Register extends React.Component {
             />
 
             <button type='submit'>Register</button>
+            <Link to="/login">
+              <small>Already have an account yet? Click here to login.</small>
+            </Link>
           </form>
         </div>
       </>
