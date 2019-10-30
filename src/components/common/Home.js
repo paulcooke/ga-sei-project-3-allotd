@@ -12,7 +12,7 @@ const Home = () => (
         <br />
         <br />
       We connect you with green-fingered folk in your neighbourhood and beyond so you can give
-      or receive excess produce, helping your community to reduce food waste whilst enjoying fresh, seasonal veg.
+      or receive excess produce - helping your community to reduce food waste whilst enjoying fresh, seasonal veg.
       </div>
      
       <Link className='indexLink'to='/vegetables'><div>Browse our veg</div> </Link>
