@@ -15,7 +15,18 @@ main {
 }
 
 h1 {
-  font-size: 120px;
+  font-size: 60px;
+  font-family: 'Anton', sans-serif;
+}
+
+h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bold;
 }
 
 a {
@@ -23,6 +34,11 @@ a {
   color: rgb(27, 14, 14);
   margin-left: 20px;
   cursor: pointer;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+
+p {
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 button {
@@ -37,7 +53,9 @@ button {
 	border:1px solid $bordergrey;
 	display:inline-block;
 	cursor:pointer;
-	font-size:14px;
+  font-size:17px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: bolder;
 }
 
 button:hover {
@@ -56,6 +74,7 @@ textarea {
   margin: 8px;
   width: 96%;
   font-size: 18px;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 input {
@@ -67,10 +86,12 @@ input {
   font-size: 18px;
   margin: 5px;
   outline: none;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 label {
   margin-top: 10px;
+  font-family: 'IBM Plex Sans', sans-serif;
 }
 
 .panelWrapper {
