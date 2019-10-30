@@ -15,9 +15,9 @@ class VegetablesMap extends React.Component {
       searchTerm: '',
 
       viewport: {
-        latitude: 51.515,
-        longitude: -0.078,
-        zoom: 12
+        latitude: 51.5176,
+        longitude: -0.1145,
+        zoom: 11
       },
       showPopup: true
     }
