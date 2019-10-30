@@ -29,14 +29,16 @@ class Login extends React.Component {
     axios.post('/api/login', this.state.data )
       .then(res => {
         Auth.setToken(res.data.token)
-        this.props.history.push('/vegetables')
+        this.props.history.goBack()
       })
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
   
   render() {
-    console.log('render state LOgin', this.state)
+    console.log('render state Login', this.state)
     console.log('render errors', this.state.errors)
+    console.log('login props', this.props)
+    console.log('history', this.props.history)
     const { errors } = this.state
     return (
       <>
@@ -62,7 +64,7 @@ class Login extends React.Component {
             <p>Oops, something went wrong. please try again</p>}
             <button type='submit'>Login</button>
             <Link to="/register">
-              <small>Don`&apos;`t have an account yet? Click here to register.</small>
+              <small>No account yet? Click here to register.</small>
             </Link>
           </form>
         </div>

@@ -7,7 +7,7 @@ const VegetableCard = ({ _id, title, image, description, user, vegLocation, isCl
       {isClaimed && <p>CLAIMED!</p>}
       <img src={image} alt={title} />
       <h2>{title}</h2>
-      <p>description: {description}</p>
+      <p>Description: {description}</p>
       <p>Location: {vegLocation}</p>
       <p>Posted by: {user.username}</p>
     </div>

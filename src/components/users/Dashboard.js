@@ -165,6 +165,7 @@ class Dashboard extends React.Component {
                           getUserInfo={() => this.getUserInfo()}
                         />
                         }
+                        {console.log('pickupApointment: ',listing.pickUpAppointment)}
                       </div>
                     </div>
                     {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
@@ -205,6 +206,23 @@ class Dashboard extends React.Component {
                     {picked.vegId && picked.appointmentStatus === 'rejected' &&
                       <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                     } 
+                    {console.log('picked id: ', picked._id)}
+                    {console.log('picked Appointments: ', picked)}
+                    {picked &&
+                          picked.messages.map(msg => {
+                            return (
+                              <p key={msg._id}>{msg.text}</p>
+                            )
+                          })
+                    }  
+                    {picked && 
+                        <VegetableChat 
+                          appointmentId={picked._id}
+                          messages={picked.messages}
+                          getUserInfo={() => this.getUserInfo()}
+                        />
+                    }
+                    
                   </div>
                 ))
               }

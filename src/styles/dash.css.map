@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACX,MAAM,EAAE,KAAK;EACb,OAAO,EAAE,mBAAmB;CAC7B",
+    "sources": [
+        "dash.scss"
+    ],
+    "names": [],
+    "file": "dash.css"
+}

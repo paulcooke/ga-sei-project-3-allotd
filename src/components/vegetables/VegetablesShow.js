@@ -116,7 +116,7 @@ class VegetablesShow extends React.Component {
                   </Link>
                   {!isClaimed && <button onClick={this.handleDelete}>Delete vegetable</button>}
                   {isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
-                  {isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
+                  {isClaimed && <p><em>Claimed vegetable cannot be edited or deleted</em></p>}
                 </div>
               }
               {!this.isOwner() && !pickUpAppointment &&
@@ -131,14 +131,20 @@ class VegetablesShow extends React.Component {
                 }
               </div>
               }
+              {!Auth.isAuthenticated() &&  
+                <Link to={'/login'}>
+                  <button>Claim veg</button>
+                </Link>
+              }
             </div>
             
           </div>
+          
           {!this.isOwner() && Auth.isAuthenticated() && !pickUpAppointment &&
             <div className="panelWrapper claimWrapper">
               <form>
-                <h2>Claim this veg from {user.username}</h2>
-                <p>Veg location: {vegLocation}</p>
+                <h2>Claim this vegetable from {user.username}</h2>
+                <p>Vegetable location: {vegLocation}</p>
 
                 <h3>Pick an upcoming day from the grower`&apos;`s preferences</h3>
                 <div>
@@ -178,7 +184,7 @@ class VegetablesShow extends React.Component {
                 {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
                 <button onClick={this.handleSubmit}>Request pickup</button>
               </form>
-             
+            
             </div>
             
           }

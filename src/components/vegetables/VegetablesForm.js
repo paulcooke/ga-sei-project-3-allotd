@@ -85,7 +85,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
           }
         />
         <button type='submit'>
-          submit
+          Submit
         </button>
       </form>
     </div>
