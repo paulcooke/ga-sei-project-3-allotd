@@ -124,7 +124,7 @@ mongoose.connect(
             image: 'https://www.thompson-morgan.com/static-images/master/static-images/how-to-grow-broadbeans/how-to-grow-broad-beans-lead.jpg',
             isClaimed: false,
             vegLocation: 'E8 2RS',
-            user: users[4],
+            user: users[0],
             availablePickUpDays: ['Friday', 'Saturday'],
             availablePickUpTimes: ['14', '15']
           },
@@ -136,7 +136,7 @@ mongoose.connect(
             image: 'https://www.quickenloans.com/blog/wp-content/uploads/2013/10/Stock-HalloweenPumpkins-t20_knkgvE.jpg',
             isClaimed: false,
             vegLocation: 'NW6 3PJ',
-            user: users[5],
+            user: users[2],
             availablePickUpDays: ['Friday', 'Saturday'],
             availablePickUpTimes: ['14', '15']
           },
