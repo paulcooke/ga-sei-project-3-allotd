@@ -46,8 +46,6 @@ class VegetablesIndex extends React.Component {
       .map(vegetable => (
         <VegetableCard key={vegetable._id} {...vegetable} />
       ))
-    console.log(filteredArr.length)
-
     return filteredArr.length !== 0 ? filteredArr : <h2>Your search returned no Results. Maybe you could grow this veg for us?...</h2>
   }
 
