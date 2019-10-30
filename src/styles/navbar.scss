@@ -2,7 +2,7 @@ nav {
   display: flex;
   justify-content: space-between;
   background-color: rgba($color: white, $alpha: 0.1);
-  height: 60px;
+  height: 100px;
   box-shadow: 1px 5px 25px 5px black;
   color: white;
   background-image: url(https://images.unsplash.com/photo-1498109175427-80f595c1b49f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2026&q=80);
@@ -27,7 +27,7 @@ nav {
     span {
       height: 8px;
       width: 50px;
-      background: $buttonbrown;
+      background: white;
       border-radius: 5px;
     }
   }
@@ -37,18 +37,26 @@ nav {
   height: 250px;
   a {
     display: flex;
-    margin: 6px;
   }
 
   div {
     flex-direction: column;
     align-items: flex-start;
+    a {
+      margin: 6px;
+    }
+  }
+  .burgerMenu {
+    span {
+      background: rgba(255, 255, 255, 0.6);
+    }
   }
 }
 
 @media screen and (max-width: 800px) {
   nav{
     .burgerMenu {
+      height: 100px;
       display: flex;
     }
     a {
