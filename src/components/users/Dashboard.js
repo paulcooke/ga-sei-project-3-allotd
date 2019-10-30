@@ -158,7 +158,8 @@ class Dashboard extends React.Component {
                             )
                           })
                         }  
-                        {<VegetableChat 
+                        {listing.pickUpAppointment && 
+                        <VegetableChat 
                           appointmentId={listing.pickUpAppointment._id}
                           messages={listing.pickUpAppointment.messages}
                           getUserInfo={() => this.getUserInfo()}
