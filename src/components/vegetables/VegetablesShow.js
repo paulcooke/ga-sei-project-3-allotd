@@ -184,7 +184,7 @@ class VegetablesShow extends React.Component {
               </form>
             </div>
           }
-          <div className='VegRec'>
+          <div className='panelWrapper'>
             <h2>Recipes with {typeOfVeg}</h2>
             <div>
               <VegetablesRecipe
