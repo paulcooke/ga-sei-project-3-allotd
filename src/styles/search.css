@@ -1,0 +1,12 @@
+.searchForm {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background: #297045;
+}
+
+.searchForm input {
+  margin-top: 10px;
+  font-family: 'IBM Plex Sans', sans-serif;
+}
+/*# sourceMappingURL=search.css.map */
