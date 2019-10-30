@@ -26,7 +26,7 @@ class Navbar extends React.Component {
     return (
       <nav className={`${this.state.burgerOpen ? 'burgerOpen' : ''}`}>
         <div>
-          <Link to="/">Go home</Link>
+          <Link to="/">Home</Link>
           <Link to="/vegetables">Veg on offer</Link>
           {Auth.isAuthenticated() && <Link to="/vegetables/new">Post your veg</Link>}
 
