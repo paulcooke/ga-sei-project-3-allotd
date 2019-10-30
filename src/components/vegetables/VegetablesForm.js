@@ -9,8 +9,8 @@ const animatedComponents = makeAnimated()
 
 const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, description, image, vegLocation, availablePickUpDays, availablePickUpTimes }, handleSubmit, handleChange, handleTimeSelect, handleDaySelect, dayOptions, timeOptions, errors, components, handleVegType, options } ) => {
   return (
-    <div className='formWrapper'>
-      <form className='panelWrapper' onSubmit={(e) => handleSubmit(e)}>
+    <div className='formWrapperVeg'>
+      <form className='panelWrapperVeg' onSubmit={(e) => handleSubmit(e)}>
         <h2>New Vegetable</h2>
         <label>Name</label>
         <input
@@ -21,6 +21,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
         />
         <label>Type</label>
         <CreatableSelect
+          class='input-select'
           placeholder={errors.typeOfVeg ? 'This field is required.' : 'Select the veg you grow or type your own'} 
           onChange={handleVegType}
           components={components}
@@ -61,6 +62,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
         />
         <label>Set your preferences for when you would like people to collect from you</label>
         <Select 
+          class='input-select'
           name='availablePickUpDays'
           options={dayOptions}
           isMulti
@@ -74,6 +76,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
         />
         <br/>
         <Select 
+          class='input-select'
           options={timeOptions}
           isMulti
           onChange={handleTimeSelect}
