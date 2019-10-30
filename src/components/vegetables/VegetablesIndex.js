@@ -40,9 +40,15 @@ class VegetablesIndex extends React.Component {
   filterVegetables() {
     const { searchTerm } = this.state
     const re = new RegExp(searchTerm, 'i')
-    return this.state.vegetables.filter(veg => {
+    const filteredArr = this.state.vegetables.filter(veg => {
       return re.test(veg.title)
     })
+      .map(vegetable => (
+        <VegetableCard key={vegetable._id} {...vegetable} />
+      ))
+    console.log(filteredArr.length)
+
+    return filteredArr.length !== 0 ? filteredArr : <h2>Your search returned no Results. Maybe you could grow this veg for us?...</h2>
   }
 
   submitSearch(e) {
@@ -104,9 +110,10 @@ class VegetablesIndex extends React.Component {
               onSubmit={this.submitSearch}
             />
             <div className='indexWrapper'>
-              {this.filterVegetables().map(vegetable => (
-                <VegetableCard key={vegetable._id} {...vegetable} />
-              ))}
+              {this.filterVegetables() && this.filterVegetables()}
+              {!this.filterVegetables() && 
+                <h1>Your search returned no Results. Maybe you could grow this veg for us?...</h1>
+              }
             </div>
           </>
         }
