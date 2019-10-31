@@ -222,6 +222,7 @@ class Dashboard extends React.Component {
                       messages={listing.pickUpAppointment.messages}
                       getUserInfo={() => this.getUserInfo()}
                       handleSubmitMessage={this.handleSubmitMessage}
+                      userId={this.state.data._id}
                     />
                   }
                 </div>
@@ -251,6 +252,7 @@ class Dashboard extends React.Component {
                       messages={picked.messages}
                       getUserInfo={() => this.getUserInfo()}
                       handleSubmitMessage={this.handleSubmitMessage}
+                      userId={this.state.data._id}
                     />
                   }
                 </div>

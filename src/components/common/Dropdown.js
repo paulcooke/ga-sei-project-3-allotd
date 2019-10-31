@@ -9,11 +9,10 @@ class Dropdown extends React.Component {
   }
 
   render() {
-    console.log('current', this.props.current)
     return (
       <div className="dropdown">
         <button className="dropbtn">
-          <span>{this.props.current}</span>
+          <span>{this.props.current || 'All'}</span>
           <i className="fas fa-caret-down"></i>
         </button>
         <div className="dropdown-content">
