@@ -4,7 +4,6 @@ import Auth from '../../lib/auth'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
 
-import SearchForm from '../common/SearchForm'
 import VegetableChat from '../vegetables/VegetablesChat'
 
 class Dashboard extends React.Component {
@@ -38,13 +37,11 @@ class Dashboard extends React.Component {
     this.handleReject = this.handleReject.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMarkCollected = this.handleMarkCollected.bind(this)
-    // this.handleChatButton = this.handleChatButton.bind(this)
-    // this.handleChatButton = this.handleChatButton.bind(this)
   }
 
   componentDidMount() {
     
-    axios.get('/api/profile', { // how is this working? LN
+    axios.get('/api/profile', { 
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => {
@@ -57,8 +54,8 @@ class Dashboard extends React.Component {
       .catch(err => console.log(err.message))
   }
   //res.data.listingHistory.listing.pickUpAppointment.id
-  getUserInfo () {//why is this null when i log it?
-    axios.get('/api/profile', { // how is this working? LN
+  getUserInfo () {
+    axios.get('/api/profile', { 
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
       .then(res => this.setState({ data: res.data }))
@@ -250,7 +247,7 @@ class Dashboard extends React.Component {
                   {picked.vegId && picked.appointmentStatus === 'rejected' &&
                     <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                   }
-                  {picked && !picked.appointmentStatus === 'rejected' &&
+                  {picked && picked.appointmentStatus !== 'rejected' &&
                     <VegetableChat
                       appointmentId={picked._id}
                       messages={picked.messages}
