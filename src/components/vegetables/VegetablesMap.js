@@ -44,18 +44,29 @@ class VegetablesMap extends React.Component {
   }
    
   getPostcodes() {
-    const postcodes = this.state.vegetables.map(veg => veg.vegLocation.replace(' ', ''))
+    const vegetables = this.filterVegetables()
+    const postcodes = vegetables.map(veg => veg.vegLocation.replace(' ', ''))
     axios.post('https://cors-anywhere.herokuapp.com/api.postcodes.io/postcodes/', { postcodes } )
-      .then(res => {
-        const filteredArr = res.data.result.filter(data => new RegExp(this.state.searchTerm, 'i').test(data.query))
-        this.setState({ postcodes: filteredArr })
-      })
+      .then(res => this.setState({ postcodes: res.data.result, vegetables: vegetables }))
       .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
   onChange({ target: { name, value, dataset, innerHTML } }) {
     console.log('onchange was called. ')
     value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: (value || innerHTML) })
+  }
+
+  filterVegetables() {
+    const { searchTerm, typeSearch } = this.state
+    const re = new RegExp(searchTerm, 'i')
+    const type = new RegExp(typeSearch, 'i')
+    const filteredArr = this.state.vegetables.filter(veg => {
+      //return re.test(veg.title) && (veg.typeOfVeg === typeSearch || typeSearch === 'All')
+      return (!veg.pickUpAppointment || (veg.pickUpAppointment &&
+         veg.pickUpAppointment.appointmentStatus !== 'completed')) &&
+        (re.test(veg.title) && (type.test(veg.typeOfVeg) || (typeSearch === 'All')))
+    })
+    return filteredArr
   }
 
   render() {

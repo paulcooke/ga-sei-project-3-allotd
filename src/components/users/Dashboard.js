@@ -35,6 +35,8 @@ class Dashboard extends React.Component {
     this.handleReject = this.handleReject.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
     this.handleMarkCollected = this.handleMarkCollected.bind(this)
+    this.handleGrowerCancel = this.handleGrowerCancel.bind(this)
+    this.handlePickerCancel = this.handlePickerCancel.bind(this)
   }
 
   componentDidMount() {
@@ -74,7 +76,7 @@ class Dashboard extends React.Component {
     const appointmentId = e.target.value
     const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
     console.log('veg id', vegetableId)
-    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected', appointmentDateandTime: '', messages: [] })
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected' })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
@@ -84,7 +86,17 @@ class Dashboard extends React.Component {
     const appointmentId = e.target.value
     const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
     console.log('veg id', vegetableId)
-    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected', appointmentDateandTime: '', messages: [] })
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'cancelled' })
+      .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
+      .then(() => this.getUserInfo())
+      .catch(err => console.log(err))
+  }
+
+  handlePickerCancel(e) {
+    const appointmentId = e.target.value
+    const vegetableId = this.state.data.pickedVegHistory.find(veg => veg.vegId.pickUpAppointment.id === appointmentId).vegId._id
+    console.log('veg id', vegetableId)
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'cancelled' })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
@@ -204,12 +216,14 @@ class Dashboard extends React.Component {
                     <div>
                       <p>This veg has been claimed by {listing.pickUpAppointment.pickerId.username}. They want to collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}.</p>
                       <p>Would you like to accept this?</p>
-                      <button onClick={this.handleAccept} value={listing.pickUpAppointment._id}>Accept</button> <button onClick={this.handleReject} value={listing.pickUpAppointment._id}>Reject</button>
+                      <button onClick={this.handleAccept} value={listing.pickUpAppointment._id}>Accept</button> 
+                      <button onClick={this.handleReject} value={listing.pickUpAppointment._id}>Reject</button>
                     </div>
                   }
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'accepted' &&
                     <div>
                       <p>{listing.pickUpAppointment.pickerId.username} claimed the {listing.title.toLowerCase()} and will collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}</p>
+                      <button onClick={this.handleGrowerCancel} value={listing.pickUpAppointment._id}>Cancel collection</button>
                       <button onClick={this.handleMarkCollected} value={listing.pickUpAppointment._id}>Mark veg as collected</button> 
                     </div>
                   }
@@ -220,6 +234,12 @@ class Dashboard extends React.Component {
                     <div>
                       Not currently claimed.
                     </div>
+                  }
+                  {listing.pickUpAppointment && listing.pickUpAppointment.appointmentStatus === 'rejected' &&
+                    <p>You cancelled collection by {listing.pickUpAppointment.pickerId.username}.</p>
+                  }
+                  {listing.pickUpAppointment && listing.pickUpAppointment.appointmentStatus === 'cancelled' &&
+                    <p>Collection by {listing.pickUpAppointment.pickerId.username} was cancelled.</p>
                   }
                   {listing.pickUpAppointment &&
                     <VegetableChat
@@ -247,7 +267,11 @@ class Dashboard extends React.Component {
                     <>
                       <p>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title}.</p>
                       <p>Collect from {picked.vegId.user.addressLineOne}, {picked.vegId.user.addressPostcode} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}</p>
+                      <button onClick={this.handlePickerCancel} value={picked.vegId.pickUpAppointment._id}>Cancel collection</button>
                     </>
+                  }
+                  {picked.vegId && picked.appointmentStatus === 'cancelled' &&
+                    <p>Collection of {picked.vegId.title} from {picked.vegId.user.username} was cancelled.</p>
                   }
                   {picked.vegId && picked.appointmentStatus === 'completed' &&
                     <p>You collected {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}.</p>
@@ -255,7 +279,7 @@ class Dashboard extends React.Component {
                   {picked.vegId && picked.appointmentStatus === 'rejected' &&
                     <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                   }
-                  {picked && picked.appointmentStatus !== 'rejected' &&
+                  {picked && 
                     <VegetableChat
                       appointmentId={picked._id}
                       messages={picked.messages}
