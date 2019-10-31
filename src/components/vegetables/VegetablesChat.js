@@ -50,7 +50,9 @@ class VegetableChat extends React.Component {
         <div className='messages'>
           {
             this.props.messages.map((msg, i) => (
-              <p key={i}>{msg.text}</p>
+              <div key={i}>
+                <p>{msg.text}</p>
+              </div>
             ))
           }
         </div>
