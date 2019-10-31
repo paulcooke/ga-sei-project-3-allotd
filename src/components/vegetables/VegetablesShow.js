@@ -71,19 +71,28 @@ class VegetablesShow extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    if (!this.state.vegetable.pickUpAppointment || !this.state.vegetable.pickUpAppointment._id) {
+      const vegetableId = this.props.match.params.id
+      axios.post(`/api/vegetables/${vegetableId}/appointment`, this.state.newAppointment, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+        .then(() => axios.patch(`/api/vegetables/${vegetableId}`, this.state.vegetable))
+        .then(() => this.props.history.push('/dashboard'))
+        .catch(err => this.setState({ errors: err.message }))
+    } else {
+      const vegetableId = this.props.match.params.id
+      const appointmentId = this.state.vegetable.pickUpAppointment.id
+      axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'requested', appointmentDateandTime: this.state.newAppointment.appointmentDateandTime, messages: [] })
+        .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: true }))
+        .then(() => this.props.history.push('/dashboard'))
+        .catch(err => console.log(err))
+    }
     
-    const vegetableId = this.props.match.params.id
-    axios.post(`/api/vegetables/${vegetableId}/appointment`, this.state.newAppointment, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(() => axios.patch(`/api/vegetables/${vegetableId}`, this.state.vegetable))
-      .then(() => this.props.history.push('/dashboard'))
-      .catch(err => this.setState({ errors: err.message }))
   }
 
   render() {
+    console.log(this.state)
     if (!this.state.vegetable) return null
-    console.log('render', this.state.vegetable )
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
@@ -138,7 +147,7 @@ class VegetablesShow extends React.Component {
               }
             </div>
           </div>
-          {!this.isOwner() && Auth.isAuthenticated() && !pickUpAppointment &&
+          {!this.isOwner() && Auth.isAuthenticated() && (!pickUpAppointment || pickUpAppointment.appointmentStatus === 'rejected') &&
             <div className="panelWrapper claimWrapper">
               <form>
                 <h2>Claim this vegetable from {user.username}</h2>
@@ -185,7 +194,7 @@ class VegetablesShow extends React.Component {
             </div>
           }
           <div className='panelWrapper'>
-            <h2>Recipes for {typeOfVeg}</h2>
+            <h2>Recipes with {typeOfVeg}</h2>
             <div>
               <VegetablesRecipe
                 id={this.props.match.params.id}
