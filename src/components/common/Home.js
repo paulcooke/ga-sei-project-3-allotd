@@ -3,8 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const Home = () => (
-  <>
- 
+  <div className='homeWrapper'>
     <main className='hero'>
       <h1 className='homeTitle'>ALLOTTED🥕</h1>
       <div className='about'>
@@ -18,14 +17,9 @@ const Home = () => (
       <Link className='indexLink'to='/vegetables'><div>Browse our veg</div> </Link>
       {/* <span className='searchHome'>
         <SearchForm />  
-        
-       
-        
       </span> */}
-
-
     </main>
-  </>
+  </div>
 )
 
 export default Home

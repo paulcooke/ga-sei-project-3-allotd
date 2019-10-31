@@ -36,7 +36,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
-  min-height: 100vh;
   padding: 20px;
     .dashPanelWrapper {
     display: flex;
@@ -58,5 +57,20 @@
 }
 }
 
-
+@media only screen and (max-width: 800px) {
+  .dashWrapper {
+    h1 {
+      font-size: 50px;
+    }
+    h2 {
+      font-size: 25px;
+    }
+    .dashPanelWrapper {
+      flex-direction: column;
+    }
+    .listingWrapper {
+      margin-left: 0;
+    }
+  }
+} 
 

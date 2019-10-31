@@ -35,3 +35,10 @@
       background: darkslategrey;
     }
   }
+
+textarea::placeholder {
+  color: #685369;
+  padding: 2px 5px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 17px;
+}
