@@ -37,6 +37,7 @@ class Dashboard extends React.Component {
     this.handleAccept = this.handleAccept.bind(this)
     this.handleReject = this.handleReject.bind(this)
     this.handleDelete = this.handleDelete.bind(this)
+    this.handleMarkCollected = this.handleMarkCollected.bind(this)
     // this.handleChatButton = this.handleChatButton.bind(this)
     // this.handleChatButton = this.handleChatButton.bind(this)
   }
@@ -80,6 +81,13 @@ class Dashboard extends React.Component {
     console.log('veg id', vegetableId)
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected', appointmentDateandTime: '', messages: [] })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
+      .then(() => this.getUserInfo())
+      .catch(err => console.log(err))
+  }
+
+  handleMarkCollected(e) {
+    const appointmentId = e.target.value
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'completed' })
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
   }
@@ -189,7 +197,7 @@ class Dashboard extends React.Component {
                   </div>
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
                     <div>
-                      <p>This veg has been CLAIMED by {listing.pickUpAppointment.pickerId.username}. They want to collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}.</p>
+                      <p>This veg has been claimed by {listing.pickUpAppointment.pickerId.username}. They want to collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}.</p>
                       <p>Would you like to accept this?</p>
                       <button onClick={this.handleAccept} value={listing.pickUpAppointment._id}>Accept</button> <button onClick={this.handleReject} value={listing.pickUpAppointment._id}>Reject</button>
                     </div>
@@ -197,7 +205,11 @@ class Dashboard extends React.Component {
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'accepted' &&
                     <div>
                       <p>{listing.pickUpAppointment.pickerId.username} claimed the {listing.title.toLowerCase()} and will collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}</p>
+                      <button onClick={this.handleMarkCollected} value={listing.pickUpAppointment._id}>Mark veg as collected</button> 
                     </div>
+                  }
+                  {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'completed' &&
+                    <p>{listing.pickUpAppointment.pickerId.username} collected the {listing.title.toLowerCase()} on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}</p>
                   }
                   {!listing.isClaimed &&
                     <div>
@@ -224,18 +236,20 @@ class Dashboard extends React.Component {
 
                 <div key={picked.id}>
                   {picked.appointmentStatus === 'requested' &&
-                    <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}.</span>}
+                    <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}.</span>
+                  }
                   {picked.vegId && picked.appointmentStatus === 'accepted' &&
                     <>
                       <p>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title}.</p>
                       <p>Collect from {picked.vegId.user.addressLineOne}, {picked.vegId.user.addressPostcode} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}</p>
                     </>
                   }
+                  {picked.vegId && picked.appointmentStatus === 'completed' &&
+                    <p>You collected {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}.</p>
+                  }
                   {picked.vegId && picked.appointmentStatus === 'rejected' &&
                     <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                   }
-                  {console.log('picked id: ', picked._id)}
-                  {console.log('picked Appointments: ', picked)}
                   {picked && !picked.appointmentStatus === 'rejected' &&
                     <VegetableChat
                       appointmentId={picked._id}

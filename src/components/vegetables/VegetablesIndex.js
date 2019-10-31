@@ -44,7 +44,7 @@ class VegetablesIndex extends React.Component {
     const type = new RegExp(typeSearch, 'i')
     const filteredArr = this.state.vegetables.filter(veg => {
       //return re.test(veg.title) && (veg.typeOfVeg === typeSearch || typeSearch === 'All')
-      return re.test(veg.title) && type.test(veg.typeOfVeg) || (typeSearch === 'All')
+      return (!veg.pickUpAppointment || (veg.pickUpAppointment && veg.pickUpAppointment.appointmentStatus !== 'completed')) && (re.test(veg.title) && type.test(veg.typeOfVeg) || (typeSearch === 'All'))
     })
       .map(vegetable => (
         <VegetableCard key={vegetable._id} {...vegetable} />
