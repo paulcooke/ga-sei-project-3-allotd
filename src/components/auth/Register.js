@@ -72,7 +72,7 @@ class Register extends React.Component {
             <input
               name='passwordConfirmation'
               type='password'
-              placeholder='Password Confirmation'
+              placeholder={errors.password ? 'This field is required.' : 'Password Confirmation'}
               onChange={this.handleChange}
             />
 

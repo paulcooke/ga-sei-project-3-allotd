@@ -35,7 +35,7 @@
 
   button:hover {
     background:linear-gradient(to bottom, #685369 5%, #685369 100%);
-    background-color:#685369;
+    background-color:$bordergrey;
   }
 
   small {
@@ -93,6 +93,14 @@
     font-family: 'IBM Plex Sans', sans-serif;
     font-size: 17px;
   }
+
+  input:focus, textarea:focus {
+    box-shadow: 0 0 0 1px #2684ff;
+    border: 1px solid #2684ff;
+    outline: none;
+  }
+
+  //.css-yk16xz-control
 
   .css-1wa3eu0-placeholder {
     color: #685369;
