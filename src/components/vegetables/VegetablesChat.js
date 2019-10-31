@@ -47,15 +47,19 @@ class VegetableChat extends React.Component {
     )
     return (
       <>
-        {
-          this.props.messages.map(msg => {
-            console.log(msg)
-            return (
-              <p key={msg._id}>{msg.text}</p>
-            )
-          })
-        }
-        < form className='panelWrapper' onSubmit={(e) => {
+        <div className='messages'>
+          {
+            this.props.messages.map(msg => {
+              console.log(msg)
+              return (
+                <>
+                  <p key={msg._id}>{msg.text}</p>
+                </>
+              )
+            })
+          }
+        </div>
+        < form className='chatBox' onSubmit={(e) => {
           e.preventDefault()
           this.setState({ text: '' }, this.props.handleSubmitMessage(this.props.appointmentId, this.state.text))
         }}>
@@ -71,6 +75,7 @@ class VegetableChat extends React.Component {
           <button type='submit'>Add message</button>
           <button onClick={this.handleClick}>Hide Chat</button>
         </form>
+
       </>
     )
   }

@@ -1,0 +1,30 @@
+
+
+.chatBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color:rgba(255, 255, 255, 0.6);
+  margin: 20px;
+  padding: 20px;
+  width: 70%;
+  border-radius: 5px;
+  border: solid 1px grey;
+  box-shadow: 3px 4px 10px -1px $bordergrey;
+  
+}
+.messages {
+    width: 70%;
+    background-color: rgba(255, 255, 255, 0.6); //:rgba(255, 255, 255, 0.8);
+    p {
+      margin: 5px;
+
+    }
+    p:nth-Child(odd) {
+      margin: 5px;
+      background: grey;
+    }
+    p:nth-child(even) {
+      background: darkslategrey;
+    }
+  }

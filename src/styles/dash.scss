@@ -1,32 +1,62 @@
+// .dashWrapper {
+//   //min-height: 100vh;
+//   display: flex;
+//   flex-direction: column;
+//   background-color: rgb(164, 197, 137);
+// }
+
+// .dashPanelWrapper {
+//   background-color: rgb(216, 238, 198);
+//   margin: 20px;
+//   padding: 20px;
+//   border: 1px solid black
+//}
+// .listingWrapper {
+//   border: 1px solid black;
+//   margin: 20px 0;
+//   padding: 20px;
+//   background-color: white;
+// }
+
+//   button {
+//     margin: 5px;
+//     width: 120px;
+//     height: 50px;
+//     box-shadow: 0px 10px 14px -7px #3e7327;
+//   }
+// }
+
+// h1 {
+//   font-size: 48px;
+// }
+
+
 .dashWrapper {
-  //min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  background-color: rgb(164, 197, 137);
-}
-
-.dashPanelWrapper {
-  background-color: rgb(216, 238, 198);
-  margin: 20px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  min-height: 100vh;
   padding: 20px;
-  // border: 1px solid black
-
-.listingWrapper {
+    .dashPanelWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color:rgba(255, 255, 255, 0.6);
+    margin: 20px;
+    padding: 20px;
+    width: 100%;
+    border-radius: 5px;
+    border: solid 1px grey;
+    box-shadow: 3px 4px 10px -1px $bordergrey;
+  }
+  .listingWrapper {
   border: 1px solid black;
   margin: 20px 0;
   padding: 20px;
-  background-color: white;
+  //background-color: white;
+}
 }
 
-  button {
-    margin: 5px;
-    width: 120px;
-    height: 50px;
-    box-shadow: 0px 10px 14px -7px #3e7327;
-  }
-}
 
-h1 {
-  font-size: 48px;
-}
 
