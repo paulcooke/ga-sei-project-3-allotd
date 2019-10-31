@@ -55,7 +55,7 @@ button {
 }
 
 button:hover {
- // background:linear-gradient(to bottom, #685369 5%, #685369 100%);
+  background:linear-gradient(to bottom, #685369 5%, #685369 100%);
   background-color:rgba(255, 255, 255, 0.5);
 }
 
@@ -91,7 +91,7 @@ label {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: $boxcolor;
+  background-color:rgba(255, 255, 255, 0.6);
   margin: 20px;
   padding: 20px;
   width: 100%;

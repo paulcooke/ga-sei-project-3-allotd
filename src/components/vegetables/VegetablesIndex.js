@@ -13,6 +13,7 @@ class VegetablesIndex extends React.Component {
     this.state = {
       vegetables: null,
       searchTerm: '',
+      typeSearch: 'All',
       mapSwitch: false
     }
     this.onChange = this.onChange.bind(this)
@@ -34,14 +35,16 @@ class VegetablesIndex extends React.Component {
 
   onChange({ target: { name, value, dataset, innerHTML } }) {
     //for the <li> dropdown, value is wiped during re render. use dataset and innerhtml in that case
-    value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: (value || innerHTML) })
+    value ? this.setState({ [name]: value }) : this.setState({ [dataset.name]: innerHTML })
   }
 
   filterVegetables() {
-    const { searchTerm } = this.state
+    const { searchTerm, typeSearch } = this.state
     const re = new RegExp(searchTerm, 'i')
+    const type = new RegExp(typeSearch, 'i')
     const filteredArr = this.state.vegetables.filter(veg => {
-      return re.test(veg.title)
+      //return re.test(veg.title) && (veg.typeOfVeg === typeSearch || typeSearch === 'All')
+      return re.test(veg.title) && type.test(veg.typeOfVeg) || (typeSearch === 'All')
     })
       .map(vegetable => (
         <VegetableCard key={vegetable._id} {...vegetable} />
@@ -106,6 +109,7 @@ class VegetablesIndex extends React.Component {
               value={this.state.mapSwitch}
               onChange={this.onChange}
               onSubmit={this.submitSearch}
+              current={this.state.typeSearch}
             />
             <div className='indexWrapper'>
               {this.filterVegetables() && this.filterVegetables()}

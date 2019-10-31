@@ -39,6 +39,7 @@ class SearchForm extends React.Component {
           <Dropdown
             vegetable={this.state.region}
             onClick={onChange ? onChange : this.handleRedirect}
+            current={this.props.current}
           />
           <input name={name} placeholder='Search...' />
           <button type='submit'>Search</button>
