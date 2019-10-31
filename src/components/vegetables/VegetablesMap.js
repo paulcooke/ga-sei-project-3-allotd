@@ -21,7 +21,7 @@ class VegetablesMap extends React.Component {
       },
       showPopup: true
     }
-    // this.mapRef = React.createRef()
+    this.mapRef = React.createRef()
     this.onChange = this.onChange.bind(this)
   }
   
