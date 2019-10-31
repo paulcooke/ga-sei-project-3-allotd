@@ -110,16 +110,16 @@ class VegetablesShow extends React.Component {
             <div className='panelWrapper'>
               <div>
                 <h1>{title}</h1>
-                {isClaimed && <p>CLAIMED!</p>}
-                <p>Type: {typeOfVeg}</p>
+                {isClaimed && <p className='claimed'>CLAIMED!</p>}
+                <p><span>Type:</span> {typeOfVeg}</p>
                 {varietyOfVeg &&
-                <p>Variety: {varietyOfVeg}</p>
+                <p><span>Variety:</span> {varietyOfVeg}</p>
                 }
-                <p>Picked: {this.handleDate(pickedDate)}</p>
+                <p><span>Picked:</span> {this.handleDate(pickedDate)}</p>
                 {description &&
-                <p>Description: {description}</p>
+                <p><span>Description:</span> {description}</p>
                 }
-                <p>Posted by: {user.username}</p>
+                <p><span>Posted by:</span> {user.username}</p>
               </div>
               {this.isOwner() &&
                 <div className='buttonWrapper'>
@@ -151,7 +151,7 @@ class VegetablesShow extends React.Component {
               }
             </div>
           </div>
-          {!this.isOwner() && Auth.isAuthenticated() && (!pickUpAppointment || pickUpAppointment.appointmentStatus === 'rejected') &&
+          {!this.isOwner() && Auth.isAuthenticated() && (!pickUpAppointment || pickUpAppointment.appointmentStatus === 'rejected' || pickUpAppointment.appointmentStatus === 'cancelled' ) &&
             <div className="panelWrapper claimWrapper">
               <form>
                 <h2>Claim this vegetable from {user.username}</h2>
