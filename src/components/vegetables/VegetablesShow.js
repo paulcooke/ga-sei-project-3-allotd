@@ -60,7 +60,7 @@ class VegetablesShow extends React.Component {
     console.log('checking day', day)
     console.log('checking hour', hour)
     const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] // for use below in getting the right number for moment's 'day'
-    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day), 'days')._d
+    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).day(dayArray.indexOf(day) + 1)._d
     
     const newAppointment = { ...this.state.newAppointment, [name]: newValue, appointmentDateandTime: setDayAndTime, appointmentStatus: 'requested' } // requested added here because if it's sent then this is tru, if it's not, it will dissapear from state when the user moves away from the page
     const errors = { ...this.state.errors, [name]: '' } // for use in error handling
@@ -71,19 +71,28 @@ class VegetablesShow extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    if (!this.state.vegetable.pickUpAppointment || !this.state.vegetable.pickUpAppointment._id) {
+      const vegetableId = this.props.match.params.id
+      axios.post(`/api/vegetables/${vegetableId}/appointment`, this.state.newAppointment, {
+        headers: { Authorization: `Bearer ${Auth.getToken()}` }
+      })
+        .then(() => axios.patch(`/api/vegetables/${vegetableId}`, this.state.vegetable))
+        .then(() => this.props.history.push('/dashboard'))
+        .catch(err => this.setState({ errors: err.message }))
+    } else {
+      const vegetableId = this.props.match.params.id
+      const appointmentId = this.state.vegetable.pickUpAppointment.id
+      axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'requested', appointmentDateandTime: this.state.newAppointment.appointmentDateandTime, messages: [] })
+        .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: true }))
+        .then(() => this.props.history.push('/dashboard'))
+        .catch(err => console.log(err))
+    }
     
-    const vegetableId = this.props.match.params.id
-    axios.post(`/api/vegetables/${vegetableId}/appointment`, this.state.newAppointment, {
-      headers: { Authorization: `Bearer ${Auth.getToken()}` }
-    })
-      .then(() => axios.patch(`/api/vegetables/${vegetableId}`, this.state.vegetable))
-      .then(() => this.props.history.push('/dashboard'))
-      .catch(err => this.setState({ errors: err.message }))
   }
 
   render() {
+    console.log(this.state)
     if (!this.state.vegetable) return null
-    console.log('render', this.state.vegetable )
     const { image, title, typeOfVeg, varietyOfVeg, pickedDate, description, isClaimed,
       vegLocation, availablePickUpDays, availablePickUpTimes, user, pickUpAppointment
     } = this.state.vegetable
@@ -138,7 +147,7 @@ class VegetablesShow extends React.Component {
               }
             </div>
           </div>
-          {!this.isOwner() && Auth.isAuthenticated() && !pickUpAppointment &&
+          {!this.isOwner() && Auth.isAuthenticated() && (!pickUpAppointment || pickUpAppointment.appointmentStatus === 'rejected') &&
             <div className="panelWrapper claimWrapper">
               <form>
                 <h2>Claim this vegetable from {user.username}</h2>
@@ -179,13 +188,13 @@ class VegetablesShow extends React.Component {
                     ))
                   }
                 </div>
-                {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
+                {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {moment(this.state.newAppointment.appointmentDateandTime).format('HH:mm')}</span>}</p>}
                 <button onClick={this.handleSubmit}>Request pickup</button>
               </form>
             </div>
           }
           <div className='panelWrapper'>
-            <h2>Recipes for {typeOfVeg}</h2>
+            <h2>Recipes with {typeOfVeg}</h2>
             <div>
               <VegetablesRecipe
                 id={this.props.match.params.id}

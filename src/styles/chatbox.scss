@@ -15,16 +15,30 @@
 }
 .messages {
     width: 70%;
+    padding: 3px;
     background-color: rgba(255, 255, 255, 0.6); //:rgba(255, 255, 255, 0.8);
-    p {
-      margin: 5px;
-
+    div{
+      display: flex;
     }
-    p:nth-Child(odd) {
-      margin: 5px;
+    p {
+        margin: 5px;
+        padding: 3px;
+        width:60%;
+        border-radius: 5px;
+    }
+    .user {
+      justify-content: flex-start;
       background: grey;
     }
-    p:nth-child(even) {
+    .otherUser {
+      justify-content: flex-end;
       background: darkslategrey;
     }
   }
+
+textarea::placeholder {
+  color: #685369;
+  padding: 2px 5px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 17px;
+}

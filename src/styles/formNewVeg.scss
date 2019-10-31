@@ -1,16 +1,8 @@
-main {
-  min-height: 100vh;
+.vegFormWrap {
   width: 100vw;
   overflow-x: hidden; //horizontal
-  //background-image: url(https://images.unsplash.com/photo-1498109175427-80f595c1b49f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2026&q=80);
-}
-
-.vegFormWrap {
-  // min-height: 100vh;
-  // width: 100vw;
-  // overflow-x: hidden; //horizontal
   background-image: url(https://images.unsplash.com/photo-1498109175427-80f595c1b49f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2026&q=80);
-  //background-image: url(https://images.unsplash.com/photo-1489575623533-95058aaa3685?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80);
+  background-repeat: repeat;
 }
 
 .formWrapperVeg {
@@ -34,7 +26,6 @@ main {
   }
   
   button {
-    margin-left: 320px;
     background: unset;
     box-shadow: 1px 5px 25px 5px black;
     color: white;
@@ -44,7 +35,7 @@ main {
 
   button:hover {
     background:linear-gradient(to bottom, #685369 5%, #685369 100%);
-    background-color:#685369;
+    background-color:$bordergrey;
   }
 
   small {
@@ -103,6 +94,14 @@ main {
     font-size: 17px;
   }
 
+  input:focus, textarea:focus {
+    box-shadow: 0 0 0 1px #2684ff;
+    border: 1px solid #2684ff;
+    outline: none;
+  }
+
+  //.css-yk16xz-control
+
   .css-1wa3eu0-placeholder {
     color: #685369;
     font-family: 'IBM Plex Sans', sans-serif;
@@ -118,10 +117,6 @@ main {
     align-items: center;
   }
 
-  // .css-b8ldur-Input {
-  //   background-color: white;
-  // }
-
   h2 {
     font-size: 45px;
     text-align: center;
@@ -135,3 +130,22 @@ main {
     margin-left: 8px
   }
 }
+
+@media only screen and (max-width: 1024px) {
+  .vegFormWrap {
+    overflow: visible;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+} 
+
+@media only screen and (max-width: 813px) {
+  .vegFormWrap {
+    overflow: visible;
+  }
+  .formWrapperVeg {
+    .panelWrapperVeg {
+      min-width: 300px;
+    }
+  }
+} 
