@@ -1,5 +1,5 @@
 import React from 'react'
-import MapGL, { Popup, NavigationControl, GeolocateControl } from 'react-map-gl'
+import MapGL, { Popup, NavigationControl } from 'react-map-gl'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
@@ -80,14 +80,7 @@ class VegetablesMap extends React.Component {
           {...this.state.viewport}
           onViewportChange={(viewport) => this.setState({ viewport })}>
 
-          <GeolocateControl 
-            positionOptions={{ enableHighAccuracy: true, timeOut: 6000 }}
-            showUserLocation={true}
-            trackUserLocation={false}
-            
-          />
-
-
+    
           {this.state.postcodes.map((postcode, i) => (
 
             <div key={i}>
