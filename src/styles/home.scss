@@ -69,8 +69,14 @@ main {
     background: unset;
     box-shadow: 1px 1px 25px 1px black;
     color: white;
-    border: solid white 2px;
+    //border: solid white 2px;
     letter-spacing: 1px;
+    background-color: $tomatoRed;
+    padding: 5px 0 10px 0;
+  }
+
+  div:hover {
+    color: $footergreen;
   }
 
   .indexLink:hover {

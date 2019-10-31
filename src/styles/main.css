@@ -22,7 +22,6 @@ main {
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  color: #1b0e0e;
 }
 
 h1 {
@@ -31,7 +30,6 @@ h1 {
 
 a {
   text-decoration: none;
-  color: #1b0e0e;
   margin-left: 20px;
   cursor: pointer;
 }

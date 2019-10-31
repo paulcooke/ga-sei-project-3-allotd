@@ -7,3 +7,10 @@
     font-family: 'IBM Plex Sans', sans-serif;
   }
 }
+
+input::placeholder {
+  color: $bordergrey;
+  padding: 2px 5px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 17px;
+}
