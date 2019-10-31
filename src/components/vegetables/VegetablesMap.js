@@ -88,9 +88,9 @@ class VegetablesMap extends React.Component {
           />
 
 
-          {this.state.postcodes.map(postcode => (
+          {this.state.postcodes.map((postcode, i) => (
 
-            <div key={postcode.result.eastings}>
+            <div key={i}>
               {showPopup && <Popup
                 
                 latitude={postcode.result.latitude}
@@ -106,7 +106,7 @@ class VegetablesMap extends React.Component {
                 {this.state.vegetables.map(veg => 
                   <div key ={veg._id}> 
                     {veg.vegLocation.replace(' ', '') === postcode.query ? <Link  to={`/vegetables/${veg._id}`}>   
-                      {veg.title} {veg.vegLocation} 🍅</Link>  : null}
+                      {veg.title} 🥕 {veg.vegLocation} </Link>  : null}
                  
                   </div>)}
               
