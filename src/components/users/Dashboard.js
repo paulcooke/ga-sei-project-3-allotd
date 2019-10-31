@@ -114,7 +114,7 @@ class Dashboard extends React.Component {
     return (
       <>
         <div className='dashWrapper'>
-          <section className='dashPanelWrapper'>
+          <div className='panelWrapper'>
             <div>
               <h1>Dashboard</h1>
             </div>
@@ -166,89 +166,87 @@ class Dashboard extends React.Component {
               </>
             }
             
-          </section>
+          </div>
 
-          <section>
-            <div className='dashPanelWrapper'>
-              <h2>My listings</h2>
-              {
-                this.state.data.listingHistory.map(listing => (
-                  <div key={listing._id} className="listingWrapper">
+          <div className='dashPanelWrapper'>
+            <h2>My listings</h2>
+            {
+              this.state.data.listingHistory.map(listing => (
+                <div key={listing._id} className="listingWrapper">
+                  <div>
+                    {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}.
                     <div>
-                      {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('h:mm')}. 
-                      <div>
-                        <Link to={`/vegetables/${listing._id}/edit`}>
-                          {!listing.isClaimed && <button>Edit vegetable</button>}
-                          {listing.isClaimed && <button disabled>Edit vegetable</button>}
-                        </Link>
-                        {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
-                        {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
-                        {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
-                        
-                        {console.log('pickupApointment: ',listing.pickUpAppointment)}
-                      </div>
+                      <Link to={`/vegetables/${listing._id}/edit`}>
+                        {!listing.isClaimed && <button>Edit vegetable</button>}
+                        {listing.isClaimed && <button disabled>Edit vegetable</button>}
+                      </Link>
+                      {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
+                      {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
+                      {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
+
+                      {console.log('pickupApointment: ', listing.pickUpAppointment)}
                     </div>
-                    {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
-                    <div>                      
+                  </div>
+                  {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
+                    <div>
                       <p>This veg has been CLAIMED by {listing.pickUpAppointment.pickerId.username}. They want to collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('h:mm')}.</p>
                       <p>Would you like to accept this?</p>
                       <button onClick={this.handleAccept} value={listing.pickUpAppointment._id}>Accept</button> <button onClick={this.handleReject} value={listing.pickUpAppointment._id}>Reject</button>
                     </div>
-                    }
-                    {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'accepted' &&
-                      <div>
-                        <p>{listing.pickUpAppointment.pickerId.username} claimed the {listing.title.toLowerCase()} and will collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('h:mm')}</p>
-                      </div>
-                    }
-                    {!listing.isClaimed &&
-                      <div>
-                        Not currently claimed.
-                      </div>
-                    }
-                    {listing.pickUpAppointment && 
-                        <VegetableChat 
-                          appointmentId={listing.pickUpAppointment._id}
-                          messages={listing.pickUpAppointment.messages}
-                          getUserInfo={() => this.getUserInfo()}
-                          handleSubmitMessage={this.handleSubmitMessage}
-                        />
-                    }
-                  </div>
-                ))
-              }
-            </div>
-            <div className='dashPanelWrapper'>
-              <h2>My pickups</h2>
-              {
-                this.state.data.pickedVegHistory.map(picked => (
-                  
-                  <div key={picked.id}>
-                    {picked.appointmentStatus === 'requested' && 
-                      <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>} 
-                    {picked.vegId && picked.appointmentStatus === 'accepted' &&
-                      <>
-                        <p>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title}.</p>
-                        <p>Collect from {picked.vegId.user.addressLineOne}, {picked.vegId.user.addressPostcode} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}</p>
-                      </>
-                    } 
-                    {picked.vegId && picked.appointmentStatus === 'rejected' &&
-                      <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
-                    } 
-                    {console.log('picked id: ', picked._id)}
-                    {console.log('picked Appointments: ', picked)}
-                    {picked && 
-                        <VegetableChat 
-                          appointmentId={picked._id}
-                          messages={picked.messages}
-                          getUserInfo={() => this.getUserInfo()}
-                          handleSubmitMessage={this.handleSubmitMessage}
-                        />
-                    }
-                  </div>
-                ))
-              }
-            </div>
-          </section>
+                  }
+                  {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'accepted' &&
+                    <div>
+                      <p>{listing.pickUpAppointment.pickerId.username} claimed the {listing.title.toLowerCase()} and will collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('h:mm')}</p>
+                    </div>
+                  }
+                  {!listing.isClaimed &&
+                    <div>
+                      Not currently claimed.
+                    </div>
+                  }
+                  {listing.pickUpAppointment &&
+                    <VegetableChat
+                      appointmentId={listing.pickUpAppointment._id}
+                      messages={listing.pickUpAppointment.messages}
+                      getUserInfo={() => this.getUserInfo()}
+                      handleSubmitMessage={this.handleSubmitMessage}
+                    />
+                  }
+                </div>
+              ))
+            }
+          </div>
+          <div className='dashPanelWrapper'>
+            <h2>My pickups</h2>
+            {
+              this.state.data.pickedVegHistory.map(picked => (
+
+                <div key={picked.id}>
+                  {picked.appointmentStatus === 'requested' &&
+                    <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}.</span>}
+                  {picked.vegId && picked.appointmentStatus === 'accepted' &&
+                    <>
+                      <p>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title}.</p>
+                      <p>Collect from {picked.vegId.user.addressLineOne}, {picked.vegId.user.addressPostcode} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('h:mm')}</p>
+                    </>
+                  }
+                  {picked.vegId && picked.appointmentStatus === 'rejected' &&
+                    <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
+                  }
+                  {console.log('picked id: ', picked._id)}
+                  {console.log('picked Appointments: ', picked)}
+                  {picked &&
+                    <VegetableChat
+                      appointmentId={picked._id}
+                      messages={picked.messages}
+                      getUserInfo={() => this.getUserInfo()}
+                      handleSubmitMessage={this.handleSubmitMessage}
+                    />
+                  }
+                </div>
+              ))
+            }
+          </div>
         </div>
       </>
     )
