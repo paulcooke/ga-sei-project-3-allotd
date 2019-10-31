@@ -250,13 +250,10 @@ class Dashboard extends React.Component {
                   {picked.vegId && picked.appointmentStatus === 'rejected' &&
                     <p><s>{picked.vegId.user.username} rejected your request to collect {picked.vegId.title}</s></p>
                   }
-<<<<<<< HEAD
                   {console.log('picked: ', picked)}
                   {console.log('picked id: ', picked._id)}
                   {console.log('appointmentStatus: ', (picked.appointmentStatus))}
-=======
->>>>>>> e64eb2decbada307b678d20100d784daeb78bfee
-                  {picked && !picked.appointmentStatus === 'rejected' &&
+                  {picked && picked.appointmentStatus !== 'rejected' &&
                     <VegetableChat
                       appointmentId={picked._id}
                       messages={picked.messages}
