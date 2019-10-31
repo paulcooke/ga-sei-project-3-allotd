@@ -42,40 +42,46 @@ class VegetablesRecipe extends React.Component {
     const otherRecipes = recipes.slice(3, 10)
 
     return (
-      <div>
-        {fewerRecipes.map(recipe => (
-          <label key={recipe.title}>
-            
-            <a href={recipe.href} rel="noopener noreferrer" target="_blank">
-              <h3> 🥕 {recipe.title}</h3>
-              <p>{recipe.ingredients}</p>
-            </a> 
-          </label> 
-        ))}
-     
-        {!this.state.recipeShow &&
-        <div value={this.state.recipeShow}>
-          <button onClick = {this.handleClick}>Show more recipes...</button>
-        </div>} 
-        
-
-        {this.state.recipeShow &&
-        <div value={this.state.recipeShow}>
-          {
-            otherRecipes.map(recipe => (
+      <>
+        {this.state.recipes.length > 0 &&
+        <div className='panelWrapper'>
+          <h2>Recipes with {this.props.typeOfVeg}</h2>
+          <div>
+            {fewerRecipes.map(recipe => (
               <label key={recipe.title}>
-            
+                
                 <a href={recipe.href} rel="noopener noreferrer" target="_blank">
                   <h3> 🥕 {recipe.title}</h3>
                   <p>{recipe.ingredients}</p>
                 </a> 
               </label> 
             ))}
-          <button onClick = {this.handleClose}>Show less</button>
+     
+            {!this.state.recipeShow &&
+            <div value={this.state.recipeShow}>
+              <button onClick = {this.handleClick}>Show more recipes...</button>
+            </div>
+            } 
+        
+
+            {this.state.recipeShow &&
+            <div value={this.state.recipeShow}>
+              {otherRecipes.map(recipe => (
+                <label key={recipe.title}>
+              
+                  <a href={recipe.href} rel="noopener noreferrer" target="_blank">
+                    <h3> 🥕 {recipe.title}</h3>
+                    <p>{recipe.ingredients}</p>
+                  </a> 
+                </label> 
+              ))}
+              <button onClick = {this.handleClose}>Show less</button>
+            </div>
+            }
+          </div>
         </div>
         }
-      </div>
-            
+      </> 
     )
   }
 }
