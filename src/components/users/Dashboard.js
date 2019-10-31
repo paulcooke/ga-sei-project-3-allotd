@@ -28,9 +28,7 @@ class Dashboard extends React.Component {
         addressCity: '', 
         addressPostcode: ''
       },
-      displayStatus: {
-        
-      }
+      displayStatus: {}
     }
 
     this.handleAccept = this.handleAccept.bind(this)
@@ -73,6 +71,16 @@ class Dashboard extends React.Component {
 
   //this needs to update the appointment status in the appointment model, possibly also deleting this but needs to update the picker, perhaps it puts them back on the schedule page
   handleReject(e) {
+    const appointmentId = e.target.value
+    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
+    console.log('veg id', vegetableId)
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected', appointmentDateandTime: '', messages: [] })
+      .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
+      .then(() => this.getUserInfo())
+      .catch(err => console.log(err))
+  }
+
+  handleGrowerCancel(e) {
     const appointmentId = e.target.value
     const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
     console.log('veg id', vegetableId)
