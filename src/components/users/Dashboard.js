@@ -154,21 +154,17 @@ class Dashboard extends React.Component {
             </div>
             }
 
-            <div>
+            <div className='pickupDays'>
               <h2>My preferred days for people to collect from me:</h2>
-              <ul>
-                {this.state.data.availablePickUpDays.map(day => {
-                  return <li key={day}>{day}</li>
-                })}
-              </ul>
+              {this.state.data.availablePickUpDays.map(day => {
+                return <p key={day}>{day}</p>
+              })}
             </div>
-            <div>
-              <p>At:</p>
-              <ul>
-                {this.state.data.availablePickUpTimes.map(time => {
-                  return <li key={time}>{time}:00</li>
-                })}
-              </ul>
+            <p>At:</p>
+            <div className='pickupTimes'>
+              {this.state.data.availablePickUpTimes.map(time => {
+                return <p key={time}>{time}:00, </p>
+              })}
             </div>
             
             {this.isOwner() &&
