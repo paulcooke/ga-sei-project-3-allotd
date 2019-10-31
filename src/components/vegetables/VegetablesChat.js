@@ -41,7 +41,7 @@ class VegetableChat extends React.Component {
   }
 
   render() {
-
+    console.log('hiiiii')
     if (!this.state.isOpen) return (
       <button onClick={this.handleClick}>Open Chat</button>
     )
