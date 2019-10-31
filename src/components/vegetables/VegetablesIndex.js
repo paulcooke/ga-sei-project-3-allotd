@@ -60,6 +60,7 @@ class VegetablesIndex extends React.Component {
         // if searchterm is false dont bother doing anything
         this.state.searchTerm ? this.setState({ vegetables: filteredArr }) : false
       })
+      .then(() => this.setState({ searchTerm: '' }))
       .catch(err => console.log(err))
   }
 

@@ -35,6 +35,7 @@ class SearchForm extends React.Component {
           className='searchForm'
           onChange={onChange ? onChange : this.storeValForRedirect} //no func from idx, store val until redirect 
           onSubmit={onSubmit ? onSubmit : this.handleRedirect} //no function passed from index then redirect to there
+          value={this.state.valBeforeRedirect}
         >
           <Dropdown
             vegetable={this.state.region}
