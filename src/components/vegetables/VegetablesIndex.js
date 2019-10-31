@@ -44,7 +44,7 @@ class VegetablesIndex extends React.Component {
     const type = new RegExp(typeSearch, 'i')
     const filteredArr = this.state.vegetables.filter(veg => {
       //return re.test(veg.title) && (veg.typeOfVeg === typeSearch || typeSearch === 'All')
-      return (!veg.pickUpAppointment || (veg.pickUpAppointment && veg.pickUpAppointment.appointmentStatus !== 'completed')) && (re.test(veg.title) && type.test(veg.typeOfVeg) || (typeSearch === 'All'))
+      return (!veg.pickUpAppointment || (veg.pickUpAppointment && veg.pickUpAppointment.appointmentStatus !== 'completed')) && (re.test(veg.title) && (type.test(veg.typeOfVeg) || (typeSearch === 'All')))
     })
       .map(vegetable => (
         <VegetableCard key={vegetable._id} {...vegetable} />
@@ -60,6 +60,7 @@ class VegetablesIndex extends React.Component {
         // if searchterm is false dont bother doing anything
         this.state.searchTerm ? this.setState({ vegetables: filteredArr }) : false
       })
+      .then(() => this.setState({ searchTerm: '' }))
       .catch(err => console.log(err))
   }
 

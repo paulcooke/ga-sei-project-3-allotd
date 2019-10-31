@@ -23,6 +23,7 @@ const VegetablesForm = ( { vegetable: { title, varietyOfVeg, pickedDate, descrip
           <label>Type<span>*</span></label>
           <div className='input-select'>
             <CreatableSelect
+              isClearable
               placeholder={errors.typeOfVeg ? 'This field is required.' : 'Click here to select or start typing'} 
               onChange={handleVegType}
               components={components}
