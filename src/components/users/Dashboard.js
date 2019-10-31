@@ -114,7 +114,7 @@ class Dashboard extends React.Component {
     return (
       <>
         <div className='dashWrapper'>
-          <div className='dashPanelWrapper'>
+          <div className='panelWrapper'>
             <div>
               <h1>Dashboard</h1>
             </div>
@@ -202,7 +202,7 @@ class Dashboard extends React.Component {
                   {!listing.isClaimed &&
                     <div>
                       Not currently claimed.
-                      </div>
+                    </div>
                   }
                   {listing.pickUpAppointment &&
                     <VegetableChat
