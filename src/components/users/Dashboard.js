@@ -78,7 +78,7 @@ class Dashboard extends React.Component {
     const appointmentId = e.target.value
     const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
     console.log('veg id', vegetableId)
-    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected' })
+    axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected', appointmentDateandTime: '', messages: [] })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
@@ -235,7 +235,7 @@ class Dashboard extends React.Component {
                   }
                   {console.log('picked id: ', picked._id)}
                   {console.log('picked Appointments: ', picked)}
-                  {picked &&
+                  {picked && !picked.appointmentStatus === 'rejected' &&
                     <VegetableChat
                       appointmentId={picked._id}
                       messages={picked.messages}
