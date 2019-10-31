@@ -360,6 +360,30 @@ mongoose.connect(
             user: users[2],
             availablePickUpDays: ['Monday', 'Friday'],
             availablePickUpTimes: ['10', '11', '12', '13', '17']
+          },
+          { title: '5 Marrows',
+            typeOfVeg: 'Marrow',
+            varietyOfVeg: '',
+            pickedDate: 1,
+            description: 'great to cook with',
+            image: 'https://www.kerrysfresh.co.uk/wp-content/uploads/2016/09/Marrow-600x600.jpg',
+            isClaimed: false,
+            vegLocation: 'w1 4eu',
+            user: users[4],
+            availablePickUpDays: ['Monday', 'Friday'],
+            availablePickUpTimes: ['10', '11', '12', '13', '17']
+          },
+          { title: 'Crate of Pears',
+            typeOfVeg: 'Pear',
+            varietyOfVeg: '',
+            pickedDate: 10,
+            description: 'sweet and juicy, almost ripe',
+            image: 'https://snaped.fns.usda.gov/sites/default/files/styles/crop_ratio_7_5/public/seasonal-produce/2018-05/pears.jpg?itok=CGjollRu',
+            isClaimed: false,
+            vegLocation: 'W11 3JE',
+            user: users[2],
+            availablePickUpDays: ['Wednesday', 'Friday'],
+            availablePickUpTimes: ['12', '15', '17']
           }
           
         ])
