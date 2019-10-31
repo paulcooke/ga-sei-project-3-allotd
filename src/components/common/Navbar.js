@@ -22,7 +22,6 @@ class Navbar extends React.Component {
   }
 
   render() {
-    console.log(this.state.burgerOpen)
     return (
       <nav className={`${this.state.burgerOpen ? 'burgerOpen' : ''}`}>
         <div>
