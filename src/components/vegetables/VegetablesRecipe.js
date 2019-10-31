@@ -21,7 +21,7 @@ class VegetablesRecipe extends React.Component {
     const veg = this.props.veg.typeOfVeg
     axios.post(`https://cors-anywhere.herokuapp.com/http://www.recipepuppy.com/api/?q=${veg}`)
       .then(res => this.setState({ recipes: res.data.results }))
-      .catch(err => console.log(err)) 
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   
 
   }

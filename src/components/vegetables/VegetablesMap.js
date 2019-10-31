@@ -11,7 +11,7 @@ class VegetablesMap extends React.Component {
 
     this.state = { 
       vegetables: null,
-      postcodes: [],
+      postcodes: null,
       searchTerm: '',
 
       viewport: {
@@ -21,12 +21,13 @@ class VegetablesMap extends React.Component {
       },
       showPopup: true
     }
-    this.mapRef = React.createRef()
+    // this.mapRef = React.createRef()
     this.onChange = this.onChange.bind(this)
   }
   
   componentDidMount() {
     this.getData()
+    
   }
 
   componentDidUpdate() {
@@ -35,8 +36,10 @@ class VegetablesMap extends React.Component {
 
   getData() {
     axios.get('/api/vegetables')
-      .then(res => this.setState({ vegetables: res.data }))
-      .catch(err => console.log(err))
+      .then(res => {
+        this.setState({ vegetables: res.data })
+      })
+      .catch(err => this.setState({ errors: err.response.data.errors }))
 
   }
    
@@ -44,11 +47,10 @@ class VegetablesMap extends React.Component {
     const postcodes = this.state.vegetables.map(veg => veg.vegLocation.replace(' ', ''))
     axios.post('https://cors-anywhere.herokuapp.com/api.postcodes.io/postcodes/', { postcodes } )
       .then(res => {
-        // console.log(res.data.result)
         const filteredArr = res.data.result.filter(data => new RegExp(this.state.searchTerm, 'i').test(data.query))
         this.setState({ postcodes: filteredArr })
       })
-      .catch(err => console.log(err))
+      .catch(err => this.setState({ errors: err.response.data.errors }))
   }
 
   onChange({ target: { name, value, dataset, innerHTML } }) {
@@ -57,7 +59,10 @@ class VegetablesMap extends React.Component {
   }
 
   render() {
+    
+    // console.log(this.state.postcodes)
     if (!this.state.vegetables) return null
+    if (!this.state.postcodes) return null
     const { showPopup } = this.state
     return (
       <main>
@@ -80,11 +85,11 @@ class VegetablesMap extends React.Component {
           {...this.state.viewport}
           onViewportChange={(viewport) => this.setState({ viewport })}>
 
-    
+          
           {this.state.postcodes.map((postcode, i) => (
 
             <div key={i}>
-              {showPopup && <Popup
+              {showPopup && <Popup 
                 
                 latitude={postcode.result.latitude}
                 longitude={postcode.result.longitude}
@@ -92,7 +97,6 @@ class VegetablesMap extends React.Component {
                 closeOnClick={true}
                 tipSize={12}
                 sortByDepth={true}
-                // onClose={() => this.setState({ showPopup: false })}
                 anchor="bottom" >
                  
 
