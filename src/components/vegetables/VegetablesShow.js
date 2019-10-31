@@ -151,7 +151,7 @@ class VegetablesShow extends React.Component {
               }
             </div>
           </div>
-          {!this.isOwner() && Auth.isAuthenticated() && (!pickUpAppointment || pickUpAppointment.appointmentStatus === 'rejected') &&
+          {!this.isOwner() && Auth.isAuthenticated() && (!pickUpAppointment || pickUpAppointment.appointmentStatus === 'rejected' || pickUpAppointment.appointmentStatus === 'cancelled' ) &&
             <div className="panelWrapper claimWrapper">
               <form>
                 <h2>Claim this vegetable from {user.username}</h2>
