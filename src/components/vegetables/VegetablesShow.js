@@ -60,7 +60,7 @@ class VegetablesShow extends React.Component {
     console.log('checking day', day)
     console.log('checking hour', hour)
     const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] // for use below in getting the right number for moment's 'day'
-    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).add(dayArray.indexOf(day), 'days')._d
+    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).day(dayArray.indexOf(day) + 1)._d
     
     const newAppointment = { ...this.state.newAppointment, [name]: newValue, appointmentDateandTime: setDayAndTime, appointmentStatus: 'requested' } // requested added here because if it's sent then this is tru, if it's not, it will dissapear from state when the user moves away from the page
     const errors = { ...this.state.errors, [name]: '' } // for use in error handling
@@ -188,7 +188,7 @@ class VegetablesShow extends React.Component {
                     ))
                   }
                 </div>
-                {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {this.state.newAppointment.selectedPickUpTime}:00</span>}</p>}
+                {this.state.newAppointment.selectedPickUpDay && <p>You are requesting collection on {this.state.newAppointment.selectedPickUpDay} {this.state.newAppointment.selectedPickUpTime && <span>at {moment(this.state.newAppointment.appointmentDateandTime).format('HH:mm')}</span>}</p>}
                 <button onClick={this.handleSubmit}>Request pickup</button>
               </form>
             </div>
