@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color:rgba(255, 255, 255, 0.6);
+  background-color:darkslategrey;
   margin: 20px;
   padding: 20px;
   width: 70%;
@@ -17,7 +17,7 @@
     width: 70%;
     padding: 3px;
     background-color: rgba(255, 255, 255, 0.6); //:rgba(255, 255, 255, 0.8);
-    div{
+    div {
       display: flex;
       flex-direction: row;
     }
@@ -33,8 +33,12 @@
     }
     .otherUser {
       margin-right: auto;
-      background: darkslategrey;
+      background: rgba(255, 255, 255, 0.6);
     }
+  }
+
+  div .chatButton  {
+    width: 80px;
   }
 
 textarea::placeholder {

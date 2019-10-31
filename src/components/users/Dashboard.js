@@ -180,11 +180,11 @@ class Dashboard extends React.Component {
             </div>
             
             {this.isOwner() &&
-              <>
+              <div className='buttonWrapper'>
                 <Link to={`/dashboard/${this.state.data.id}/edit`}>
                   <button>Edit profile</button>
                 </Link>
-              </>
+              </div>
             }
             
           </div>
@@ -196,17 +196,17 @@ class Dashboard extends React.Component {
                 <div key={listing._id} className="listingWrapper">
                   <div>
                     {listing.title}, listed on {moment(listing.createdAt).format('dddd, MMMM Do')} at {moment(listing.createdAt).format('HH:mm')}.
-                    <div>
+
+                    <div className='buttonWrapper'>
                       <Link to={`/vegetables/${listing._id}/edit`}>
                         {!listing.isClaimed && <button>Edit vegetable</button>}
                         {listing.isClaimed && <button disabled>Edit vegetable</button>}
                       </Link>
                       {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
                       {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
-                      {listing.isClaimed && <p><em>Claimed veg cannot be edited or deleted</em></p>}
-
                       {console.log('pickupApointment: ', listing.pickUpAppointment)}
                     </div>
+                    {listing.isClaimed && <p><em>*Claimed veg cannot be edited or deleted</em></p>}
                   </div>
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
                     <div>
@@ -219,8 +219,10 @@ class Dashboard extends React.Component {
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'accepted' &&
                     <div>
                       <p>{listing.pickUpAppointment.pickerId.username} claimed the {listing.title.toLowerCase()} and will collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}</p>
-                      <button onClick={this.handleGrowerCancel} value={listing.pickUpAppointment._id}>Cancel collection</button>
-                      <button onClick={this.handleMarkCollected} value={listing.pickUpAppointment._id}>Mark veg as collected</button> 
+                      <div className='buttonWrapper'>
+                        <button onClick={this.handleGrowerCancel} value={listing.pickUpAppointment._id}>Cancel collection</button>
+                        <button onClick={this.handleMarkCollected} value={listing.pickUpAppointment._id}>Mark as collected</button> 
+                      </div>
                     </div>
                   }
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'completed' &&
@@ -238,6 +240,8 @@ class Dashboard extends React.Component {
                     <p>Collection by {listing.pickUpAppointment.pickerId.username} was cancelled.</p>
                   }
                   {listing.pickUpAppointment &&
+                  <>
+                    <p>Would you like to discuss these times with the seller?</p>
                     <VegetableChat
                       appointmentId={listing.pickUpAppointment._id}
                       messages={listing.pickUpAppointment.messages}
@@ -245,12 +249,13 @@ class Dashboard extends React.Component {
                       handleSubmitMessage={this.handleSubmitMessage}
                       userId={this.state.data._id}
                     />
+                  </>
                   }
                 </div>
               ))
             }
           </div>
-          <div className='dashPanelWrapper'>
+          <div className='dashPanelWrapper pickupsWrapper'>
             <h2>My pickups</h2>
             {
               this.state.data.pickedVegHistory.map(picked => (
