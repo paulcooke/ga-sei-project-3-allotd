@@ -5,7 +5,7 @@ const User = require('../../models/User')
 const jwt = require('jsonwebtoken')
 const { secret } = require('../../config/environment')
 
-const testUserData = [{
+const testUserData = [{ 
   username: 'test',
   email: 'test@email.com',
   password: 'test',
@@ -17,9 +17,10 @@ const testUserData = [{
   passwordConfirmation: 'test'
 }]
 
-describe('PUT /vegetables/:id', () => {
+describe('DELETE /vegetables/:id', () => {
   // eslint-disable-next-line prefer-const
-  let token = null 
+  let token = null
+  // eslint-disable-next-line prefer-const
   let incorrectToken = null
   // eslint-disable-next-line prefer-const
   let vegetable = null
@@ -30,7 +31,6 @@ describe('PUT /vegetables/:id', () => {
         token = jwt.sign({ sub: users[0]._id }, secret, { expiresIn: '6h' })
         incorrectToken = jwt.sign({ sub: users[1]._id }, secret, { expiresIn: '6h' })
         return Veg.create({
-          
           title: 'tomato',
           typeOfVeg: 'fruit',
           varietyOfVeg: 'cherry',
@@ -40,13 +40,13 @@ describe('PUT /vegetables/:id', () => {
           isClaimed: false,
           vegLocation: 'SW18 4TQ',
           user: users[0]
-          
         })
       })
-      .then(createdVeg => {
+      .then(createdVeg=> {
         vegetable = createdVeg
         done()
       })
+
   })
   afterEach(done => {
     User.deleteMany()
@@ -55,79 +55,41 @@ describe('PUT /vegetables/:id', () => {
   })
 
   it('should return a 401 response without a token', done => {
-    api.put(`/api/vegetables/${vegetable._id}`)
-      
-      .send({ name: 'Test' })
+    api.delete(`/api/vegetables/${vegetable._id}`)
       .end((err, res) => {
         expect(res.status).to.eq(401)
         done()
       })
   })
 
-  it('should return a 202 repose with a token', done => {
-    api.put(`/api/vegetables/${vegetable._id}`)
+  it('should return a 204 response with a token', done => {
+    api.delete(`/api/vegetables/${vegetable._id}`)
       .set('Authorization', `Bearer ${token}`)
-      .send({ name: 'Test' })
       .end((err, res) => {
-        expect(res.status).to.eq(202)
+        expect(res.status).to.eq(204)
         done()
       })
   })
 
-  it('should return an object', done => {
-    api.put(`/api/vegetables/${vegetable._id}`)
+  it('should return no data', done => {
+    api.delete(`/api/vegetables/${vegetable._id}`)
       .set('Authorization', `Bearer ${token}`)
-      .send({ name: 'Test' })
       .end((err, res) => {
-        expect(res.body).to.be.an('object')
+        expect(res.body).to.deep.eq({})
         done()
       })
   })
-
-  it('should return the correct fields', done => {
-    api.put(`/api/vegetables/${vegetable._id}`)
-      .set('Authorization', `Bearer ${token}`)
-      .send( { name: 'Test' })
-      .end((err, res) => {
-        expect(res.body).to.contains.keys([
-          'title',
-          'typeOfVeg',
-          'varietyOfVeg',
-          'pickedDate',
-          'description',
-          'image',
-          'isClaimed',
-          'vegLocation',
-          'user'
-        ])
-        done()
-      })
-  })
-  it('should return the correct data types', done => {
-    api.put(`/api/vegetables/${vegetable._id}`)
-      .set('Authorization', `Bearer ${token}`)
-      .send({ name: 'Test' })
-      .end((err, res) => {
-        expect(res.body._id).to.be.a('string')
-        expect(res.body.title).to.be.a('string')
-        expect(res.body.typeOfVeg).to.be.a('string')
-        expect(res.body.pickedDate).to.be.a('string')
-        expect(res.body.description).to.be.a('string')
-        expect(res.body.image).to.be.a('string')
-        expect(res.body.isClaimed).to.be.a('boolean')
-        expect(res.body.vegLocation).to.be.a('string')
-        expect(res.body.user).to.be.an('object')
-        done()
-      })
-  })
+  
   it('should return a 401 response with a token for a user that did not create the resource', done => {
-    api.put(`/api/vegetables/${vegetable._id}`)
+    api.delete(`/api/vegetables/${vegetable._id}`)
       .set('Authorization', `Bearer ${incorrectToken}`)
-      .send({ name: 'Test' })
       .end((err, res) => {
         expect(res.status).to.eq(401)
         done()
       })
+
+
   })
+
 
 })

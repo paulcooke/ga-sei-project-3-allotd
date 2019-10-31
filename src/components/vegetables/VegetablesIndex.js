@@ -46,10 +46,14 @@ class VegetablesIndex extends React.Component {
       //return re.test(veg.title) && (veg.typeOfVeg === typeSearch || typeSearch === 'All')
       return (!veg.pickUpAppointment || (veg.pickUpAppointment && veg.pickUpAppointment.appointmentStatus !== 'completed')) && (re.test(veg.title) && (type.test(veg.typeOfVeg) || (typeSearch === 'All')))
     })
-      .map(vegetable => (
-        <VegetableCard key={vegetable._id} {...vegetable} />
-      ))
-    return filteredArr.length !== 0 ? filteredArr : <h2>Your search returned no Results. Maybe you could grow this veg for us?...</h2>
+    return filteredArr
+  }
+
+  displayVegetables(filteredArr) {
+    const vegCards = filteredArr.map(vegetable => (
+      <VegetableCard key={vegetable._id} {...vegetable} />
+    ))
+    return vegCards.length !== 0 ? vegCards : <h2>Your search returned no Results. Maybe you could grow this veg for us?...</h2>
   }
 
   submitSearch(e) {
@@ -113,10 +117,7 @@ class VegetablesIndex extends React.Component {
               current={this.state.typeSearch}
             />
             <div className='indexWrapper'>
-              {this.filterVegetables() && this.filterVegetables()}
-              {!this.filterVegetables() && 
-                <h1>Your search returned no Results. Maybe you could grow this veg for us?...</h1>
-              }
+              {this.displayVegetables(this.filterVegetables())}
             </div>
           </>
         }

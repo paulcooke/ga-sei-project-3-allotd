@@ -193,16 +193,16 @@ class VegetablesShow extends React.Component {
               </form>
             </div>
           }
-          <div className='panelWrapper'>
-            <h2>Recipes with {typeOfVeg}</h2>
-            <div>
-              <VegetablesRecipe
-                id={this.props.match.params.id}
-                veg={this.state.vegetable}
-              />
-            </div>
+          
+          <div>
+            <VegetablesRecipe
+              id={this.props.match.params.id}
+              veg={this.state.vegetable}
+              typeOfVeg={this.state.vegetable.typeOfVeg}
+            />
           </div>
         </div>
+        
       </>
     )
   }

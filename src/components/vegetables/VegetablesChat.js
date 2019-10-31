@@ -41,6 +41,7 @@ class VegetableChat extends React.Component {
   }
 
   render() {
+    console.log('chat props: ', this.props)
     const userId =  this.props.userId
     if (!this.state.isOpen) {
       console.log('testing the if')
