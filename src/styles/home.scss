@@ -83,3 +83,44 @@ main {
   color: white;
 }
 }  
+
+@media only screen and (max-width: 800px) {
+  .hero {
+    .homeTitle {
+      font-size: 90px;
+    }
+    .about {
+      font-size: 20px;
+    }
+    .indexLink div {
+      font-size: 30px;
+      width: 300px;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .hero {
+    .homeTitle {
+      font-size: 50px;
+      width: 0;
+    }
+  }
+}
+
+
+@media only screen and (max-width: 360px) {
+  .hero {
+    .homeTitle {
+      font-size: 50px;
+      width: 0;
+    }
+    .about {
+      font-size: 15px;
+    }
+    .indexLink div {
+      font-size: 25px;
+      width: 300px;
+    }
+  }
+}
