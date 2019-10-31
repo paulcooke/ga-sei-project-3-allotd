@@ -41,7 +41,6 @@ const App = () => (
         <SecureRoute path="/dashboard/:id/edit" component={DashboardEdit} />
         <SecureRoute path="/dashboard" component={Dashboard} />
       </Switch>
-      <Footer />
     </main>
   </BrowserRouter>
 )
