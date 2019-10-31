@@ -82,12 +82,16 @@ class VegetablesShow extends React.Component {
     } else {
       const vegetableId = this.props.match.params.id
       const appointmentId = this.state.vegetable.pickUpAppointment.id
-      axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'requested', appointmentDateandTime: this.state.newAppointment.appointmentDateandTime, messages: [] })
+      axios.patch(`/api/appointments/${appointmentId}`, { 
+        appointmentStatus: 'requested', 
+        appointmentDateandTime: this.state.newAppointment.appointmentDateandTime, 
+        messages: [], 
+        pickerId: Auth.getPayload().sub
+      })
         .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: true }))
         .then(() => this.props.history.push('/dashboard'))
         .catch(err => console.log(err))
     }
-    
   }
 
   render() {
