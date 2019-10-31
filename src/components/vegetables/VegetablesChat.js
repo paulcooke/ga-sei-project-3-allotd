@@ -41,7 +41,7 @@ class VegetableChat extends React.Component {
   }
 
   render() {
-
+    const userId =  this.props.userId
     if (!this.state.isOpen) return (
       <button onClick={this.handleClick}>Open Chat</button>
     )
@@ -51,7 +51,9 @@ class VegetableChat extends React.Component {
           {
             this.props.messages.map((msg, i) => (
               <div key={i}>
-                <p>{msg.text}</p>
+                <p 
+                  className={userId === msg.user ? 'user' : 'otherUser'}
+                >{msg.text}</p>
               </div>
             ))
           }
