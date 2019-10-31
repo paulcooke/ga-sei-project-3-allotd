@@ -49,14 +49,9 @@ class VegetableChat extends React.Component {
       <>
         <div className='messages'>
           {
-            this.props.messages.map(msg => {
-              console.log(msg)
-              return (
-                <>
-                  <p key={msg._id}>{msg.text}</p>
-                </>
-              )
-            })
+            this.props.messages.map((msg, i) => (
+              <p key={i}>{msg.text}</p>
+            ))
           }
         </div>
         < form className='chatBox' onSubmit={(e) => {
