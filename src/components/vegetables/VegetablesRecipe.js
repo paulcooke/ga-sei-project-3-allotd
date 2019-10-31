@@ -44,7 +44,7 @@ class VegetablesRecipe extends React.Component {
     return (
       <>
         {this.state.recipes.length > 0 &&
-        <div className='panelWrapper'>
+        <div className='panelWrapperRep'>
           <h2>Recipes with {this.props.typeOfVeg}</h2>
           <div>
             {fewerRecipes.map(recipe => (
