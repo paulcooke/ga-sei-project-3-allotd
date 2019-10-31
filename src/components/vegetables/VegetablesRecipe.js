@@ -47,7 +47,7 @@ class VegetablesRecipe extends React.Component {
           <label key={recipe.title}>
             
             <a href={recipe.href} rel="noopener noreferrer" target="_blank">
-              <h3> ⭐️ {recipe.title}</h3>
+              <h3> 🥕 {recipe.title}</h3>
               <p>{recipe.ingredients}</p>
             </a> 
           </label> 
@@ -66,7 +66,7 @@ class VegetablesRecipe extends React.Component {
               <label key={recipe.title}>
             
                 <a href={recipe.href} rel="noopener noreferrer" target="_blank">
-                  <h3> ⭐️ {recipe.title}</h3>
+                  <h3> 🥕 {recipe.title}</h3>
                   <p>{recipe.ingredients}</p>
                 </a> 
               </label> 

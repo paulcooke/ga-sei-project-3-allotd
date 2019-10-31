@@ -185,7 +185,7 @@ class VegetablesShow extends React.Component {
             </div>
           }
           <div className='VegRec'>
-            <h2>Recipes with {typeOfVeg}</h2>
+            <h2>Recipes for {typeOfVeg}</h2>
             <div>
               <VegetablesRecipe
                 id={this.props.match.params.id}
