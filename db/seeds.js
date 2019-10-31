@@ -89,7 +89,7 @@ mongoose.connect(
       .then(users => {
         return Veg.create([
           {
-            title: 'Box of tomato',
+            title: 'Box of tomatoes',
             typeOfVeg: 'Tomato',
             varietyOfVeg: 'Cherry',
             pickedDate: 5,
@@ -313,8 +313,8 @@ mongoose.connect(
             availablePickUpDays: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'],
             availablePickUpTimes: ['19', '20', '21', '22']
           },
-          { title: 'Chilly',
-            typeOfVeg: 'Chilly',
+          { title: 'Chilli',
+            typeOfVeg: 'Chilli',
             varietyOfVeg: '',
             pickedDate: 2,
             description: 'Very spicy.',
@@ -324,7 +324,44 @@ mongoose.connect(
             user: users[5],
             availablePickUpDays: ['Tuesday', 'Wednesday', 'Thursday', 'Friday'],
             availablePickUpTimes: ['19', '20', '21', '22']
+          },
+          { title: 'Crunchy Chard',
+            typeOfVeg: 'Chard',
+            varietyOfVeg: '',
+            pickedDate: 7,
+            description: 'Great tasting and freshly picked',
+            image: 'https://gofreshusa.com/wp-content/uploads/2018/04/Depositphotos_31672627_original-e1523467588980-1024x750.jpg',
+            isClaimed: false,
+            vegLocation: 'SE19 1HF',
+            user: users[3],
+            availablePickUpDays: ['Monday', 'Wednesday', 'Thursday', 'Friday'],
+            availablePickUpTimes: ['12', '13']
+          },
+          { title: 'Sweet shallots',
+            typeOfVeg: 'Shallot',
+            varietyOfVeg: '',
+            pickedDate: 3,
+            description: 'Really nice to cook with',
+            image: 'https://www.ocado.com/productImages/384/384721011_0_640x640.jpg?identifier=fdb35ef2977c6ede48351968b6ced299',
+            isClaimed: false,
+            vegLocation: 'w12 7gf',
+            user: users[3],
+            availablePickUpDays: ['Thursday', 'Friday'],
+            availablePickUpTimes: ['15', '16']
+          },
+          { title: 'Spring onions',
+            typeOfVeg: 'Spring onions',
+            varietyOfVeg: '',
+            pickedDate: 4,
+            description: 'nice in salad',
+            image: 'https://www.kerrysfresh.co.uk/wp-content/uploads/2016/09/Spring-Onions.jpg',
+            isClaimed: false,
+            vegLocation: 'n8 9dg',
+            user: users[2],
+            availablePickUpDays: ['Monday', 'Friday'],
+            availablePickUpTimes: ['10', '11', '12', '13', '17']
           }
+          
         ])
       })
       .then(vegetables => console.log(`${vegetables.length} Vegetables created`))
