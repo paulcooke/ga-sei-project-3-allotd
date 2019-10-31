@@ -43,41 +43,45 @@ class VegetableChat extends React.Component {
   render() {
     console.log('chat props: ', this.props)
     const userId =  this.props.userId
-    if (!this.state.isOpen) return (
-      <button onClick={this.handleClick}>Open Chat</button>
-    )
-    return (
-      <>
-        <div className='messages'>
-          {
-            this.props.messages.map((msg, i) => (
-              <div key={i}>
-                <p 
-                  className={userId === msg.user ? 'user' : 'otherUser'}
-                >{msg.text}</p>
-              </div>
-            ))
-          }
-        </div>
-        < form className='chatBox' onSubmit={(e) => {
-          e.preventDefault()
-          this.setState({ text: '' }, this.props.handleSubmitMessage(this.props.appointmentId, this.state.text))
-        }}>
-          <textarea
-            rows='4'
-            cols='5'
-            type='textarea'
-            placeholder="Message"
-            name="text"
-            onChange={this.handleChange}
-            value={this.state.text}
-          />
-          <button type='submit'>Add message</button>
-          <button onClick={this.handleClick}>Hide Chat</button>
-        </form>
+    if (!this.state.isOpen) {
+      console.log('testing the if')
+      return (
+        <button onClick={this.handleClick}>Open Chat</button>
+      )
+    } else {
+      return (
+        <>
+          <div className='messages'>
+            {
+              this.props.messages.map((msg, i) => (
+                <div key={i}>
+                  <p 
+                    className={userId === msg.user ? 'user' : 'otherUser'}
+                  >{msg.text}</p>
+                </div>
+              ))
+            }
+          </div>
+          < form className='chatBox' onSubmit={(e) => {
+            e.preventDefault()
+            this.setState({ text: '' }, this.props.handleSubmitMessage(this.props.appointmentId, this.state.text))
+          }}>
+            <textarea
+              rows='4'
+              cols='5'
+              type='textarea'
+              placeholder="Message"
+              name="text"
+              onChange={this.handleChange}
+              value={this.state.text}
+            />
+            <button type='submit'>Add message</button>
+            <button onClick={this.handleClick}>Hide Chat</button>
+          </form>
 
-      </>
-    )
+        </>
+      )
+    }
   }
 }
 
