@@ -76,63 +76,64 @@ class VegetablesMap extends React.Component {
     if (!this.state.postcodes) return null
     const { showPopup } = this.state
     return (
-      <main>
+      <main className='map'>
         <SearchForm
           name='searchTerm'
           onChange={this.onChange}
           onSubmit={this.submitSearch}
         />
-        <MapGL
-          mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
-          height={'100vh'}
-          width={'100vw'}
-          mapStyle="mapbox://styles/mapbox/streets-v10"
-          scrollZoom={true}
-          minZoom={0}
-          maxZoom={20}
-          touchZoom={true}
-          
+        <div className='mapArea'>
+          <MapGL
+            mapboxApiAccessToken={process.env.MAPBOX_ACCESS_TOKEN}
+            height={'100vh'}
+            width={'100vw'}
+            mapStyle="mapbox://styles/mapbox/streets-v10"
+            scrollZoom={true}
+            minZoom={0}
+            maxZoom={20}
+            touchZoom={true}
 
-          {...this.state.viewport}
-          onViewportChange={(viewport) => this.setState({ viewport })}>
 
-          
-          {this.state.postcodes.map((postcode, i) => (
+            {...this.state.viewport}
+            onViewportChange={(viewport) => this.setState({ viewport })}>
 
-            <div key={i}>
-              {showPopup && <Popup 
-                
-                latitude={postcode.result.latitude}
-                longitude={postcode.result.longitude}
-                closeButton={false}
-                closeOnClick={true}
-                tipSize={12}
-                sortByDepth={true}
-                anchor="bottom" >
-                 
 
-                {this.state.vegetables.map(veg => 
-                  <div key ={veg._id}> 
-                    {veg.vegLocation.replace(' ', '') === postcode.query ? <Link  to={`/vegetables/${veg._id}`}>   
-                      {veg.title} 🥕 {veg.vegLocation} </Link>  : null}
-                 
-                  </div>)}
-              
-              </Popup>}
-         
+            {this.state.postcodes.map((postcode, i) => (
+
+              <div key={i}>
+                {showPopup && <Popup
+
+                  latitude={postcode.result.latitude}
+                  longitude={postcode.result.longitude}
+                  closeButton={false}
+                  closeOnClick={true}
+                  tipSize={12}
+                  sortByDepth={true}
+                  anchor="bottom" >
+
+
+                  {this.state.vegetables.map(veg =>
+                    <div key={veg._id}>
+                      {veg.vegLocation.replace(' ', '') === postcode.query ? <Link to={`/vegetables/${veg._id}`}>
+                        {veg.title} 🥕 {veg.vegLocation} </Link> : null}
+
+                    </div>)}
+
+                </Popup>}
+
+              </div>
+            ))}
+
+            <div style={{ position: 'absolute', right: 0 }}>
+              <NavigationControl />
             </div>
-          ))}
-          
-          <div style={{ position: 'absolute', right: 0 }}>
-            <NavigationControl />
-          </div>
+          </MapGL>
+        </div>
         
-     
-        </MapGL>
-      
       </main>
     )
   }
 }
 
 export default VegetablesMap
+

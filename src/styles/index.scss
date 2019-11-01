@@ -17,3 +17,35 @@
     color: white;
   }
 }
+
+.mapOpen {
+    .indexSearch {
+      display: none;
+      //visibility: hidden;
+    }
+    .indexWrapper {
+      display: none;
+      //visibility: hidden;
+    }
+    .map {
+      visibility: visible;
+    }
+    // .map .mapArea {
+    //   height: 100vh;
+    //   width: 100vw;
+    // }
+  }
+  .mapClosed {
+    .indexSearch {
+      display: block;
+      //visibility: visible;
+    }
+    .indexWrapper {
+      display: flex;
+      //visibility: visible;
+    }
+    .map {
+      visibility: hidden;
+    }
+  }
+
