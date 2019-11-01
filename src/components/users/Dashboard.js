@@ -63,47 +63,35 @@ class Dashboard extends React.Component {
   }
 
   //this needs to update the appointment status in the appointment model
-  handleAccept(e) {
-    const appointmentId = e.target.value
-    // console.log(appointmentId)
+  handleAccept(appointmentId) {
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'accepted' })
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
   }
 
   //this needs to update the appointment status in the appointment model, possibly also deleting this but needs to update the picker, perhaps it puts them back on the schedule page
-  handleReject(e) {
-    const appointmentId = e.target.value
-    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId).vegId._id
-    console.log('veg id', vegetableId)
+  handleReject(appointmentId, vegetableId) {
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected' })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
   }
 
-  handleGrowerCancel(e) {
-    const appointmentId = e.target.value
-    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId).vegId._id
-    console.log('veg id', vegetableId)
+  handleGrowerCancel(appointmentId, vegetableId) {
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'cancelled' })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
   }
 
-  handlePickerCancel(e) {
-    const appointmentId = e.target.value
-    const vegetableId = this.state.data.pickedVegHistory.find(veg => veg.vegId.pickUpAppointment.id === appointmentId).vegId._id
-    console.log('veg id', vegetableId)
+  handlePickerCancel(appointmentId, vegetableId) {
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'cancelled' })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
   }
 
-  handleMarkCollected(e) {
-    const appointmentId = e.target.value
+  handleMarkCollected(appointmentId) {
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'completed' })
       .then(() => this.getUserInfo())
       .catch(err => console.log(err))
@@ -212,16 +200,16 @@ class Dashboard extends React.Component {
                     <div>
                       <p>This veg has been claimed by {listing.pickUpAppointment.pickerId.username}. They want to collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}.</p>
                       <p>Would you like to accept this?</p>
-                      <button onClick={this.handleAccept} value={listing.pickUpAppointment._id}>Accept</button> 
-                      <button onClick={this.handleReject} value={listing.pickUpAppointment._id}>Reject</button>
+                      <button onClick={() => this.handleAccept(listing.pickUpAppointment.id)}>Accept</button> 
+                      <button onClick={() => this.handleReject(listing.pickUpAppointment.id, listing.pickUpAppointment.vegId._id)}>Reject</button>
                     </div>
                   }
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'accepted' &&
                     <div>
                       <p>{listing.pickUpAppointment.pickerId.username} claimed the {listing.title.toLowerCase()} and will collect it on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}</p>
                       <div className='buttonWrapper'>
-                        <button onClick={this.handleGrowerCancel} value={listing.pickUpAppointment._id}>Cancel collection</button>
-                        <button onClick={this.handleMarkCollected} value={listing.pickUpAppointment._id}>Mark as collected</button> 
+                        <button onClick={() => this.handleGrowerCancel(listing.pickUpAppointment.id, listing.pickUpAppointment.vegId._id)}>Cancel collection</button>
+                        <button onClick={() => this.handleMarkCollected(listing.pickUpAppointment._id)}>Mark as collected</button> 
                       </div>
                     </div>
                   }
@@ -241,7 +229,7 @@ class Dashboard extends React.Component {
                   }
                   {listing.pickUpAppointment &&
                   <>
-                    <p>Would you like to discuss these times with the seller?</p>
+                    <p>Discuss collection</p>
                     <VegetableChat
                       appointmentId={listing.pickUpAppointment._id}
                       messages={listing.pickUpAppointment.messages}
@@ -268,7 +256,7 @@ class Dashboard extends React.Component {
                     <>
                       <p>{picked.vegId.user.username} has accepted your request to collect {picked.vegId.title}.</p>
                       <p>Collect from {picked.vegId.user.addressLineOne}, {picked.vegId.user.addressPostcode} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}</p>
-                      <button onClick={this.handlePickerCancel} value={picked.vegId.pickUpAppointment._id}>Cancel collection</button>
+                      <button onClick={() => this.handlePickerCancel(picked.id, picked.vegId._id)}>Cancel collection</button>
                     </>
                   }
                   {picked.vegId && picked.appointmentStatus === 'cancelled' &&
