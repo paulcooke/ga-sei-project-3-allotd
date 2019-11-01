@@ -129,13 +129,3 @@ class VegetablesIndex extends React.Component {
 }
 
 export default VegetablesIndex
-
-// {this.props.location.state && // if a value has been passed from another page then use it to filter
-//   this.state.vegetables.filter(veg => new RegExp(this.props.location.state.detail, 'i').test(veg.title))
-//     .map(vegetable => (
-//       <VegetableCard key={vegetable._id} {...vegetable} />
-//     ))}
-// {!this.props.location.state && // if no value from a redirect then render all after dynamic filter
-//   this.filterVegetables().map(vegetable => (
-//     <VegetableCard key={vegetable._id} {...vegetable} />
-//   ))}

@@ -28,6 +28,7 @@
       //visibility: hidden;
     }
     .map {
+      position: relative;
       visibility: visible;
     }
     // .map .mapArea {
@@ -46,6 +47,11 @@
     }
     .map {
       visibility: hidden;
+      position: absolute;
+      
+    }
+    .map .mapArea {
+      min-height: 100vh;
     }
   }
 
