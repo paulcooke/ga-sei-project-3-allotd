@@ -106,9 +106,8 @@ class VegetablesIndex extends React.Component {
           </label> 
         </>
         }
-        
-        {!this.state.mapSwitch &&
-          <>
+        <div className={this.state.mapSwitch ? 'mapOpen' : 'mapClosed'}>
+          <div className='indexSearch'>
             <SearchForm
               name='searchTerm'
               value={this.state.mapSwitch}
@@ -116,16 +115,14 @@ class VegetablesIndex extends React.Component {
               onSubmit={this.submitSearch}
               current={this.state.typeSearch}
             />
-            <div className='indexWrapper'>
-              {this.displayVegetables(this.filterVegetables())}
-            </div>
-          </>
-        }
-        {this.state.mapSwitch &&
-          <>
-            <VegetableMap />
-          </>
-        }
+          </div>
+          <div className='indexWrapper'>
+            {this.displayVegetables(this.filterVegetables())}
+          </div>
+        </div>
+        <div className={this.state.mapSwitch ? 'mapOpen' : 'mapClosed'}>
+          <VegetableMap />
+        </div>
       </>
     )
   }
