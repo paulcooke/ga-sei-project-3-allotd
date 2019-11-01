@@ -368,7 +368,7 @@ mongoose.connect(
             description: 'great to cook with',
             image: 'https://www.kerrysfresh.co.uk/wp-content/uploads/2016/09/Marrow-600x600.jpg',
             isClaimed: false,
-            vegLocation: 'w1 4eu',
+            vegLocation: 'W1B 2QD',
             user: users[4],
             availablePickUpDays: ['Monday', 'Friday'],
             availablePickUpTimes: ['10', '11', '12', '13', '17']
