@@ -40,7 +40,6 @@ class Dashboard extends React.Component {
   }
 
   componentDidMount() {
-    
     axios.get('/api/profile', { 
       headers: { Authorization: `Bearer ${Auth.getToken()}` }
     })
@@ -51,8 +50,14 @@ class Dashboard extends React.Component {
         })
         this.setState({ data: res.data, displayStatus })
       })
+      .then(() => this.interval = setInterval(() => this.getUserInfo(), 1000))
       .catch(err => console.log(err.message))
   }
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
+
   //res.data.listingHistory.listing.pickUpAppointment.id
   getUserInfo () {
     axios.get('/api/profile', { 
