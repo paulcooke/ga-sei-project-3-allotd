@@ -125,11 +125,10 @@ class VegetablesShow extends React.Component {
                 <div className='buttonWrapper'>
                   <Link to={`/vegetables/${this.state.vegetable._id}/edit`}>
                     {!isClaimed && <button>Edit vegetable</button>}
-                    {isClaimed && <button disabled>Edit vegetable</button>}
+                    {isClaimed && <button className='claimed' disabled>Claimed</button>}
                   </Link>
                   {!isClaimed && <button onClick={this.handleDelete}>Delete vegetable</button>}
-                  {isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
-                  {isClaimed && <p><em>Claimed vegetable cannot be edited or deleted</em></p>}
+                  {isClaimed && <button className='claimed' disabled onClick={this.handleDelete}>Claimed</button>}
                 </div>
               }
               {!this.isOwner() && !pickUpAppointment &&

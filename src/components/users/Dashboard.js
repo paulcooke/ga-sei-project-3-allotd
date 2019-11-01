@@ -144,7 +144,7 @@ class Dashboard extends React.Component {
               <h1>Dashboard</h1>
             </div>
             <div>
-              <h2>Username: {this.state.data.username}</h2>
+              <h2>Username: <span>{this.state.data.username}</span></h2>
               {this.state.data.rating && <h2>User Rating {this.state.data.rating}: </h2>}
             </div>
 
@@ -165,17 +165,16 @@ class Dashboard extends React.Component {
               )}
             </div>
             }
-
+            <h3>Preffered collection days:</h3>
             <div className='pickupDays'>
-              <h2>My preferred days for people to collect from me:</h2>
               {this.state.data.availablePickUpDays.map(day => {
                 return <p key={day}>{day}</p>
               })}
             </div>
-            <p>At:</p>
+            <h3>Preffered collection time:</h3>
             <div className='pickupTimes'>
               {this.state.data.availablePickUpTimes.map(time => {
-                return <p key={time}>{time}:00, </p>
+                return <p key={time}>{time}:00</p>
               })}
             </div>
             
@@ -200,13 +199,12 @@ class Dashboard extends React.Component {
                     <div className='buttonWrapper'>
                       <Link to={`/vegetables/${listing._id}/edit`}>
                         {!listing.isClaimed && <button>Edit vegetable</button>}
-                        {listing.isClaimed && <button disabled>Edit vegetable</button>}
+                        {listing.isClaimed && <button className='claimed' disabled>Edit vegetable</button>}
                       </Link>
                       {!listing.isClaimed && <button onClick={this.handleDelete} value={listing._id}>Delete vegetable</button>}
-                      {listing.isClaimed && <button disabled onClick={this.handleDelete}>Delete vegetable</button>}
+                      {listing.isClaimed && <button className='claimed' disabled onClick={this.handleDelete}>Delete vegetable</button>}
                       {console.log('pickupApointment: ', listing.pickUpAppointment)}
                     </div>
-                    {listing.isClaimed && <p><em>*Claimed veg cannot be edited or deleted</em></p>}
                   </div>
                   {listing.isClaimed && listing.pickUpAppointment.appointmentStatus === 'requested' &&
                     <div>
@@ -229,9 +227,9 @@ class Dashboard extends React.Component {
                     <p>{listing.pickUpAppointment.pickerId.username} collected the {listing.title.toLowerCase()} on {moment(listing.pickUpAppointment.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(listing.pickUpAppointment.appointmentDateandTime).format('HH:mm')}</p>
                   }
                   {!listing.isClaimed &&
-                    <div>
+                    <small>
                       Not currently claimed.
-                    </div>
+                    </small>
                   }
                   {listing.pickUpAppointment && listing.pickUpAppointment.appointmentStatus === 'rejected' &&
                     <p>You cancelled collection by {listing.pickUpAppointment.pickerId.username}.</p>
@@ -240,7 +238,7 @@ class Dashboard extends React.Component {
                     <p>Collection by {listing.pickUpAppointment.pickerId.username} was cancelled.</p>
                   }
                   {listing.pickUpAppointment &&
-                  <>
+                  <div>
                     <p>Would you like to discuss these times with the seller?</p>
                     <VegetableChat
                       appointmentId={listing.pickUpAppointment._id}
@@ -249,7 +247,7 @@ class Dashboard extends React.Component {
                       handleSubmitMessage={this.handleSubmitMessage}
                       userId={this.state.data._id}
                     />
-                  </>
+                  </div>
                   }
                 </div>
               ))
@@ -262,7 +260,7 @@ class Dashboard extends React.Component {
 
                 <div key={picked.id}>
                   {picked.appointmentStatus === 'requested' &&
-                    <span>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}.</span>
+                    <p>You have requested to collect {picked.vegId.title} from {picked.vegId.user.username} on {moment(picked.appointmentDateandTime).format('dddd, MMMM Do')} at {moment(picked.appointmentDateandTime).format('HH:mm')}.</p>
                   }
                   {picked.vegId && picked.appointmentStatus === 'accepted' &&
                     <>
