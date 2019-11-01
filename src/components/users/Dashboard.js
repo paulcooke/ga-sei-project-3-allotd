@@ -74,7 +74,7 @@ class Dashboard extends React.Component {
   //this needs to update the appointment status in the appointment model, possibly also deleting this but needs to update the picker, perhaps it puts them back on the schedule page
   handleReject(e) {
     const appointmentId = e.target.value
-    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
+    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId).vegId._id
     console.log('veg id', vegetableId)
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'rejected' })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
@@ -84,7 +84,7 @@ class Dashboard extends React.Component {
 
   handleGrowerCancel(e) {
     const appointmentId = e.target.value
-    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId)._id
+    const vegetableId = this.state.data.listingHistory.find(veg => veg.pickUpAppointment.id === appointmentId).vegId._id
     console.log('veg id', vegetableId)
     axios.patch(`/api/appointments/${appointmentId}`, { appointmentStatus: 'cancelled' })
       .then(() => axios.patch(`/api/vegetables/${vegetableId}`, { isClaimed: false }))
