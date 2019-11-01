@@ -251,8 +251,8 @@ mongoose.connect(
             availablePickUpTimes: ['9', '10', '11']
           }, 
           {
-            title: 'Leafy Salad',
-            typeOfVeg: 'Salad',
+            title: 'Leafy Greens',
+            typeOfVeg: 'Lettuce',
             varietyOfVeg: '',
             pickedDate: 3,
             description: 'Perfect for garnish and smoothies.',

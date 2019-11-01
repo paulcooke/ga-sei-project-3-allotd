@@ -9,7 +9,7 @@ import VegetableChat from '../vegetables/VegetablesChat'
 class Dashboard extends React.Component {
   constructor() {
     super()
-   
+  
     this.state = {
       data: {
         username: '',

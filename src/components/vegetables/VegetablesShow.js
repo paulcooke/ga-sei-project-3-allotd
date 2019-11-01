@@ -29,7 +29,7 @@ class VegetablesShow extends React.Component {
       .then(res => {
         this.setState({ vegetable: res.data })
       })
-     
+    
       .catch(err => console.log(err))
   }
 
@@ -59,14 +59,22 @@ class VegetablesShow extends React.Component {
     const hour = name === 'selectedPickUpTime' ? value : this.state.newAppointment.selectedPickUpTime
     console.log('checking day', day)
     console.log('checking hour', hour)
-    const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ] // for use below in getting the right number for moment's 'day'
-    const setDayAndTime = moment().hour(parseInt(hour)).minute(0).second(0).day(dayArray.indexOf(day) + 1)._d
+    const setDayAndTime = this.setDateAndTime(day, hour)
     
     const newAppointment = { ...this.state.newAppointment, [name]: newValue, appointmentDateandTime: setDayAndTime, appointmentStatus: 'requested' } // requested added here because if it's sent then this is tru, if it's not, it will dissapear from state when the user moves away from the page
     const errors = { ...this.state.errors, [name]: '' } // for use in error handling
     const vegetable = { ...this.state.vegetable, isClaimed: true } // setting state here because if they go ahead it's true, if not it will be lost from state when the user moves away
     
     this.setState({ newAppointment, errors, vegetable })
+  }
+
+  setDateAndTime(day, hour) {
+    const dayArray = [ 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday' ]
+    if (moment().isoWeekday() <= dayArray.indexOf(day) + 1) {
+      return moment().hour(parseInt(hour)).minute(0).second(0).day(dayArray.indexOf(day) + 1)._d
+    } else {
+      return moment().hour(parseInt(hour)).minute(0).second(0).day(dayArray.indexOf(day) + 1).add(1, 'weeks')._d
+    }
   }
 
   handleSubmit(e) {
