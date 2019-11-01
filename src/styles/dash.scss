@@ -5,22 +5,57 @@
   justify-content: space-around;
   padding: 20px;
   background-image: url('https://images.unsplash.com/photo-1498109175427-80f595c1b49f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2026&q=80');
+  .panelWrapper {
+    padding: 20px 20px 20px 40px;
+  }
+    h1 {
+      font-size: 60px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    h2 {
+      span {
+        text-transform: uppercase;
+        text-align: center;
+      }
+    }
+    h3 {
+      margin-top: 20px;
+    }
+    p {
+      margin-top: 5px;
+    }
+    small {
+      color: $footergreen;
+    }
     .dashPanelWrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color:rgba(255, 255, 255, 0.6);
-    margin: 20px;
-    padding: 20px;
-    width: 100%;
-    border-radius: 5px;
-    border: solid 1px grey;
-    box-shadow: 3px 4px 10px -1px $bordergrey;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color:rgba(255, 255, 255, 0.6);
+      margin: 20px;
+      padding: 20px;
+      width: 100%;
+      border-radius: 5px;
+      //border: solid 1px grey;
+      box-shadow: 3px 4px 10px -1px $bordergrey;
+      h2 {
+        text-transform: uppercase;
+        text-align: center;
+        margin-bottom: 20px;
+      }
   }
   .listingWrapper {
-    border: 1px solid black;
+    border: 2px solid #64403E;
     margin: 20px 0;
     padding: 20px;
+    div {
+      margin: 20px 0;
+    }
+    button {
+      margin-top: 10px;
+    }
   }
   .pickupsWrapper {
     display: flex;
@@ -28,39 +63,26 @@
     button {
       margin-right: 50%;
       margin-bottom: 20px;
+      margin-top: 20px;
     }
   }
   button {
-    height: 20px;
+    height: 45px;
     width: 120px;
-    font-size: 12px;
+    font-size: 14px;
     box-shadow: 1px 2px 2px 2px black;
   }
-  .pickupDays {
-    margin: 10px;
-    h2 {
-      margin-bottom: 5px;
-    }
-  }
-  .pickupTimes {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    height: 80px;
-    max-width: 450px;
-    margin: 10px;
-    p {
-      margin-right: 5px;
-    }
-  }
-  em {
-      font-size: 12px;
-  }
 }
-
 .buttonWrapper {
   display: flex;
   justify-content: flex-end;
+  .claimed {
+    box-shadow: none;
+    opacity: 0.5;
+  }
+  button[disabled]:hover {
+    background: none;
+  }
 }
 
 @media only screen and (max-width: 800px) {

@@ -46,7 +46,10 @@ class VegetableChat extends React.Component {
     if (!this.state.isOpen) {
       console.log('testing the if')
       return (
-        <button className='chatButton' onClick={this.handleClick}>Discussion</button>
+        <div>
+          <button className='chatButton' onClick={this.handleClick}>Discussion</button>
+          <span><small> {this.props.messages.length} messages</small></span>
+        </div>
       )
     } else {
       return (
