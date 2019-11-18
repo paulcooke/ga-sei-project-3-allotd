@@ -14,6 +14,8 @@ mongoose.connect(
   () => console.log('mongo is connected. ')  
 ) // connect our db first
 
+app.use(express.static(`${__dirname}/dist`))
+
 app.use(bodyParser.json()) //bp middleware
 
 app.use(logger)// registering custom logger
@@ -22,10 +24,9 @@ app.use('/api', router) // all middleware is now in the router it always has to 
 
 app.use(errorHandler)
 
-app.get('/*', (req, res) => res.status(404).json({ message: 'Not Found checking' })) // catch all
+app.get('/*', (req, res) => res.sendFile(`${__dirname}/dist/index.html`))
 
-app.listen(port, () => console.log(`server listening on port ${port}`))
-
+app.listen(process.env.PORT, () => console.log(`Running on port ${process.env.PORT}`))
 
 
 
