@@ -6,7 +6,7 @@ import makeAnimated from 'react-select/animated'
 import CreatableSelect from 'react-select/creatable'
 
 import Auth from '../../lib/auth'
-import ImageUpload from '../images/ImageUpload'
+import ImageUpload from '../images/imageUpload'
 
 const animatedComponents = makeAnimated()
 

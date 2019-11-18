@@ -20,7 +20,7 @@ import Login from './components/auth/Login'
 import Dashboard from './components/users/Dashboard'
 import DashboardEdit from './components/users/DashboardEdit'
 
-import ImageUpload from './components/images/ImageUpload'
+import ImageUpload from './components/images/imageUpload'
 
 const App = () => (
   <BrowserRouter>
