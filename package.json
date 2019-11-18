@@ -7,8 +7,6 @@
   "license": "MIT",
   "scripts": {
     "test": "mocha test/**/*_spec.js --require test/helper --recursive --exit",
-    // "serve:back": "nodemon index.js",
-    // "serve:front": "webpack-dev-server --mode-development",
     "seed": "node db/seeds.js",
     "build": "webpack -p",
     "start": "node index.js"
