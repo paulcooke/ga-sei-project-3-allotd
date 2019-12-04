@@ -62,7 +62,7 @@ In Paul's dashboard, he can also see this chat, as well as the options to cancel
 #### The back end
 The main challenge for us in the back end was setting up our models correctly. We opted for Users, Vegetables, Appointments and Messages. We did a good job but didn't account for the fact vegetables could have more than one appointment (cancelled and claimed by another user for example). As we were under time pressure we dealt with this by reusing the appointment for each veg listing, which required some extra logic but works fine.
 
-Each appointment can have multiple messagesand this is how we dealt with chat. Originally we had hoped to use WebSockets but did not have time to learn this in the end, so we used a simple set interval to regularly check for new messages. The interval is cleared using componentWillUnmount.
+Each appointment can have multiple messages and this is how we dealt with chat. Originally we had hoped to use WebSockets but did not have time to learn this in the end, so we used a simple set interval to regularly check for new messages. The interval is cleared using componentWillUnmount.
 
 #### Appointment system
 The main components I worked in were the dashboard, along with the veg show, veg new, veg edit and veg chat components as I spent a lot of time doing the appointment system.
